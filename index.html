@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jai Durga Chemical | Premium Industrial Coatings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Satisfy&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'jdc-blue': '#0B1C3E', // Deep Industrial Blue
+              'jdc-dark': '#020617', // Darker Charcoal
+              'jdc-orange': '#F97316', // Premium Orange
+              'jdc-gray': '#F1F5F9', // Light Slate
+              'jdc-cream': '#FDFBF7', // Warm off-white for human touch
+            },
+            fontFamily: {
+              sans: ['Manrope', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
+              hand: ['Satisfy', 'cursive'],
+            },
+            boxShadow: {
+              'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+              'card': '0 20px 40px -10px rgba(0,0,0,0.1)',
+              'glow': '0 0 20px rgba(249, 115, 22, 0.3)',
+            },
+            backgroundImage: {
+              'noise': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E')",
+            },
+            animation: {
+              'marquee': 'marquee 25s linear infinite',
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      /* Custom scrollbar for industrial feel */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0f172a; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #334155; 
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #F97316; 
+      }
+      
+      .glass-panel {
+        background: rgba(15, 23, 42, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      
+      .glass-nav-mobile {
+         background: rgba(15, 23, 42, 0.95);
+         backdrop-filter: blur(16px);
+         border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      /* Animations */
+      @keyframes slideUp {
+        from { transform: translateY(40px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+
+      .reveal-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal-on-scroll.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      .signature-rotate {
+        transform: rotate(-5deg);
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.12.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-jdc-cream text-slate-800 antialiased selection:bg-jdc-orange selection:text-white">
+    <div class="fixed inset-0 pointer-events-none z-50 opacity-40 bg-noise mix-blend-overlay"></div>
+    <div id="root"></div>
+    <script>
+      // Simple intersection observer for reveal animations
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      // Run on load and DOM changes
+      setInterval(() => {
+        document.querySelectorAll('.reveal-on-scroll:not(.observed)').forEach(el => {
+          observer.observe(el);
+          el.classList.add('observed');
+        });
+      }, 500);
+    </script>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
