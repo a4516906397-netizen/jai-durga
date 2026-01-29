@@ -184,7 +184,7 @@ const Contact: React.FC = () => {
 
                   {/* Premium Map Card */}
                   <div className="relative h-64 md:h-72 bg-slate-200 rounded-2xl overflow-hidden group border-2 border-slate-200 shadow-xl reveal-on-scroll">
-                     <img src="/ima/test.png" alt="Location Map" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                     <img src="/images/test.png" alt="Location Map" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-end justify-center pb-6">
                         <div className="bg-white/95 backdrop-blur-md px-6 py-3 rounded-full shadow-2xl cursor-pointer hover:bg-jdc-orange hover:text-white transition-all hover:scale-105 flex items-center gap-2">
                            <MapPin size={20} />

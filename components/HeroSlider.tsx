@@ -5,7 +5,7 @@ import { ArrowRight, ChevronLeft, ChevronRight, Minus } from 'lucide-react';
 
 const SLIDES = [
   {
-    image: "/ima/production.png",
+    image: "/images/production.png",
     title: "Industrial Excellence",
     subtitle: "Precision-engineered paints & coatings for global OEMs.",
     cta: "Explore Products",
@@ -13,7 +13,7 @@ const SLIDES = [
     tag: "Since 1998"
   },
   {
-    image: "/ima/factory.png",
+    image: "/images/factory.png",
     title: "Advanced Manufacturing",
     subtitle: "State-of-the-art facilities ensuring consistency in every drop.",
     cta: "Our Infrastructure",
@@ -21,7 +21,7 @@ const SLIDES = [
     tag: "ISO 9001:2015"
   },
   {
-    image: "/ima/colour.png",
+    image: "/images/colour.png",
     title: "Enduring Protection",
     subtitle: "Surface solutions designed to withstand the toughest environments.",
     cta: "Contact Us",
@@ -29,7 +29,7 @@ const SLIDES = [
     tag: "Global Standards"
   },
   {
-    image: "/ima/slide1.png",
+    image: "/images/slide1.png",
     title: "Trusted by Thousands",
     subtitle: "Building lasting partnerships with OEMs and infrastructure developers.",
     cta: "Learn More",
@@ -37,7 +37,7 @@ const SLIDES = [
     tag: "500+ Partners"
   },
   {
-    image: "/ima/slide2.png",
+    image: "/images/slide2.png",
     title: "Quality You Can Depend On",
     subtitle: "Certified excellence in every batch, every time.",
     cta: "View Our Story",

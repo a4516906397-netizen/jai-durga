@@ -30,7 +30,7 @@ export const LEADERSHIP_IMAGES = {
   chairman: "https://sakarni.com/public/img/uploads/team/1740121605.png",
   director_mohit: "https://sakarni.com/public/img/uploads/team/1740121691123.png",
   // Placeholder for Vikas Jain to ensure 3-column layout looks premium
-  director_vikas: "/ima/vikas.png",
+  director_vikas: "/images/vikas.png",
 };
 
 export const HERO_IMAGES = [

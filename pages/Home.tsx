@@ -99,11 +99,11 @@ const Home: React.FC = () => {
                   {/* Main Image (The Facility) */}
                   <div className="relative z-10 lg:ml-10 lg:mt-10 group">
                      <div className="absolute inset-0 bg-slate-200 -translate-x-3 -translate-y-3 lg:-translate-x-6 lg:-translate-y-6 rounded-sm transition-transform duration-700 group-hover:translate-x-0 group-hover:translate-y-0"></div>
-                     <img src="/ima/production.png" alt="Industrial Facility" className="relative w-full h-[350px] md:h-[500px] object-cover grayscale hover:grayscale-0 transition-all duration-700 rounded-sm shadow-2xl" />
+                     <img src="/images/production.png" alt="Industrial Facility" className="relative w-full h-[350px] md:h-[500px] object-cover grayscale hover:grayscale-0 transition-all duration-700 rounded-sm shadow-2xl" />
 
                      {/* Overlay Image (The Human Touch) */}
                      <div className="absolute -bottom-6 -right-4 lg:-bottom-12 lg:-left-12 w-32 h-32 md:w-64 md:h-64 border-4 lg:border-8 border-jdc-cream shadow-xl rounded-sm overflow-hidden group z-20">
-                        <img src="/ima/test.png" alt="Quality Check" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                        <img src="/images/test.png" alt="Quality Check" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                      </div>
 
                      {/* "Certified" Stamp Badge */}
@@ -250,7 +250,7 @@ const Home: React.FC = () => {
                   <div className="relative reveal-on-scroll delay-100 hidden lg:block">
                      {/* Abstract Line Art or Signature visual */}
                      <div className="absolute inset-0 bg-slate-100 transform -rotate-2 rounded-lg scale-95 origin-bottom-right"></div>
-                     <img src="/ima/factory.png" alt="Hand holding test tube" className="relative rounded-lg shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-700 grayscale hover:grayscale-0" />
+                     <img src="/images/factory.png" alt="Hand holding test tube" className="relative rounded-lg shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-700 grayscale hover:grayscale-0" />
                   </div>
                </div>
 
@@ -442,7 +442,7 @@ const Home: React.FC = () => {
          </section>
 
          {/* PRODUCT PORTFOLIO OVERVIEW - Parallax */}
-         <section className="relative py-20 md:py-32 bg-fixed bg-cover bg-center" style={{ backgroundImage: "url('/ima/production.png')" }}>
+         <section className="relative py-20 md:py-32 bg-fixed bg-cover bg-center" style={{ backgroundImage: "url('/images/production.png')" }}>
             <div className="absolute inset-0 bg-jdc-blue/90 mix-blend-multiply"></div>
             <div className="absolute inset-0 bg-black/20"></div>
 
@@ -671,7 +671,7 @@ const Home: React.FC = () => {
 
                         {/* Main image */}
                         <div className="relative rounded-lg overflow-hidden shadow-2xl aspect-[9/11] md:aspect-[4/5]">
-                           <img src="/ima/stainer.png" alt="Manufacturing Precision" className="w-full h-full object-cover" />
+                           <img src="/images/stainer.png" alt="Manufacturing Precision" className="w-full h-full object-cover" />
 
                            {/* Subtle overlay */}
                            <div className="absolute inset-0 bg-black/5 mix-blend-multiply"></div>
