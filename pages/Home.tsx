@@ -6,7 +6,7 @@ import { ShieldCheck, Settings, Users, ArrowRight, Activity, Beaker, Globe, Chev
 import { Link } from 'react-router-dom';
 import { PageRoute } from '../types';
 
-import productionImg from '../ima/production.png';
+
 
 const FAQS = [
    { q: "What makes your paints different from competitors?", a: "We focus on consistency and reliability. Every batch undergoes rigorous quality control, and our formulations are designed for industrial-grade performance, not just decorative appeal. Our automated dosing systems ensure that Batch #1 and Batch #1000 are identical." },
@@ -99,7 +99,7 @@ const Home: React.FC = () => {
                   {/* Main Image (The Facility) */}
                   <div className="relative z-10 lg:ml-10 lg:mt-10 group">
                      <div className="absolute inset-0 bg-slate-200 -translate-x-3 -translate-y-3 lg:-translate-x-6 lg:-translate-y-6 rounded-sm transition-transform duration-700 group-hover:translate-x-0 group-hover:translate-y-0"></div>
-                     <img src={productionImg} alt="Industrial Facility" className="relative w-full h-[350px] md:h-[500px] object-cover grayscale hover:grayscale-0 transition-all duration-700 rounded-sm shadow-2xl" />
+                     <img src="/ima/production.png" alt="Industrial Facility" className="relative w-full h-[350px] md:h-[500px] object-cover grayscale hover:grayscale-0 transition-all duration-700 rounded-sm shadow-2xl" />
 
                      {/* Overlay Image (The Human Touch) */}
                      <div className="absolute -bottom-6 -right-4 lg:-bottom-12 lg:-left-12 w-32 h-32 md:w-64 md:h-64 border-4 lg:border-8 border-jdc-cream shadow-xl rounded-sm overflow-hidden group z-20">
