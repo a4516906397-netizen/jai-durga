@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Clock, ChevronDown, ChevronUp, Send, Building2, Sparkles } from 'lucide-react';
 
 const FAQS = [
-   { q: "Do you offer custom formulations for OEMs?", a: "Yes, we specialize in OEM partnerships. Our R&D team can reverse-engineer or develop custom formulations based on your viscosity, drying time, and finish requirements." },
+   { q: "Do you offer custom formulations for industrial clients?", a: "Yes, we specialize in strategic partnerships. Our R&D team can reverse-engineer or develop custom formulations based on your viscosity, drying time, and finish requirements." },
    { q: "What is the minimum order quantity (MOQ) for bulk dispatch?", a: "For industrial products, our MOQ is typically 500 liters. For decorative paints, we supply pallet-sized loads. Please contact sales for specific product MOQs." },
    { q: "Do you provide on-site technical support?", a: "Absolutely. For large infrastructure projects, we deploy technical supervisors to ensure proper surface preparation and application." },
    { q: "Are your products REACH and RoHS compliant?", a: "Most of our industrial coatings are compliant. We provide specific MSDS and compliance certificates with every batch upon request." }
@@ -58,10 +58,10 @@ const Contact: React.FC = () => {
                      <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-jdc-orange to-orange-400 rounded-xl flex items-center justify-center mb-4 md:mb-5 group-hover:rotate-6 transition-transform">
                         <Mail className="text-white" size={24} />
                      </div>
-                     <h3 className="font-serif font-bold text-xl md:text-2xl text-jdc-blue mb-3 md:mb-4">Sales & OEMs</h3>
+                     <h3 className="font-serif font-bold text-xl md:text-2xl text-jdc-blue mb-3 md:mb-4">Sales & Projects</h3>
                      <p className="text-slate-500 text-sm md:text-base mb-5 md:mb-6 leading-relaxed">For bulk orders, dealership inquiries, and custom manufacturing.</p>
-                     <a href="mailto:sales@jaidurgachem.com" className="inline-flex items-center gap-2 text-jdc-orange font-bold text-sm hover:gap-3 transition-all group-hover:underline">
-                        sales@jaidurgachem.com
+                     <a href="mailto:info@jaidurgachemical.com" className="inline-flex items-center gap-2 text-jdc-orange font-bold text-sm hover:gap-3 transition-all group-hover:underline">
+                        info@jaidurgachemical.com
                         <Send size={14} />
                      </a>
                   </div>
@@ -77,8 +77,8 @@ const Contact: React.FC = () => {
                      </div>
                      <h3 className="font-serif font-bold text-xl md:text-2xl text-jdc-blue mb-3 md:mb-4">Technical Support</h3>
                      <p className="text-slate-500 text-sm md:text-base mb-5 md:mb-6 leading-relaxed">For application guides, MSDS requests, and on-site troubleshooting.</p>
-                     <a href="mailto:support@jaidurgachem.com" className="inline-flex items-center gap-2 text-jdc-orange font-bold text-sm hover:gap-3 transition-all group-hover:underline">
-                        support@jaidurgachem.com
+                     <a href="mailto:info@jaidurgachemical.com" className="inline-flex items-center gap-2 text-jdc-orange font-bold text-sm hover:gap-3 transition-all group-hover:underline">
+                        info@jaidurgachemical.com
                         <Send size={14} />
                      </a>
                   </div>
@@ -94,8 +94,8 @@ const Contact: React.FC = () => {
                      </div>
                      <h3 className="font-serif font-bold text-xl md:text-2xl text-jdc-blue mb-3 md:mb-4">Careers</h3>
                      <p className="text-slate-500 text-sm md:text-base mb-5 md:mb-6 leading-relaxed">Join our team of chemists and engineers. Send us your CV.</p>
-                     <a href="mailto:hr@jaidurgachem.com" className="inline-flex items-center gap-2 text-jdc-orange font-bold text-sm hover:gap-3 transition-all group-hover:underline">
-                        hr@jaidurgachem.com
+                     <a href="mailto:info@jaidurgachemical.com" className="inline-flex items-center gap-2 text-jdc-orange font-bold text-sm hover:gap-3 transition-all group-hover:underline">
+                        info@jaidurgachemical.com
                         <Send size={14} />
                      </a>
                   </div>
@@ -207,13 +207,13 @@ const Contact: React.FC = () => {
                            <div className="w-8 h-8 bg-jdc-orange/10 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
                               <MapPin className="text-jdc-orange" size={16} />
                            </div>
-                           <span className="text-sm md:text-base leading-relaxed">123 Industrial Area, Phase III,<br />New Delhi, India - 110020</span>
+                           <span className="text-sm md:text-base leading-relaxed">site-5, J-10, Kasna Road, Industrial Area,<br />Surajpur Site V, Greater Noida, UP - 201312</span>
                         </li>
                         <li className="flex items-center gap-4 p-3 rounded-xl hover:bg-slate-50 transition-colors">
                            <div className="w-8 h-8 bg-jdc-blue/10 rounded-lg flex items-center justify-center shrink-0">
                               <Phone className="text-jdc-blue" size={16} />
                            </div>
-                           <a href="tel:+911123456789" className="text-sm md:text-base hover:text-jdc-orange transition-colors font-medium">+91 11 2345 6789</a>
+                           <a href="tel:+919971661234" className="text-sm md:text-base hover:text-jdc-orange transition-colors font-medium">+91 99716 61234</a>
                         </li>
                         <li className="flex items-center gap-4 p-3 rounded-xl hover:bg-slate-50 transition-colors">
                            <div className="w-8 h-8 bg-slate-500/10 rounded-lg flex items-center justify-center shrink-0">

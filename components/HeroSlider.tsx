@@ -7,18 +7,18 @@ const SLIDES = [
   {
     image: "/images/production.png",
     title: "Industrial Excellence",
-    subtitle: "Precision-engineered paints & coatings for global OEMs.",
+    subtitle: "Precision-engineered paints & coatings for industrial projects.",
     cta: "Explore Products",
     link: PageRoute.PRODUCTS,
-    tag: "Since 1998"
+    tag: "Expert Solutions"
   },
   {
     image: "/images/factory.png",
     title: "Advanced Manufacturing",
     subtitle: "State-of-the-art facilities ensuring consistency in every drop.",
-    cta: "Our Infrastructure",
-    link: PageRoute.INFRASTRUCTURE,
-    tag: "ISO 9001:2015"
+    cta: "View Our Story",
+    link: PageRoute.ABOUT,
+    tag: "Advanced Tech"
   },
   {
     image: "/images/colour.png",
@@ -31,10 +31,10 @@ const SLIDES = [
   {
     image: "/images/slide1.png",
     title: "Trusted by Thousands",
-    subtitle: "Building lasting partnerships with OEMs and infrastructure developers.",
+    subtitle: "Building lasting partnerships with global infrastructure developers.",
     cta: "Learn More",
     link: PageRoute.ABOUT,
-    tag: "500+ Partners"
+    tag: "2500+ Clients"
   },
   {
     image: "/images/slide2.png",
@@ -42,7 +42,7 @@ const SLIDES = [
     subtitle: "Certified excellence in every batch, every time.",
     cta: "View Our Story",
     link: PageRoute.ABOUT,
-    tag: "ISO Certified"
+    tag: "Quality Assured"
   }
 ];
 

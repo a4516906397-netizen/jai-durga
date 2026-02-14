@@ -8,8 +8,8 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import Products from './pages/Products';
-import Infrastructure from './pages/Infrastructure';
 import Contact from './pages/Contact';
+import FAQ from './pages/FAQ';
 
 // Scroll to top on route change
 const ScrollToTop = () => {
@@ -25,13 +25,13 @@ const App: React.FC = () => {
     <HashRouter>
       <ScrollToTop />
       <div className="font-sans antialiased text-slate-800 bg-gray-50 flex flex-col min-h-screen">
-        
+
         {/* Navigation - Header (Brand Bar) is now visible on mobile via DesktopNav */}
         <DesktopNav />
-        
+
         {/* Mobile Bottom Menu - Only visible on mobile */}
         <div className="md:hidden">
-           <MobileNav />
+          <MobileNav />
         </div>
 
         {/* Main Content */}
@@ -40,8 +40,8 @@ const App: React.FC = () => {
             <Route path={PageRoute.HOME} element={<Home />} />
             <Route path={PageRoute.ABOUT} element={<About />} />
             <Route path={PageRoute.PRODUCTS} element={<Products />} />
-            <Route path={PageRoute.INFRASTRUCTURE} element={<Infrastructure />} />
             <Route path={PageRoute.CONTACT} element={<Contact />} />
+            <Route path={PageRoute.FAQ} element={<FAQ />} />
           </Routes>
         </main>
 

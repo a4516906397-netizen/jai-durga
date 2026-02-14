@@ -5,6 +5,7 @@ export interface Product {
   name: string;
   category: string;
   description: string;
+  image?: string;
 }
 
 export interface NavItem {
@@ -17,6 +18,6 @@ export enum PageRoute {
   HOME = '/',
   ABOUT = '/about',
   PRODUCTS = '/products',
-  INFRASTRUCTURE = '/infrastructure',
   CONTACT = '/contact',
+  FAQ = '/faq',
 }

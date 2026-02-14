@@ -1,166 +1,183 @@
 import React from 'react';
 import { COMPANY_NAME, LEADERSHIP, PARENT_COMPANY, LEADERSHIP_IMAGES } from '../constants';
-import { Quote } from 'lucide-react';
+import { Quote, Target, Shield, Zap, Award, CheckCircle2 } from 'lucide-react';
 
 const About: React.FC = () => {
   return (
-    <div className="pt-20 min-h-screen bg-jdc-cream pb-12 md:pb-20 relative">
+    <div className="bg-[#FAF9F6] min-h-screen">
+      {/* Editorial Hero Section */}
+      <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-6 overflow-hidden bg-jdc-blue">
+        {/* Abstract background elements */}
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-black/20 to-transparent pointer-events-none"></div>
+        <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-jdc-orange/10 rounded-full blur-3xl"></div>
 
-      {/* Header - Centered & Big */}
-      <div className="bg-white pt-12 pb-12 md:pt-20 md:pb-20 px-4 md:px-6 text-center border-b border-slate-100 relative overflow-hidden">
-        {/* Subtle Noise Texture */}
-        <div className="absolute inset-0 opacity-[0.03] bg-noise mix-blend-multiply pointer-events-none"></div>
-
-        <div className="max-w-4xl mx-auto relative z-10">
-          <span className="text-jdc-orange font-bold tracking-widest uppercase text-[10px] md:text-sm mb-3 md:mb-4 block reveal-on-scroll">Our Legacy</span>
-          <h1 className="text-2xl md:text-5xl lg:text-6xl font-serif font-bold text-jdc-blue mb-4 md:mb-8 leading-tight reveal-on-scroll">
-            Building Trust Through <span className="block md:inline"> </span><span className="text-transparent bg-clip-text bg-gradient-to-r from-jdc-blue to-jdc-orange italic">Chemical Innovation.</span>
-          </h1>
-          <div className="w-16 md:w-24 h-1 md:h-1.5 bg-jdc-orange mx-auto rounded-full mb-4 md:mb-8 reveal-on-scroll"></div>
-          <p className="text-sm md:text-xl text-slate-600 leading-relaxed reveal-on-scroll px-2">
-            We are more than just a paint company. We are a team of chemists, engineers, and visionaries dedicated to protecting the world's infrastructure.
-          </p>
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="max-w-3xl">
+            <div className="inline-flex items-center gap-3 mb-6 md:mb-8 bg-white/5 border border-white/10 px-4 py-2 rounded-full backdrop-blur-sm">
+              <span className="w-2 h-2 rounded-full bg-jdc-orange animate-pulse"></span>
+              <span className="text-white text-[10px] md:text-xs font-bold uppercase tracking-[0.3em]">Established Excellence</span>
+            </div>
+            <h1 className="text-4xl md:text-7xl lg:text-8xl font-serif text-white mb-8 md:mb-12 leading-[1.1]">
+              The Science of <span className="italic text-slate-400">Protection.</span>
+            </h1>
+            <p className="text-lg md:text-2xl text-slate-300 font-light leading-relaxed mb-10 md:mb-16 border-l-2 border-jdc-orange/30 pl-6 md:pl-10">
+              {COMPANY_NAME} is driven by proven expertise, advanced manufacturing, and
+              a relentless commitment to superior quality standards across all decorative and
+              industrial formulations.
+            </p>
+          </div>
         </div>
-      </div>
+      </section>
 
-      {/* Main Content Layout */}
-      <div className="max-w-7xl mx-auto px-4 md:px-6 space-y-10 md:space-y-20 mt-8 md:mt-20">
-
-        {/* Philosophy Section */}
-        <section className="reveal-on-scroll">
-          <h2 className="text-xl md:text-3xl font-serif font-bold text-jdc-dark mb-4 md:mb-6 flex items-center gap-2 md:gap-3">
-            <span className="w-1.5 md:w-2 h-6 md:h-8 bg-jdc-blue rounded-full"></span>
-            Our Philosophy
-          </h2>
-          <div className="grid grid-cols-1 gap-4 md:gap-6 text-slate-600 text-xs md:text-base leading-relaxed">
-            <p>
-              At {COMPANY_NAME}, we believe that quality is not a variable—it's a constant.
-              In an industry often plagued by inconsistency, we have built our reputation on the promise that every barrel, every bucket, and every liter performs exactly as specified.
-            </p>
-            <p>
-              Serving a B2B clientele requires more than just a good product; it requires reliability.
-              We act as an extension of our clients' manufacturing processes, ensuring that our coatings meet the stringent requirements of OEM partners and global contractors.
-            </p>
-          </div>
-        </section>
-
-        {/* Timeline Section */}
-        <section className="reveal-on-scroll">
-          <h2 className="text-xl md:text-3xl font-serif font-bold text-jdc-dark mb-6 md:mb-10 flex items-center gap-2 md:gap-3">
-            <span className="w-1.5 md:w-2 h-6 md:h-8 bg-jdc-orange rounded-full"></span>
-            Our Journey
-          </h2>
-          <div className="border-l-2 border-slate-200 ml-2 md:ml-5 space-y-6 md:space-y-12 pb-2">
-            {[
-              { year: '1998', title: 'Inception', desc: 'Started as a small blending unit in Delhi.' },
-              { year: '2005', title: 'Expansion', desc: 'Moved to a 10,000 sq ft facility and began OEM partnerships.' },
-              { year: '2012', title: 'Sakarni Group', desc: 'Became a proud subsidiary of the Sakarni Group, enhancing R&D capabilities.' },
-              { year: '2023', title: 'Global Standards', desc: 'Achieved ISO 9001:2015 certification and expanded export operations.' }
-            ].map((item, i) => (
-              <div key={i} className="relative pl-5 md:pl-10 group">
-                <div className="absolute -left-[7px] md:-left-[9px] top-0.5 md:top-1 w-4 h-4 md:w-5 md:h-5 rounded-full bg-white border-3 md:border-4 border-slate-300 group-hover:border-jdc-orange transition-colors"></div>
-                <span className="text-[10px] md:text-sm font-bold text-jdc-orange block mb-0.5 md:mb-1">{item.year}</span>
-                <h3 className="text-base md:text-xl font-bold font-serif text-jdc-blue mb-1 md:mb-2">{item.title}</h3>
-                <p className="text-slate-500 text-xs md:text-base pr-2">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Leadership Section - Full Width */}
-        <section className="reveal-on-scroll">
-          <h2 className="text-xl md:text-3xl font-serif font-bold text-jdc-dark mb-8 md:mb-12 flex items-center gap-2 md:gap-3">
-            <span className="w-1.5 md:w-2 h-6 md:h-8 bg-jdc-blue rounded-full"></span>
-            Guided by Experience
-          </h2>
-
-          {/* Chairman */}
-          <div className="bg-white rounded-2xl md:rounded-3xl shadow-lg overflow-hidden mb-6 md:mb-16 border border-slate-100 reveal-on-scroll">
-            {/* Mobile: Stacked Vertical, Desktop: Side by Side */}
-            <div className="md:grid md:grid-cols-2">
-              {/* Image */}
-              <div className="h-80 md:h-full md:min-h-96 bg-gradient-to-br from-jdc-blue/10 to-jdc-orange/10 flex items-center justify-center overflow-hidden">
-                <img
-                  src={LEADERSHIP_IMAGES.chairman}
-                  alt="Ashok Kumar Gupta"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              {/* Content */}
-              <div className="p-6 md:p-12 flex flex-col justify-center space-y-5 md:space-y-6">
-                <div>
-                  <h3 className="font-bold font-serif text-jdc-dark text-2xl md:text-3xl mb-1.5 md:mb-2">{LEADERSHIP.chairman}</h3>
-                  <p className="text-jdc-orange font-semibold text-base md:text-lg">Founder & Chairman</p>
-                </div>
-
-                <div className="flex items-start">
-                  <Quote className="text-jdc-blue/20 mr-3" size={40} />
-                  <p className="text-base md:text-lg font-medium font-serif text-jdc-dark italic leading-relaxed">
-                    "We didn't just build a factory. We built a culture where excellence is the only metric."
-                  </p>
-                </div>
-
-                <p className="text-sm md:text-base text-slate-600 leading-relaxed">
-                  For over 25 years, our mission has been singular: to provide industrial coatings that withstand the test of time. In an industry driven by volume, we chose value. Every batch that leaves our facility carries my personal guarantee of quality.
+      {/* Philosophy & Purpose - Editorial Layout */}
+      <section className="py-24 md:py-40 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-32 items-start">
+            <div className="reveal-on-scroll">
+              <span className="text-jdc-orange font-bold uppercase tracking-widest text-xs mb-6 block">Our Essence</span>
+              <h2 className="text-3xl md:text-5xl font-serif text-jdc-blue mb-8 leading-tight">
+                Not just products. <br />
+                <span className="italic text-slate-400">Process-driven solutions.</span>
+              </h2>
+              <div className="space-y-6 text-slate-600 text-lg font-light leading-relaxed">
+                <p>
+                  Established in 2003, Sakarni was founded to deliver affordable, high-quality solutions for construction and surface beautification. Driven by perseverance, innovation, and continuous research, the company has evolved to meet changing market demands.
                 </p>
+                <p>
+                  Today, Sakarni is recognized as a trusted name in construction solutions and a leading plaster of Paris brand in Northern India, while maintaining global standards through strategic partnerships.
+                </p>
+                <p>
+                  At Jai Durga Chemical, our philosophy is anchored in the belief that decorative and industrial coatings are the silent guardians of surfaces and infrastructure.
+                  We don't just sell paint; we deliver a promise of durability, consistency, and technical superiority.
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 reveal-on-scroll" style={{ transitionDelay: '200ms' }}>
+              {[
+                { icon: Shield, title: "Integrity", desc: "Unwavering commitment to chemical specifications and raw material purity." },
+                { icon: Target, title: "Precision", desc: "Automated dosing and blending for batch-to-batch repeatability." },
+                { icon: Zap, title: "Innovation", desc: "R&D focused on functional coatings for extreme industrial environments." },
+                { icon: Award, title: "Mastery", desc: "Built on 45 years of industrial mastery and process-driven manufacturing excellence." }
+              ].map((pill, i) => (
+                <div key={i} className="p-8 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-xl hover:border-jdc-orange/20 transition-all duration-300 group">
+                  <pill.icon className="text-jdc-orange mb-6 group-hover:scale-110 transition-transform" size={32} strokeWidth={1.5} />
+                  <h3 className="text-xl font-bold text-jdc-blue mb-3 font-serif">{pill.title}</h3>
+                  <p className="text-sm text-slate-500 leading-relaxed">{pill.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Leadership Section - Boardroom Professionalism */}
+      <section className="py-24 md:py-40 bg-white px-6 border-y border-slate-100">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-20 md:mb-32">
+            <span className="text-jdc-orange font-bold uppercase tracking-widest text-xs mb-4 block">The Board</span>
+            <h2 className="text-4xl md:text-6xl font-serif text-jdc-blue">Guided by Visionaries</h2>
+          </div>
+
+          {/* Chairman - The Executive Profile */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 mb-32 items-center reveal-on-scroll">
+            <div className="lg:col-span-5 relative">
+              <div className="absolute -inset-4 border border-jdc-orange/20 rounded-2xl -rotate-2"></div>
+              <div className="relative aspect-[4/5] rounded-xl overflow-hidden shadow-2xl grayscale hover:grayscale-0 transition-all duration-1000">
+                <img src={LEADERSHIP_IMAGES.chairman} alt={LEADERSHIP.chairman} className="w-full h-full object-cover object-top" />
+              </div>
+              <div className="absolute -bottom-10 -right-6 lg:-right-10 bg-jdc-blue text-white p-8 rounded-xl shadow-2xl max-w-xs border-t-4 border-jdc-orange">
+                <p className="text-jdc-orange font-bold uppercase tracking-widest text-[10px] mb-2">Founder & Chairman</p>
+                <h3 className="text-2xl font-serif font-bold">{LEADERSHIP.chairman}</h3>
+              </div>
+            </div>
+            <div className="lg:col-span-7">
+              <Quote className="text-jdc-orange/20 mb-8" size={60} />
+              <p className="text-2xl md:text-4xl font-serif text-jdc-blue leading-tight mb-12 italic text-slate-500">
+                Our commitment is to build long-term client partnerships through quality, reliability, and trust.
+              </p>
+              <div className="prose prose-lg text-slate-600 font-light leading-relaxed max-w-2xl">
+                <p>
+                  With a rich legacy of 45 years, we continue to set unmatched benchmarks
+                  in quality, precision, and consistency within the competitive building materials market.
+                  Our journey is one of continuous evolution—we have expanded our technological
+                  footprint and digitized our manufacturing command centers, all while preserving
+                  the personalized dedication, integrity, and core values of a family-managed
+                  powerhouse. This blend of modern scale and traditional accountability ensures
+                  that every product we deliver is a testament to our enduring commitment
+                  to excellence.
+                </p>
+              </div>
+              <div className="mt-12 flex items-center gap-6">
+                <div className="h-px w-12 bg-slate-300"></div>
+                <span className="font-serif text-xl text-slate-400">Dr. Ashok Kumar Gupta</span>
               </div>
             </div>
           </div>
 
-          {/* Directors */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          {/* Directors - Collaborative Excellence (Chairman Style Cards) */}
+          <div className="mt-40 space-y-48">
             {[
               {
-                name: LEADERSHIP.directors[0],
-                role: "Director • Operations",
-                image: LEADERSHIP_IMAGES.director_vikas,
-                quote: "Precision isn't an accident. It's engineered. We are digitizing our production lines to ensure 100% repeatability."
+                name: LEADERSHIP.directors[1],
+                role: "Director",
+                image: LEADERSHIP_IMAGES.director_mohit,
+                bio: [
+                  "With a professional journey spanning over 15 years, Mr. Mohit Aggarwal has established unparalleled mastery in the gypsum sector. He has been instrumental in diversifying the Sakarni product spectrum—from premium Plaster of Paris and ready-mix plasters to the landmark launch of 'GIPSKARTON SAKARNI GYPSUM BOARD,' a vibrant addition to our high-performance drywall solutions.",
+                  "Driven by a vision of a 'Green house & Eco-friendly India,' he is committed to transforming Indian resources into sustainable, environmentally responsible gypsum-based systems. His leadership ensures that quality remains the core sphere of all activities, focusing on smart, certified solutions that not only lead market trends but also redefine customer satisfaction in the building materials industry."
+                ],
+                reverse: true
               },
               {
-                name: LEADERSHIP.directors[1],
-                role: "Director • Strategy",
-                image: LEADERSHIP_IMAGES.director_mohit,
-                quote: "To lead the market, we must first lead in innovation. Our R&D focus is second to none."
+                name: LEADERSHIP.directors[0],
+                role: "Director",
+                image: LEADERSHIP_IMAGES.director_vikas,
+                bio: [
+                  "With a sharp strategic vision and unwavering determination, Mr. Vikas Jain stands as a driving force behind the growth and evolution of the organization. A self-made leader, he has transformed challenges into opportunities and played a pivotal role in building strong, trusted brands in the building materials sector.",
+                  "His deep understanding of retail dynamics, project execution, and market behavior empowers the company to navigate complex challenges and deliver consistent success. Guided by resilience, innovation, and forward-thinking leadership, he continues to inspire progress, strengthen partnerships, and shape a future defined by performance, trust, and excellence."
+                ],
+                reverse: false
               }
             ].map((director, i) => (
-              <div key={i} className="bg-white rounded-2xl md:rounded-3xl shadow-lg overflow-hidden border border-slate-100 reveal-on-scroll" style={{ transitionDelay: `${(i + 1) * 100}ms` }}>
-                {/* Mobile: Vertical Stack, Desktop: Horizontal */}
-                <div className="md:grid md:grid-cols-3">
-                  {/* Image */}
-                  <div className="h-72 md:h-64 bg-gradient-to-br from-jdc-blue/10 to-jdc-orange/10 flex items-center justify-center overflow-hidden">
-                    <img
-                      src={director.image}
-                      alt={director.name}
-                      className="w-full h-full object-cover"
-                    />
+              <div key={i} className={`grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-center reveal-on-scroll`}>
+                <div className={`lg:col-span-5 relative ${director.reverse ? 'lg:order-last' : ''} mb-12 lg:mb-0`}>
+                  <div className={`absolute -inset-4 border border-jdc-orange/20 rounded-2xl ${director.reverse ? 'rotate-2' : '-rotate-2'}`}></div>
+                  <div className="relative aspect-[4/5] rounded-xl overflow-hidden shadow-2xl grayscale hover:grayscale-0 transition-all duration-1000 max-w-md mx-auto lg:max-w-none">
+                    <img src={director.image} alt={director.name} className="w-full h-full object-cover object-top" />
                   </div>
-                  {/* Content */}
-                  <div className="md:col-span-2 p-6 md:p-8 flex flex-col justify-center space-y-4">
-                    <div>
-                      <h3 className="font-bold font-serif text-jdc-dark text-xl md:text-2xl mb-1">{director.name}</h3>
-                      <p className="text-jdc-orange font-semibold text-base md:text-base">{director.role}</p>
-                    </div>
-
-                    <div className="flex items-start">
-                      <Quote className="text-jdc-orange/20 mr-2 flex-shrink-0" size={36} />
-                      <p className="text-sm md:text-base font-medium font-serif text-jdc-dark italic leading-relaxed">
-                        "{director.quote}"
-                      </p>
-                    </div>
+                  <div className={`absolute -bottom-10 ${director.reverse ? '-left-4 lg:-left-10' : '-right-4 lg:-right-10'} bg-jdc-blue text-white p-6 md:p-8 rounded-xl shadow-2xl max-w-[200px] md:max-w-xs border-t-4 border-jdc-orange z-20`}>
+                    <p className="text-jdc-orange font-bold uppercase tracking-widest text-[8px] md:text-[10px] mb-2">{director.role}</p>
+                    <h3 className="text-lg md:text-2xl font-serif font-bold">{director.name}</h3>
+                  </div>
+                </div>
+                <div className="lg:col-span-7">
+                  <span className="text-jdc-orange/20 block mb-6">
+                    <Quote size={60} />
+                  </span>
+                  <div className="space-y-6 text-slate-600 font-light leading-relaxed text-lg">
+                    {director.bio.map((para, idx) => (
+                      <p key={idx}>{para}</p>
+                    ))}
                   </div>
                 </div>
               </div>
             ))}
           </div>
-        </section>
-
-        {/* Powered By Section */}
-        <div className="bg-gradient-to-r from-jdc-blue to-jdc-blue/80 text-white p-6 md:p-12 rounded-xl md:rounded-2xl shadow-lg reveal-on-scroll text-center">
-          <p className="text-[10px] md:text-base font-semibold uppercase tracking-widest text-jdc-orange mb-2 md:mb-3">Powered By</p>
-          <h3 className="text-2xl md:text-4xl font-serif font-bold">{PARENT_COMPANY}</h3>
         </div>
+      </section>
 
-      </div>
+
+      {/* Corporate Sign-off */}
+      <section className="py-20 md:py-32 px-6 text-center">
+        <div className="max-w-4xl mx-auto">
+          <CheckCircle2 className="text-jdc-orange mx-auto mb-8" size={48} />
+          <h2 className="text-3xl md:text-5xl font-serif text-jdc-blue mb-8">Our promise is in every drop.</h2>
+          <div className="w-20 h-1 bg-jdc-orange mx-auto mb-12"></div>
+          <p className="text-slate-500 text-sm md:text-base font-bold uppercase tracking-[0.4em]">
+            Excellence in Every Formulation
+          </p>
+        </div>
+      </section>
     </div>
   );
 };
