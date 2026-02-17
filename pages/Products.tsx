@@ -1,20 +1,49 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { PRODUCT_LIST } from '../constants';
 import { Search, ArrowRight, Check, Tag, ShieldCheck, Zap, Droplets, Palette, Info } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Product } from '../types';
+import { database } from '../firebase';
+import { ref, onValue } from 'firebase/database';
 
 const Products: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [products, setProducts] = useState<Product[]>(PRODUCT_LIST);
+
+  useEffect(() => {
+    const productsRef = ref(database, 'products');
+    const unsubscribe = onValue(productsRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        // Merge cloud descriptions into local product list
+        const mergedProducts = PRODUCT_LIST.map(localProduct => {
+          const cloudProduct = data[localProduct.slug];
+          return {
+            ...localProduct,
+            description: cloudProduct?.description || "" // Use cloud description or empty if not found
+          };
+        });
+        setProducts(mergedProducts);
+      } else {
+        // If no cloud data, use local list but with empty descriptions 
+        // (per strict "local code se description nahi show hoga" rule)
+        const productsWithNoDesc = PRODUCT_LIST.map(p => ({ ...p, description: "" }));
+        setProducts(productsWithNoDesc);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   // Filter Logic (Search only)
   const filteredProducts = useMemo(() => {
-    return PRODUCT_LIST.filter(product => {
+    return products.filter(product => {
       const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
         product.category.toLowerCase().includes(searchQuery.toLowerCase());
       return matchesSearch;
     });
-  }, [searchQuery]);
+  }, [searchQuery, products]);
 
   return (
     <div className="pt-20 min-h-screen bg-white pb-32 font-sans overflow-hidden">
@@ -111,8 +140,8 @@ const Products: React.FC = () => {
                 </div>
 
                 {/* Content */}
-                <div className="px-2 flex-grow">
-                  <h3 className="text-2xl md:text-3xl font-serif font-bold text-jdc-blue mb-3 group-hover:text-jdc-orange transition-colors duration-300">
+                <Link to={`/product/${product.slug}`} className="px-2 flex-grow group/details">
+                  <h3 className="text-2xl md:text-3xl font-serif font-bold text-jdc-blue mb-3 group-hover/details:text-jdc-orange transition-colors duration-300">
                     {product.name}
                   </h3>
                   <p className="text-slate-500 text-sm md:text-base leading-relaxed mb-6 font-light">
@@ -129,14 +158,16 @@ const Products: React.FC = () => {
                       <span className="text-xs uppercase tracking-wider font-bold">Consistent Tint</span>
                     </div>
                   </div>
-                </div>
+                </Link>
 
                 {/* Footer Link */}
                 <div className="px-2 pt-6 border-t border-slate-100 mt-auto flex items-center justify-between">
-                  <Link to="#" className="group/link inline-flex items-center gap-2 text-jdc-blue font-bold uppercase tracking-widest text-[10px] md:text-xs">
-                    Technical Data <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
+                  <Link to={`/product/${product.slug}`} className="group/link inline-flex items-center gap-2 text-jdc-blue font-bold uppercase tracking-widest text-[10px] md:text-xs">
+                    View Details <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
                   </Link>
-                  <span className="text-[10px] font-mono text-slate-300 uppercase">Ref: SK-{product.id.padStart(3, '0')}</span>
+                  <span className="text-[10px] font-mono text-slate-300 uppercase">
+                    Ref: {product.slug.substring(0, 10).toUpperCase()}
+                  </span>
                 </div>
               </div>
             ))}

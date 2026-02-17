@@ -8,8 +8,10 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import Products from './pages/Products';
+import ProductDetails from './pages/ProductDetails';
 import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
+import Admin from './pages/Admin';
 
 // Scroll to top on route change
 const ScrollToTop = () => {
@@ -40,8 +42,10 @@ const App: React.FC = () => {
             <Route path={PageRoute.HOME} element={<Home />} />
             <Route path={PageRoute.ABOUT} element={<About />} />
             <Route path={PageRoute.PRODUCTS} element={<Products />} />
+            <Route path="/product/:slug" element={<ProductDetails />} />
             <Route path={PageRoute.CONTACT} element={<Contact />} />
             <Route path={PageRoute.FAQ} element={<FAQ />} />
+            <Route path="/admin" element={<Admin />} />
           </Routes>
         </main>
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import HeroSlider from '../components/HeroSlider';
 import { COMPANY_NAME, PARENT_COMPANY } from '../constants';
-import { ShieldCheck, Settings, Users, ArrowRight, Activity, Beaker, Globe, ChevronRight, Star, Factory, Layers, CheckCircle, Quote, ArrowUpRight, Ruler, ClipboardCheck, FileText, BadgeCheck, ChevronDown, Sparkles, Building2, Train, Building, Cog, BridesIcon as Bridge, Hotel, Landmark, FlaskConical, PackageCheck, Truck } from 'lucide-react';
+import { ShieldCheck, Settings, Users, ArrowRight, Activity, Beaker, Globe, ChevronRight, Star, Factory, Layers, CheckCircle, Quote, ArrowUpRight, Ruler, ClipboardCheck, FileText, BadgeCheck, ChevronDown, Sparkles, Building2, Train, Building, Cog, Hotel, Landmark, FlaskConical, PackageCheck, Truck, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { PageRoute } from '../types';
 
@@ -128,39 +128,70 @@ const Home: React.FC = () => {
                <h3 className="text-2xl md:text-4xl font-serif font-bold text-jdc-blue">Trusted by Leading Sectors</h3>
             </div>
 
-            {/* Marquee Container */}
-            <div className="overflow-hidden relative w-full">
-               <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
+            {/* Marquee Container - Row 1 (Left) */}
+            <div className="overflow-hidden relative w-full mb-12">
+               <div className="flex w-max animate-marquee hover:[animation-play-state:paused] py-8">
                   {[...Array(2)].map((_, i) => (
-                     <div key={i} className="flex gap-6 md:gap-12 mx-4 md:mx-8 items-center">
+                     <div key={i} className="flex gap-6 md:gap-10 mx-3 md:mx-5 items-center">
                         {[
-                           { icon: Building2, text: 'Infrastructure', color: 'from-blue-500 to-blue-600' },
-                           { icon: Factory, text: 'Manufacturing', color: 'from-orange-500 to-orange-600' },
-                           { icon: Train, text: 'Metro Rail', color: 'from-purple-500 to-purple-600' },
-                           { icon: Building, text: 'Commercial', color: 'from-green-500 to-green-600' },
-                           { icon: Cog, text: 'Industrial Clients', color: 'from-slate-500 to-slate-600' },
-                           { icon: Activity, text: 'Construction', color: 'from-cyan-500 to-cyan-600' },
-                           { icon: Hotel, text: 'Hospitality', color: 'from-pink-500 to-pink-600' },
-                           { icon: Landmark, text: 'Government', color: 'from-indigo-500 to-indigo-600' }
+                           { icon: Building2, text: 'Infrastructure' },
+                           { icon: Factory, text: 'Manufacturing' },
+                           { icon: Train, text: 'Metro Rail' },
+                           { icon: Building, text: 'Commercial' },
+                           { icon: Cog, text: 'Industrial Hubs' },
                         ].map((item, idx) => {
-                           const IconComponent = item.icon;
+                           const Icon = item.icon;
                            return (
                               <div
                                  key={idx}
-                                 className="flex flex-col items-center gap-3 md:gap-4 group cursor-default min-w-[120px] md:min-w-[160px] p-4 md:p-6 bg-white rounded-2xl border border-slate-100 hover:border-slate-200 hover:shadow-xl transition-all duration-500 hover:-translate-y-2"
+                                 className="group relative flex flex-col items-center justify-center p-10 bg-white/20 backdrop-blur-2xl rounded-3xl border border-white/40 shadow-[0_15px_35px_rgba(0,0,0,0.05)] transition-all duration-500 hover:shadow-glow hover:border-jdc-orange/40 min-w-[220px] md:min-w-[300px] cursor-default"
                               >
-                                 {/* Icon Badge with Gradient */}
-                                 <div className={`w-14 h-14 md:w-20 md:h-20 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center shadow-lg group-hover:shadow-2xl group-hover:scale-110 transition-all duration-500`}>
-                                    <IconComponent className="text-white" size={28} strokeWidth={1.5} />
+                                 <div className="mb-6 p-5 rounded-2xl bg-white/40 shadow-sm text-jdc-blue group-hover:text-jdc-orange group-hover:scale-110 transition-all duration-500">
+                                    <Icon size={32} strokeWidth={1} />
                                  </div>
-
-                                 {/* Label */}
-                                 <span className="text-xs md:text-sm font-bold text-slate-700 group-hover:text-jdc-blue transition-colors text-center whitespace-nowrap">
+                                 <h4 className="text-sm md:text-base font-black text-jdc-blue group-hover:text-jdc-orange transition-colors text-center uppercase tracking-widest leading-tight">
                                     {item.text}
-                                 </span>
+                                 </h4>
 
-                                 {/* Decorative Dot */}
-                                 <div className="w-1.5 h-1.5 rounded-full bg-slate-300 group-hover:bg-jdc-orange transition-colors"></div>
+                                 {/* Hover Accent Glow */}
+                                 <div className="absolute inset-0 bg-jdc-orange/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none"></div>
+                                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-8 h-1 bg-jdc-orange/0 group-hover:bg-jdc-orange/40 transition-all duration-500 rounded-full"></div>
+                              </div>
+                           );
+                        })}
+                     </div>
+                  ))}
+               </div>
+            </div>
+
+            {/* Marquee Container - Row 2 (Right) */}
+            <div className="overflow-hidden relative w-full">
+               <div className="flex w-max animate-marquee-reverse hover:[animation-play-state:paused] py-8">
+                  {[...Array(2)].map((_, i) => (
+                     <div key={i} className="flex gap-6 md:gap-10 mx-3 md:mx-5 items-center">
+                        {[
+                           { icon: Hotel, text: 'Hospitality' },
+                           { icon: Landmark, text: 'Government' },
+                           { icon: Zap, text: 'Green Energy' },
+                           { icon: Globe, text: 'Global Logistics' },
+                           { icon: Activity, text: 'Construction' },
+                        ].map((item, idx) => {
+                           const Icon = item.icon;
+                           return (
+                              <div
+                                 key={idx}
+                                 className="group relative flex flex-col items-center justify-center p-10 bg-white/20 backdrop-blur-2xl rounded-3xl border border-white/40 shadow-[0_15px_35px_rgba(0,0,0,0.05)] transition-all duration-500 hover:shadow-glow hover:border-jdc-orange/40 min-w-[220px] md:min-w-[300px] cursor-default"
+                              >
+                                 <div className="mb-6 p-5 rounded-2xl bg-white/40 shadow-sm text-jdc-blue group-hover:text-jdc-orange group-hover:scale-110 transition-all duration-500">
+                                    <Icon size={32} strokeWidth={1} />
+                                 </div>
+                                 <h4 className="text-sm md:text-base font-black text-jdc-blue group-hover:text-jdc-orange transition-colors text-center uppercase tracking-widest leading-tight">
+                                    {item.text}
+                                 </h4>
+
+                                 {/* Hover Accent Glow */}
+                                 <div className="absolute inset-0 bg-jdc-orange/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none"></div>
+                                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-8 h-1 bg-jdc-orange/0 group-hover:bg-jdc-orange/40 transition-all duration-500 rounded-full"></div>
                               </div>
                            );
                         })}

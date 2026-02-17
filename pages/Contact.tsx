@@ -1,257 +1,186 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Clock, ChevronDown, ChevronUp, Send, Building2, Sparkles } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, ChevronDown, Send, Sparkles, Building2, ExternalLink } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const FAQS = [
-   { q: "Do you offer custom formulations for industrial clients?", a: "Yes, we specialize in strategic partnerships. Our R&D team can reverse-engineer or develop custom formulations based on your viscosity, drying time, and finish requirements." },
-   { q: "What is the minimum order quantity (MOQ) for bulk dispatch?", a: "For industrial products, our MOQ is typically 500 liters. For decorative paints, we supply pallet-sized loads. Please contact sales for specific product MOQs." },
-   { q: "Do you provide on-site technical support?", a: "Absolutely. For large infrastructure projects, we deploy technical supervisors to ensure proper surface preparation and application." },
-   { q: "Are your products REACH and RoHS compliant?", a: "Most of our industrial coatings are compliant. We provide specific MSDS and compliance certificates with every batch upon request." }
+   { q: "Do you offer custom formulations?", a: "Yes, our R&D team specializes in developing custom formulations based on specific viscosity, drying time, and finish requirements for industrial partners." },
+   { q: "What is your minimum order quantity?", a: "For industrial products, typical MOQ is 500 liters. Decorative paints are available in pallet-sized loads. Contact sales for specific product details." },
+   { q: "Do you provide technical support?", a: "Absolutely. We deploy technical supervisors for large infrastructure projects to ensure proper surface preparation and application." },
+   { q: "Are products certified?", a: "Our industrial coatings meet strict compliance standards. MSDS and quality certificates are provided with every batch." }
 ];
 
 const Contact: React.FC = () => {
    const [activeFAQ, setActiveFAQ] = useState<number | null>(0);
 
    return (
-      <div className="pt-20 md:pt-24 min-h-screen bg-gradient-to-br from-slate-50 via-white to-jdc-gray pb-16 md:pb-20 font-sans relative overflow-hidden">
-
-         {/* Animated Background Elements */}
-         <div className="absolute top-0 right-0 w-96 h-96 bg-jdc-orange/5 rounded-full blur-3xl"></div>
-         <div className="absolute bottom-0 left-0 w-96 h-96 bg-jdc-blue/5 rounded-full blur-3xl"></div>
-
-         {/* Header with Gradient */}
-         <div className="relative bg-gradient-to-br from-jdc-dark via-jdc-blue to-jdc-dark text-white pt-16 md:pt-24 pb-20 md:pb-32 px-4 md:px-6 text-center overflow-hidden">
-            {/* Animated Grid Background */}
-            <div className="absolute inset-0 opacity-10">
-               <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:30px_30px] animate-pulse"></div>
-            </div>
-
-            {/* Floating Particles */}
-            <div className="absolute top-10 left-10 w-2 h-2 bg-jdc-orange rounded-full animate-ping"></div>
-            <div className="absolute top-20 right-20 w-3 h-3 bg-white rounded-full opacity-50 animate-pulse"></div>
-            <div className="absolute bottom-10 left-1/4 w-2 h-2 bg-jdc-orange/50 rounded-full animate-ping delay-75"></div>
-
-            <div className="max-w-5xl mx-auto relative z-10">
-               <div className="inline-flex items-center gap-2 bg-jdc-orange/20 backdrop-blur-sm px-4 py-2 rounded-full mb-4 md:mb-6 reveal-on-scroll border border-jdc-orange/30">
-                  <Sparkles size={14} className="text-jdc-orange" />
-                  <span className="text-jdc-orange font-bold uppercase tracking-widest text-[10px] md:text-xs">24/7 Expert Support</span>
-               </div>
-
-               <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold mb-5 md:mb-6 reveal-on-scroll leading-tight">
-                  Let's Start a <span className="text-transparent bg-clip-text bg-gradient-to-r from-jdc-orange to-orange-300">Conversation</span>
-               </h1>
-
-               <p className="text-slate-300 text-sm md:text-lg max-w-2xl mx-auto leading-relaxed reveal-on-scroll px-4">
-                  Whether you need a custom quote, technical datasheet, or partnership details, our expert team is ready to assist you.
-               </p>
+      <div className="bg-slate-50 min-h-screen pt-20">
+         {/* Hero Section - Clean & Professional */}
+         <div className="bg-white border-b border-slate-200">
+            <div className="max-w-7xl mx-auto px-6 py-16 md:py-24 text-center">
+               <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+               >
+                  <h1 className="text-4xl md:text-5xl font-serif font-bold text-slate-900 mb-6">
+                     Contact <span className="text-jdc-blue">Us</span>
+                  </h1>
+                  <p className="text-slate-600 text-lg max-w-2xl mx-auto leading-relaxed">
+                     Get in touch for bulk orders, technical support, or partnership inquiries. <br className="hidden md:block" />
+                     Our team is available 6 days a week to assist you.
+                  </p>
+               </motion.div>
             </div>
          </div>
 
-         <div className="max-w-7xl mx-auto px-4 md:px-6 -mt-16 md:-mt-24 relative z-20">
-
-            {/* Premium Department Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-12 md:mb-20">
-               <div className="group bg-white p-6 md:p-8 rounded-2xl shadow-xl border border-slate-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 reveal-on-scroll relative overflow-hidden">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-jdc-orange to-orange-400"></div>
-                  <div className="absolute -right-6 -top-6 w-24 h-24 bg-jdc-orange/5 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
-
-                  <div className="relative z-10">
-                     <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-jdc-orange to-orange-400 rounded-xl flex items-center justify-center mb-4 md:mb-5 group-hover:rotate-6 transition-transform">
-                        <Mail className="text-white" size={24} />
+         {/* Contact Info Cards */}
+         <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+               {[
+                  { icon: Phone, title: "Call Us", desc: "Mon-Sat, 9am - 6pm", action: "+91 99716 61234", link: "tel:+919971661234", color: "text-blue-600", bg: "bg-blue-50" },
+                  { icon: Mail, title: "Email Us", desc: "For quotes & support", action: "info@jaidurgachemical.com", link: "mailto:info@jaidurgachemical.com", color: "text-orange-500", bg: "bg-orange-50" },
+                  { icon: MapPin, title: "Visit Factory", desc: "Greater Noida, UP", action: "Get Directions", link: "https://maps.app.goo.gl/XfQFFabfzoz9Zz7s7", color: "text-green-600", bg: "bg-green-50" },
+               ].map((item, idx) => (
+                  <motion.a
+                     href={item.link}
+                     target={item.icon === MapPin ? "_blank" : "_self"}
+                     key={idx}
+                     initial={{ opacity: 0, y: 20 }}
+                     whileInView={{ opacity: 1, y: 0 }}
+                     transition={{ delay: idx * 0.1 }}
+                     viewport={{ once: true }}
+                     className="bg-white p-8 rounded-xl shadow-sm border border-slate-200 hover:shadow-md hover:border-jdc-orange/30 transition-all group flex flex-col items-center text-center"
+                  >
+                     <div className={`w-14 h-14 ${item.bg} rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                        <item.icon size={28} className={item.color} />
                      </div>
-                     <h3 className="font-serif font-bold text-xl md:text-2xl text-jdc-blue mb-3 md:mb-4">Sales & Projects</h3>
-                     <p className="text-slate-500 text-sm md:text-base mb-5 md:mb-6 leading-relaxed">For bulk orders, dealership inquiries, and custom manufacturing.</p>
-                     <a href="mailto:info@jaidurgachemical.com" className="inline-flex items-center gap-2 text-jdc-orange font-bold text-sm hover:gap-3 transition-all group-hover:underline">
-                        info@jaidurgachemical.com
-                        <Send size={14} />
-                     </a>
-                  </div>
-               </div>
-
-               <div className="group bg-white p-6 md:p-8 rounded-2xl shadow-xl border border-slate-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 reveal-on-scroll relative overflow-hidden">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-jdc-blue to-blue-600"></div>
-                  <div className="absolute -right-6 -top-6 w-24 h-24 bg-jdc-blue/5 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
-
-                  <div className="relative z-10">
-                     <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-jdc-blue to-blue-600 rounded-xl flex items-center justify-center mb-4 md:mb-5 group-hover:rotate-6 transition-transform">
-                        <Phone className="text-white" size={24} />
-                     </div>
-                     <h3 className="font-serif font-bold text-xl md:text-2xl text-jdc-blue mb-3 md:mb-4">Technical Support</h3>
-                     <p className="text-slate-500 text-sm md:text-base mb-5 md:mb-6 leading-relaxed">For application guides, MSDS requests, and on-site troubleshooting.</p>
-                     <a href="mailto:info@jaidurgachemical.com" className="inline-flex items-center gap-2 text-jdc-orange font-bold text-sm hover:gap-3 transition-all group-hover:underline">
-                        info@jaidurgachemical.com
-                        <Send size={14} />
-                     </a>
-                  </div>
-               </div>
-
-               <div className="group bg-white p-6 md:p-8 rounded-2xl shadow-xl border border-slate-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 reveal-on-scroll relative overflow-hidden">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-slate-500 to-slate-600"></div>
-                  <div className="absolute -right-6 -top-6 w-24 h-24 bg-slate-500/5 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
-
-                  <div className="relative z-10">
-                     <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-slate-500 to-slate-600 rounded-xl flex items-center justify-center mb-4 md:mb-5 group-hover:rotate-6 transition-transform">
-                        <Building2 className="text-white" size={24} />
-                     </div>
-                     <h3 className="font-serif font-bold text-xl md:text-2xl text-jdc-blue mb-3 md:mb-4">Careers</h3>
-                     <p className="text-slate-500 text-sm md:text-base mb-5 md:mb-6 leading-relaxed">Join our team of chemists and engineers. Send us your CV.</p>
-                     <a href="mailto:info@jaidurgachemical.com" className="inline-flex items-center gap-2 text-jdc-orange font-bold text-sm hover:gap-3 transition-all group-hover:underline">
-                        info@jaidurgachemical.com
-                        <Send size={14} />
-                     </a>
-                  </div>
-               </div>
+                     <h3 className="text-lg font-bold text-slate-900 mb-1">{item.title}</h3>
+                     <p className="text-slate-500 text-sm mb-4">{item.desc}</p>
+                     <span className={`font-bold text-sm ${item.color} flex items-center gap-2`}>
+                        {item.action} {item.icon === MapPin && <ExternalLink size={14} />}
+                     </span>
+                  </motion.a>
+               ))}
             </div>
+         </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 lg:gap-16">
+         {/* Main Content Grid */}
+         <div className="max-w-7xl mx-auto px-6 pb-20 md:pb-32">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
 
-               {/* Left: Premium Contact Form */}
-               <div className="lg:col-span-7 reveal-on-scroll">
-                  <div className="bg-white p-6 md:p-10 lg:p-12 rounded-3xl border border-slate-200 shadow-2xl relative overflow-hidden">
-                     {/* Decorative Elements */}
-                     <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-jdc-orange/10 to-transparent rounded-full blur-2xl"></div>
-                     <div className="absolute bottom-0 left-0 w-40 h-40 bg-gradient-to-tr from-jdc-blue/10 to-transparent rounded-full blur-2xl"></div>
-
-                     <div className="relative z-10">
-                        <div className="flex items-center gap-3 mb-6 md:mb-8">
-                           <div className="w-1.5 h-8 bg-gradient-to-b from-jdc-orange to-jdc-blue rounded-full"></div>
-                           <h3 className="text-2xl md:text-3xl font-serif font-bold text-jdc-dark">Send us a Message</h3>
-                        </div>
-
-                        <form className="space-y-5 md:space-y-6">
-                           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
-                              <div className="group">
-                                 <label className="block text-xs font-bold text-slate-600 uppercase mb-2 tracking-wider group-focus-within:text-jdc-orange transition-colors">First Name</label>
-                                 <input
-                                    type="text"
-                                    className="w-full bg-slate-50 border-2 border-slate-200 p-3.5 md:p-4 outline-none focus:border-jdc-orange focus:bg-white transition-all rounded-xl text-slate-800 placeholder:text-slate-400"
-                                    placeholder="John"
-                                 />
-                              </div>
-                              <div className="group">
-                                 <label className="block text-xs font-bold text-slate-600 uppercase mb-2 tracking-wider group-focus-within:text-jdc-orange transition-colors">Last Name</label>
-                                 <input
-                                    type="text"
-                                    className="w-full bg-slate-50 border-2 border-slate-200 p-3.5 md:p-4 outline-none focus:border-jdc-orange focus:bg-white transition-all rounded-xl text-slate-800 placeholder:text-slate-400"
-                                    placeholder="Doe"
-                                 />
-                              </div>
-                           </div>
-
-                           <div className="group">
-                              <label className="block text-xs font-bold text-slate-600 uppercase mb-2 tracking-wider group-focus-within:text-jdc-orange transition-colors">Business Email</label>
-                              <input
-                                 type="email"
-                                 className="w-full bg-slate-50 border-2 border-slate-200 p-3.5 md:p-4 outline-none focus:border-jdc-orange focus:bg-white transition-all rounded-xl text-slate-800 placeholder:text-slate-400"
-                                 placeholder="john.doe@company.com"
-                              />
-                           </div>
-
-                           <div className="group">
-                              <label className="block text-xs font-bold text-slate-600 uppercase mb-2 tracking-wider group-focus-within:text-jdc-orange transition-colors">Subject / Product Interest</label>
-                              <select className="w-full bg-slate-50 border-2 border-slate-200 p-3.5 md:p-4 outline-none focus:border-jdc-orange focus:bg-white transition-all rounded-xl text-slate-700 cursor-pointer">
-                                 <option>General Inquiry</option>
-                                 <option>Bulk Order Quote</option>
-                                 <option>Distributorship Application</option>
-                                 <option>Technical Issue</option>
-                                 <option>Custom Formulation Request</option>
-                              </select>
-                           </div>
-
-                           <div className="group">
-                              <label className="block text-xs font-bold text-slate-600 uppercase mb-2 tracking-wider group-focus-within:text-jdc-orange transition-colors">Message</label>
-                              <textarea
-                                 rows={5}
-                                 className="w-full bg-slate-50 border-2 border-slate-200 p-3.5 md:p-4 outline-none focus:border-jdc-orange focus:bg-white transition-all rounded-xl text-slate-800 placeholder:text-slate-400 resize-none"
-                                 placeholder="Tell us about your requirements..."
-                              ></textarea>
-                           </div>
-
-                           <button
-                              type="button"
-                              className="w-full bg-gradient-to-r from-jdc-blue to-jdc-blue/90 hover:from-jdc-orange hover:to-orange-500 text-white font-bold py-4 md:py-5 transition-all duration-300 uppercase tracking-widest text-sm flex items-center justify-center gap-3 shadow-xl hover:shadow-2xl rounded-xl group relative overflow-hidden"
-                           >
-                              <span className="relative z-10">Submit Inquiry</span>
-                              <Send size={18} className="relative z-10 group-hover:translate-x-1 transition-transform" />
-                              <div className="absolute inset-0 bg-gradient-to-r from-jdc-orange to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                           </button>
-                        </form>
-                     </div>
+               {/* Left: Contact Form */}
+               <div className="lg:col-span-7 bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-slate-200">
+                  <div className="mb-8">
+                     <h2 className="text-2xl font-serif font-bold text-slate-900 mb-2">Send Message</h2>
+                     <p className="text-slate-500 text-sm">We usually respond within 24 hours.</p>
                   </div>
+
+                  <form className="space-y-5">
+                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div className="space-y-1.5">
+                           <label className="text-xs font-bold text-slate-700 uppercase">Name</label>
+                           <input
+                              type="text"
+                              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 focus:outline-none focus:border-jdc-orange focus:ring-1 focus:ring-jdc-orange transition-all placeholder:text-slate-400 text-sm"
+                              placeholder="Your Name"
+                           />
+                        </div>
+                        <div className="space-y-1.5">
+                           <label className="text-xs font-bold text-slate-700 uppercase">Email</label>
+                           <input
+                              type="email"
+                              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 focus:outline-none focus:border-jdc-orange focus:ring-1 focus:ring-jdc-orange transition-all placeholder:text-slate-400 text-sm"
+                              placeholder="email@example.com"
+                           />
+                        </div>
+                     </div>
+
+                     <div className="space-y-1.5">
+                        <label className="text-xs font-bold text-slate-700 uppercase">Subject</label>
+                        <select className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-700 focus:outline-none focus:border-jdc-orange focus:ring-1 focus:ring-jdc-orange transition-all cursor-pointer text-sm">
+                           <option>General Inquiry</option>
+                           <option>Bulk/Wholesale Order</option>
+                           <option>Job Application</option>
+                           <option>Other</option>
+                        </select>
+                     </div>
+
+                     <div className="space-y-1.5">
+                        <label className="text-xs font-bold text-slate-700 uppercase">Message</label>
+                        <textarea
+                           rows={5}
+                           className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 focus:outline-none focus:border-jdc-orange focus:ring-1 focus:ring-jdc-orange transition-all placeholder:text-slate-400 text-sm resize-none"
+                           placeholder="How can we help you?"
+                        ></textarea>
+                     </div>
+
+                     <button
+                        type="button"
+                        className="bg-jdc-blue text-white px-8 py-4 rounded-lg font-bold uppercase tracking-widest text-xs hover:bg-jdc-orange transition-colors duration-300 w-full flex items-center justify-center gap-2 mt-2"
+                     >
+                        Submit Inquiry <Send size={14} />
+                     </button>
+                  </form>
                </div>
 
-               {/* Right: Map & FAQs */}
-               <div className="lg:col-span-5 space-y-8 md:space-y-10">
-
-                  {/* Premium Map Card */}
-                  <div className="relative h-64 md:h-72 bg-slate-200 rounded-2xl overflow-hidden group border-2 border-slate-200 shadow-xl reveal-on-scroll">
-                     <img src="/images/test.png" alt="Location Map" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-end justify-center pb-6">
-                        <div className="bg-white/95 backdrop-blur-md px-6 py-3 rounded-full shadow-2xl cursor-pointer hover:bg-jdc-orange hover:text-white transition-all hover:scale-105 flex items-center gap-2">
-                           <MapPin size={20} />
-                           <span className="text-sm font-bold uppercase tracking-wider">View on Google Maps</span>
-                        </div>
+               {/* Right: Map & Details */}
+               <div className="lg:col-span-5 space-y-8">
+                  {/* Map Card */}
+                  <div className="bg-white p-2 rounded-2xl shadow-sm border border-slate-200">
+                     <div className="bg-slate-100 rounded-xl overflow-hidden h-72 relative group">
+                        <iframe
+                           src="https://maps.google.com/maps?q=Jai+Durga+Chemical+Site-5+Kasna+Road+Greater+Noida&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                           width="100%"
+                           height="100%"
+                           style={{ border: 0 }}
+                           allowFullScreen
+                           loading="lazy"
+                           className="filter grayscale-[20%] group-hover:grayscale-0 transition-all duration-700"
+                        ></iframe>
+                        <a
+                           href="https://maps.app.goo.gl/XfQFFabfzoz9Zz7s7"
+                           target="_blank"
+                           rel="noreferrer"
+                           className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white text-slate-900 px-4 py-2 rounded-full shadow-lg text-xs font-bold flex items-center gap-2 hover:bg-jdc-orange hover:text-white transition-colors"
+                        >
+                           <MapPin size={14} /> Open in Google Maps
+                        </a>
                      </div>
                   </div>
 
-                  {/* Corporate Address with Premium Design */}
-                  <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-200 shadow-xl reveal-on-scroll">
-                     <div className="flex items-center gap-3 mb-5 md:mb-6">
-                        <div className="w-10 h-10 bg-gradient-to-br from-jdc-blue to-jdc-orange rounded-lg flex items-center justify-center">
-                           <Building2 className="text-white" size={20} />
-                        </div>
-                        <h4 className="font-serif font-bold text-xl md:text-2xl text-jdc-blue">Corporate HQ</h4>
-                     </div>
-
-                     <ul className="space-y-4 md:space-y-5 text-slate-600">
-                        <li className="flex items-start gap-4 p-3 rounded-xl hover:bg-slate-50 transition-colors">
-                           <div className="w-8 h-8 bg-jdc-orange/10 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
-                              <MapPin className="text-jdc-orange" size={16} />
-                           </div>
-                           <span className="text-sm md:text-base leading-relaxed">site-5, J-10, Kasna Road, Industrial Area,<br />Surajpur Site V, Greater Noida, UP - 201312</span>
-                        </li>
-                        <li className="flex items-center gap-4 p-3 rounded-xl hover:bg-slate-50 transition-colors">
-                           <div className="w-8 h-8 bg-jdc-blue/10 rounded-lg flex items-center justify-center shrink-0">
-                              <Phone className="text-jdc-blue" size={16} />
-                           </div>
-                           <a href="tel:+919971661234" className="text-sm md:text-base hover:text-jdc-orange transition-colors font-medium">+91 99716 61234</a>
-                        </li>
-                        <li className="flex items-center gap-4 p-3 rounded-xl hover:bg-slate-50 transition-colors">
-                           <div className="w-8 h-8 bg-slate-500/10 rounded-lg flex items-center justify-center shrink-0">
-                              <Clock className="text-slate-600" size={16} />
-                           </div>
-                           <span className="text-sm md:text-base">Mon - Sat: 9:00 AM - 6:00 PM</span>
-                        </li>
-                     </ul>
-                  </div>
-
-                  {/* Premium FAQ Accordion */}
-                  <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-200 shadow-xl reveal-on-scroll">
-                     <h4 className="font-serif font-bold text-xl md:text-2xl text-jdc-blue mb-5 md:mb-6 flex items-center gap-2">
-                        <Sparkles className="text-jdc-orange" size={24} />
-                        FAQ's
-                     </h4>
-                     <div className="space-y-3">
-                        {FAQS.map((faq, idx) => (
-                           <div key={idx} className="border-2 border-slate-100 rounded-xl bg-slate-50/50 overflow-hidden hover:border-slate-200 transition-colors">
-                              <button
-                                 onClick={() => setActiveFAQ(activeFAQ === idx ? null : idx)}
-                                 className="w-full flex justify-between items-center p-4 md:p-5 text-left hover:bg-white transition-colors group"
-                              >
-                                 <span className={`font-bold text-xs md:text-sm pr-4 transition-colors ${activeFAQ === idx ? 'text-jdc-orange' : 'text-slate-700 group-hover:text-jdc-blue'}`}>{faq.q}</span>
-                                 <div className={`shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all ${activeFAQ === idx ? 'bg-jdc-orange text-white rotate-180' : 'bg-slate-200 text-slate-600'}`}>
-                                    <ChevronDown size={16} />
-                                 </div>
-                              </button>
-                              <div className={`overflow-hidden transition-all duration-300 ${activeFAQ === idx ? 'max-h-48 px-4 md:px-5 pb-4 md:pb-5' : 'max-h-0'}`}>
-                                 <p className="text-xs md:text-sm text-slate-600 leading-relaxed bg-white p-4 rounded-lg">
-                                    {faq.a}
-                                 </p>
-                              </div>
-                           </div>
-                        ))}
+                  {/* Corporate Address */}
+                  <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+                     <h3 className="font-serif font-bold text-lg text-slate-900 mb-6 flex items-center gap-2">
+                        <Building2 size={18} className="text-jdc-blue" /> Corporate Office
+                     </h3>
+                     <div className="space-y-4 text-sm text-slate-600">
+                        <p className="leading-relaxed pl-8 relative">
+                           <span className="absolute left-0 top-1 w-1.5 h-1.5 rounded-full bg-jdc-orange"></span>
+                           <strong className="text-slate-900 block mb-1">Jai Durga Chemical</strong>
+                           Site-5, J-10, Kasna Road, Industrial Area,<br />
+                           Surajpur Site V, Greater Noida,<br />
+                           Uttar Pradesh - 201312
+                        </p>
+                        <div className="border-t border-slate-100 my-4"></div>
+                        <p className="leading-relaxed pl-8 relative">
+                           <span className="absolute left-0 top-1 w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                           <strong className="text-slate-900 block mb-1">Support Hours</strong>
+                           Monday - Saturday<br />
+                           09:00 AM - 06:00 PM
+                        </p>
                      </div>
                   </div>
 
+                  {/* FAQ Teaser */}
+                  <div className="bg-blue-50 p-8 rounded-2xl border border-blue-100 text-center">
+                     <h3 className="font-serif font-bold text-lg text-blue-900 mb-2 flex items-center justify-center gap-2">
+                        <Sparkles size={18} className="text-blue-500" /> Have Questions?
+                     </h3>
+                     <p className="text-sm text-slate-600 mb-6">Find answers to common questions about our products, custom formulations, and minimum orders.</p>
+                     <a href="/#/faq" className="inline-block bg-white text-blue-600 px-6 py-3 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all shadow-sm">
+                        View Knowledge Base
+                     </a>
+                  </div>
                </div>
 
             </div>

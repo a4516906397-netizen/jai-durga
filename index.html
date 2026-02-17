@@ -37,6 +37,7 @@
           },
           animation: {
             'marquee': 'marquee 25s linear infinite',
+            'marquee-reverse': 'marquee-reverse 25s linear infinite',
           }
         }
       }
@@ -104,6 +105,16 @@
 
       100% {
         transform: translateX(-50%);
+      }
+    }
+
+    @keyframes marquee-reverse {
+      0% {
+        transform: translateX(-50%);
+      }
+
+      100% {
+        transform: translateX(0);
       }
     }
 
