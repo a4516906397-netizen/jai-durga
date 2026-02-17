@@ -62,7 +62,7 @@ export const PRODUCT_LIST: Product[] = [
   },
   {
     id: 'sakarni-universal-stainer',
-    name: 'Sakarni Universal Stainer',
+    name: 'Universal Stainer',
     slug: 'sakarni-universal-stainer',
     category: 'Universal Stainer',
     description: `SAKARNI UNIVERSAL STAINER is a glycol based binder free pigment concentrate having both non-ionic and anionic wetting agent and dispersing agent in optimum dosage. It contains pro colorants with active pigments which enhances the final color and helps to achieve multiple shades with accurate desired color output.\n\nSakarni Universal Stainer is manufactured to right specifications such as color shade, color strength and rheology which guarantees both excellent color accuracy and color reproducibility. Due to the unique dispersion technique used in Sakarni universal stainer complete deagglomeration of pigments takes place hence optimum color development is obtained from each pigment which in turn results in maximum tinting strength.\n\nEach batch of Sakarni universal stainer goes through stringent quality control procedures in every step from selection of raw materials to its processing and packaging, using latest technology and equipments which make the product free from defects such as flocculation, flooding, cratering, etc. and also ensures to maintain highest of standards.`,
@@ -103,7 +103,7 @@ export const PRODUCT_LIST: Product[] = [
   },
   {
     id: 'magic-coat',
-    name: 'Sakarni Magic Coat Primer',
+    name: 'Magic Coat Primer',
     slug: 'magic-coat',
     category: 'Primers',
     description: `SAKARNI MAGIC COAT ACRYLIC CEMENT PRIMER is a carefully formulated interior water based acrylic cement primer based on modified styrene acrylic emulsion which can be used for application on interior surfaces. It has been specifically designed as a surface primer with excellent binding and spreading capacity.\n\nThe fine particle size allows outstanding penetration into porous and chalky substrates to consolidate the plaster and gives even shade to the surface. It is reinforced with inert pigments and extenders and also gives excellent covering capacity along with uniform absorption over the whole surface. These properties enhance the top coats adhesion and durability.`,
@@ -121,7 +121,7 @@ export const PRODUCT_LIST: Product[] = [
   },
   {
     id: 'magic-grip',
-    name: 'Sakarni Magic Grip Primer',
+    name: 'Magic Grip Primer',
     slug: 'magic-grip',
     category: 'Primers',
     description: `SAKARNI MAGIC GRIP water based acrylic cement primer is based on modified styrene acrylic emulsion. It has been specially designed as a surface primer with excellent binding and spreading capacities.\n\nThe fine particle size allows good penetration into porous and chalky substrates to consolidate the plaster, give even shade to the surface and provide uniform absorption over the whole surface. These properties enhance the top coats adhesion, durability and also create strong surface bonding.\n\nSakarni primer is specially reinforced with inert pigments and extenders and has been designed to provide super sealing properties, excellent resistance from moisture and to keep the walls free from defects. The very fine particle size of Sakarni primer also allows penetration into substrates to enhance the physical barrier to water transportation and act as a chemical barrier to salt migration.`,
@@ -139,7 +139,7 @@ export const PRODUCT_LIST: Product[] = [
   },
   {
     id: 'water-base-red-oxide-primer',
-    name: 'Sakarni High Prime - Red Oxide Primer',
+    name: 'High Prime - Red Oxide Primer',
     slug: 'water-base-red-oxide-primer',
     category: 'Primers',
     description: `SAKARNI HIGH PRIME – RED OXIDE PRIMER is a general purpose solvent thinnable metal primer built with superior quality base of synthetic resin which is pigmented with Red Oxide and other rust inhibitive pigments. Sakarni High Prime provides excellent protection to exterior and interior of ferrous metal surfaces (like steel, cast iron, wrought iron etc.) during and after fabrication. It also offers good opacity, coverage, flow, leveling, and adhesion.`,
@@ -159,7 +159,7 @@ export const PRODUCT_LIST: Product[] = [
   },
   {
     id: 'solvent-base-red-oxide-primer',
-    name: 'Sakarni Pro Protect - Red Oxide Primer',
+    name: 'Pro Protect - Red Oxide Primer',
     slug: 'solvent-base-red-oxide-primer',
     category: 'Primers',
     subTitle: 'Advanced Corrosion & Rust Protection',
@@ -199,7 +199,7 @@ export const PRODUCT_LIST: Product[] = [
   },
   {
     id: 'water-base-wood-primer',
-    name: 'Sakarni Wood Guard Primer',
+    name: 'Wood Guard Primer',
     slug: 'water-base-wood-primer',
     category: 'Primers',
     description: `SAKARNI WOOD GUARD primer is a premium and environment friendly water-based acrylic primer that promotes excellent adhesion on wood substrates without the strong odour of solvent based primers. It is easily sandable and helps to provide a smooth finish.`,
@@ -219,7 +219,7 @@ export const PRODUCT_LIST: Product[] = [
   },
   {
     id: 'solvent-base-wood-primer',
-    name: 'SAKARNI WOOD SECURE PRIMER',
+    name: 'Wood Secure Primer',
     slug: 'solvent-base-wood-primer',
     category: 'Primers',
     description: 'Solvent-based primer for wood, offering deep penetration and protection against moisture and insects for long-lasting wood finishes.',
@@ -227,7 +227,7 @@ export const PRODUCT_LIST: Product[] = [
   },
   {
     id: 'magna',
-    name: 'Sakarni Magna Interior Emulsion',
+    name: 'Magna',
     slug: 'magna',
     category: 'Interior Emulsion',
     subTitle: 'Premium Value-for-Money Interior Finish',
@@ -256,7 +256,7 @@ export const PRODUCT_LIST: Product[] = [
   },
   {
     id: 'magna-glow',
-    name: 'MAGNA GLOW',
+    name: 'Magna Glow',
     slug: 'magna-glow',
     category: 'Interior Emulsion',
     description: 'Premium interior emulsion with excellent coverage, vibrant colors, washability, and resistance to stains for a rich, long-lasting finish on interior walls.',
@@ -272,7 +272,7 @@ export const PRODUCT_LIST: Product[] = [
   },
   {
     id: 'charm-glow-sheen',
-    name: 'Sakarni Charm Glow Shades',
+    name: 'Charm Glow Shades',
     slug: 'charm-glow-sheen',
     category: 'Exterior Emulsion',
     description: 'Advanced exterior emulsion with multiple premium shades, offering weather resistance, anti-fungal protection, and durability against rain, heat, and humidity.',
@@ -280,7 +280,7 @@ export const PRODUCT_LIST: Product[] = [
   },
   {
     id: 'charm-gold',
-    name: 'Sakarni Charm Gold',
+    name: 'Charm Gold',
     slug: 'charm-gold',
     category: 'Exterior Emulsion',
     description: 'Premium exterior emulsion with 7-year warranty, Suspension Max Technology, low VOC, anti-fungal and antibacterial protection, and extra coverage for luxurious outdoor finishes.',
@@ -288,7 +288,7 @@ export const PRODUCT_LIST: Product[] = [
   },
   {
     id: 'charm-gold-sheen',
-    name: 'Sakarni Charm Gold Shades',
+    name: 'Charm Gold Shades',
     slug: 'charm-gold-sheen',
     category: 'Exterior Emulsion',
     description: 'Multiple premium shades of Charm Gold, providing robust protection and an elegant finish for exterior surfaces exposed to harsh weather conditions.',
@@ -296,7 +296,7 @@ export const PRODUCT_LIST: Product[] = [
   },
   {
     id: 'charm-glow-plus',
-    name: 'Sakarni Charm Glow Plus',
+    name: 'Charm Glow Plus',
     slug: 'charm-glow-plus',
     category: 'Exterior Emulsion',
     description: 'Upgraded exterior emulsion with plus features like improved adhesion, crack resistance, and superior weather guard for long-term exterior wall protection.',
@@ -304,7 +304,7 @@ export const PRODUCT_LIST: Product[] = [
   },
   {
     id: 'charm-glow',
-    name: 'Sakarni Charm Glow',
+    name: 'Charm Glow',
     slug: 'charm-glow',
     category: 'Exterior Emulsion',
     subTitle: 'Premium Shiny Finish Exterior Protection',
@@ -340,7 +340,7 @@ This innovative technology helps particles to reflect more light and gives enhan
   },
   {
     id: 'charm',
-    name: 'Sakarni Charm Exterior Emulsion Paint',
+    name: 'Charm',
     slug: 'charm',
     category: 'Exterior Emulsion',
     subTitle: 'Premium Weather-Shield Protection',
@@ -432,10 +432,11 @@ This premium semi gloss enamel is perfect for a variety of surfaces:
   },
   {
     id: 'pyd-meta-ruby',
-    name: 'PYD Meta Ruby',
+    name: 'Pyd Meta Ruby',
     slug: 'pyd-meta-ruby',
     category: 'Metallic Paint',
-    description: 'Metallic emulsion paint with a ruby finish, adding a luxurious metallic touch and shimmer to interior walls for elegant decor.'
+    subTitle: 'Upcoming Product',
+    description: 'COMING SOON - Our luxury metallic emulsion paint with a ruby finish is currently in development. Stay tuned for a brilliant metallic shimmer.'
   },
   {
     id: 'maha-glow',
@@ -447,7 +448,7 @@ This premium semi gloss enamel is perfect for a variety of surfaces:
   },
   {
     id: 'sakarni-maha-glow-colour-distemper',
-    name: 'Sakarni Maha Glow Colour Distemper',
+    name: 'Maha Glow Colour Shades',
     slug: 'sakarni-maha-glow-colour-distemper',
     category: 'Distemper',
     description: 'Color distemper variant providing durable, washable finish with good coverage and a soft sheen, ideal for interior walls seeking affordable yet quality painting.',
@@ -455,7 +456,7 @@ This premium semi gloss enamel is perfect for a variety of surfaces:
   },
   {
     id: 'pyd-super-booster',
-    name: 'PYD Super Booster',
+    name: 'Pyd Super Booster',
     slug: 'pyd-super-booster',
     category: 'Waterproofing',
     subTitle: 'Advanced Polymer-Based Liquid Additive',
@@ -486,7 +487,7 @@ This premium semi gloss enamel is perfect for a variety of surfaces:
   },
   {
     id: 'pyd-roof-cover',
-    name: 'PYD Roof Cover',
+    name: 'Pyd Roof Cover',
     slug: 'pyd-roof-cover',
     category: 'Waterproofing',
     subTitle: 'Upcoming Product',
@@ -499,65 +500,65 @@ export const MEGA_MENU_DATA: MegaMenuCategory[] = [
   {
     title: "UNIVERSAL STAINER",
     items: [
-      { name: "SAKARNI UNIVERSAL STAINER", slug: "sakarni-universal-stainer", image: "/product/sakarni_universal_stainer.png" },
-      { name: "PYD UNIVERSAL STAINER", slug: "pyd-universal-stainer", image: "/product/pydstainer.png" }
+      { name: "Universal Stainer", slug: "sakarni-universal-stainer", image: "/product/sakarni_universal_stainer.png" },
+      { name: "Pyd Universal Stainer", slug: "pyd-universal-stainer", image: "/product/pydstainer.png" }
     ]
   },
   {
     title: "PRIMERS",
     items: [
-      { name: "SAKARNI MAGIC COAT PRIMER", slug: "magic-coat", image: "/product/sakarni_magic_coat_interior_primer.png" },
-      { name: "SAKARNI MAGIC GRIP PRIMER", slug: "magic-grip", image: "/product/sakarni_magic_grip_primer_bucket.png" },
-      { name: "SAKARNI PRO PROTECT - RED OXIDE PRIMER", slug: "solvent-base-red-oxide-primer", image: "/product/sakarni_primer_pro_protect_red_oxide_can.png" },
-      { name: "SAKARNI WOOD GUARD PRIMER", slug: "water-base-wood-primer", image: "/product/sakarni_primer_wood_guard_can.png" },
-      { name: "SAKARNI HIGH PRIME - RED OXIDE PRIMER", slug: "water-base-red-oxide-primer", image: "/product/sakarni_high_prime_red_oxide_primer_can.png" },
-      { name: "SAKARNI WOOD SECURE PRIMER", slug: "solvent-base-wood-primer", image: "/product/sakarni_primer_wood_secure_can.png" }
+      { name: "Magic Coat Primer", slug: "magic-coat", image: "/product/sakarni_magic_coat_interior_primer.png" },
+      { name: "Magic Grip Primer", slug: "magic-grip", image: "/product/sakarni_magic_grip_primer_bucket.png" },
+      { name: "Pro Protect - Red Oxide Primer", slug: "solvent-base-red-oxide-primer", image: "/product/sakarni_primer_pro_protect_red_oxide_can.png" },
+      { name: "Wood Guard Primer", slug: "water-base-wood-primer", image: "/product/sakarni_primer_wood_guard_can.png" },
+      { name: "High Prime - Red Oxide Primer", slug: "water-base-red-oxide-primer", image: "/product/sakarni_high_prime_red_oxide_primer_can.png" },
+      { name: "Wood Secure Primer", slug: "solvent-base-wood-primer", image: "/product/sakarni_primer_wood_secure_can.png" }
     ]
   },
   {
     title: "INTERIOR EMULSION",
     items: [
-      { name: "SAKARNI MAGNA INTERIOR EMULSION", slug: "magna", image: "/product/sakarni_magna_emulsion_paint.png" },
-      { name: "MAGNA GLOW", slug: "magna-glow", image: "/product/sakarni_magna_glow_interior_emulsion.png" },
-      { name: "QUICK CLEAN", slug: "quick-clean", image: "/product/sakarni_quick_clean_interior_emulsion.png" }
+      { name: "Magna Interior Emulsion", slug: "magna", image: "/product/sakarni_magna_emulsion_paint.png" },
+      { name: "Magna Glow", slug: "magna-glow", image: "/product/sakarni_magna_glow_interior_emulsion.png" },
+      { name: "Quick Clean", slug: "quick-clean", image: "/product/sakarni_quick_clean_interior_emulsion.png" }
     ]
   },
   {
     title: "EXTERIOR EMULSION",
     items: [
-      { name: "SAKARNI CHARM GOLD", slug: "charm-gold", image: "/product/sakarni_charm_gold_exterior_emulsion.png" },
-      { name: "SAKARNI CHARM GOLD SHADES", slug: "charm-gold-sheen", image: "/product/sakarni_charm_gold_exterior_emulsion.png" },
-      { name: "SAKARNI CHARM GLOW PLUS", slug: "charm-glow-plus", image: "/product/charmglow+.png" },
-      { name: "SAKARNI CHARM GLOW", slug: "charm-glow", image: "/product/sakarni_charm_glow_exterior_emulsion.png" },
-      { name: "SAKARNI CHARM GLOW SHADES", slug: "charm-glow-sheen", image: "/product/sakarni_charm_glow_exterior_emulsion.png" },
-      { name: "SAKARNI CHARM", slug: "charm", image: "/product/sakarni_charm_exterior_emulsion.png" }
+      { name: "Charm Gold", slug: "charm-gold", image: "/product/sakarni_charm_gold_exterior_emulsion.png" },
+      { name: "Charm Gold Shades", slug: "charm-gold-sheen", image: "/product/sakarni_charm_gold_exterior_emulsion.png" },
+      { name: "Charm Glow Plus", slug: "charm-glow-plus", image: "/product/charmglow+.png" },
+      { name: "Charm Glow", slug: "charm-glow", image: "/product/sakarni_charm_glow_exterior_emulsion.png" },
+      { name: "Charm Glow Shades", slug: "charm-glow-sheen", image: "/product/sakarni_charm_glow_exterior_emulsion.png" },
+      { name: "Charm", slug: "charm", image: "/product/sakarni_charm_exterior_emulsion.png" }
     ]
   },
   {
     title: "ENAMEL",
     items: [
-      { name: "SAK CLASSIC", slug: "sak-classic", image: "/product/sakarni_sak_classic_gloss_enamel_can.png" },
-      { name: "PYD PRIME SHINE", slug: "pyd-prime-shine", image: "/product/pyd_prime_shine.png" }
+      { name: "Sak Classic", slug: "sak-classic", image: "/product/sakarni_sak_classic_gloss_enamel_can.png" },
+      { name: "Pyd Prime Shine", slug: "pyd-prime-shine", image: "/product/pyd_prime_shine.png" }
     ]
   },
   {
     title: "METALLIC PAINT",
     items: [
-      { name: "PYD META RUBY", slug: "pyd-meta-ruby" }
+      { name: "Pyd Meta Ruby", slug: "pyd-meta-ruby" }
     ]
   },
   {
     title: "DISTEMPER",
     items: [
-      { name: "MAHA GLOW", slug: "maha-glow", image: "/product/sakarni_mahaglow_distemper_bucket.png" },
-      { name: "SAKARNI MAHA GLOW COLOUR DISTEMPER", slug: "sakarni-maha-glow-colour-distemper", image: "/product/sakarni_mahaglow_distemper_bucket.png" }
+      { name: "Maha Glow", slug: "maha-glow", image: "/product/sakarni_mahaglow_distemper_bucket.png" },
+      { name: "Maha Glow Colour Shades", slug: "sakarni-maha-glow-colour-distemper", image: "/product/sakarni_mahaglow_distemper_bucket.png" }
     ]
   },
   {
     title: "WATER PROOFING",
     items: [
-      { name: "PYD SUPER BOOSTER", slug: "pyd-super-booster", image: "/product/pyd_super_booster.png" },
-      { name: "PYD ROOF COVER", slug: "pyd-roof-cover" }
+      { name: "Pyd Super Booster", slug: "pyd-super-booster", image: "/product/pyd_super_booster.png" },
+      { name: "Pyd Roof Cover", slug: "pyd-roof-cover" }
     ]
   }
 ];

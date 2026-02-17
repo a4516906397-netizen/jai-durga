@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { PRODUCT_LIST, COMPANY_NAME } from '../constants';
 import { motion } from 'framer-motion';
-import { ArrowLeft, ShoppingBag, Phone, ChevronRight, ImageIcon, Box } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, Phone, ChevronRight, ImageIcon, Box, Zap } from 'lucide-react';
 import { PageRoute, Product } from '../types';
 import { database } from '../firebase';
 import { ref, onValue } from 'firebase/database';
@@ -142,6 +142,18 @@ const ProductDetails: React.FC = () => {
                                 </div>
                             )}
 
+                            {product.subTitle === 'Upcoming Product' && (
+                                <div className="absolute inset-0 flex items-center justify-center z-30 pointer-events-none p-6">
+                                    <motion.div
+                                        initial={{ scale: 0.5, opacity: 0 }}
+                                        animate={{ scale: 1, opacity: 1 }}
+                                        className="px-10 py-5 bg-jdc-orange/95 backdrop-blur-xl text-white text-sm md:text-lg font-black uppercase tracking-[0.5em] rounded-full shadow-[0_25px_80px_rgba(242,118,34,0.6)] border border-white/40 text-center animate-pulse"
+                                    >
+                                        Coming Soon
+                                    </motion.div>
+                                </div>
+                            )}
+
                             {/* Floating Category Badge */}
                             <div className="absolute top-10 left-10 z-20">
                                 <div className="px-5 py-2 bg-slate-900 text-white text-[9px] font-black uppercase tracking-[0.3em] rounded-full shadow-2xl">
@@ -168,6 +180,12 @@ const ProductDetails: React.FC = () => {
                                 <h1 className="text-4xl md:text-6xl font-serif font-black text-slate-900 leading-[1.1]">
                                     {product.name}
                                 </h1>
+                                {product.subTitle === 'Upcoming Product' && (
+                                    <div className="inline-flex items-center gap-2 bg-jdc-orange text-white px-4 py-2 rounded-full w-fit animate-pulse shadow-xl">
+                                        <Zap size={16} fill="white" />
+                                        <span className="text-xs font-black uppercase tracking-[0.2em]">Future Release</span>
+                                    </div>
+                                )}
                             </div>
 
                             {product.subTitle && (
@@ -184,10 +202,26 @@ const ProductDetails: React.FC = () => {
                                 </div>
                             )}
 
-                            <div className="prose prose-slate prose-xl max-w-none">
-                                <p className="text-slate-600 leading-relaxed font-medium whitespace-pre-line">
-                                    {product.description}
-                                </p>
+                            <div className="bg-slate-50 rounded-2xl p-6 md:p-8 border border-slate-100 relative group/desc">
+                                <div className={`prose prose-slate prose-lg max-w-none transition-all duration-500 overflow-hidden ${!showFullDetails && product.description.length > 200 ? 'max-h-[150px] mask-fade' : 'max-h-[1000px]'}`}>
+                                    <p className="text-slate-600 leading-relaxed font-medium whitespace-pre-line">
+                                        {product.description}
+                                    </p>
+                                </div>
+
+                                {product.description.length > 200 && (
+                                    <button
+                                        onClick={() => setShowFullDetails(!showFullDetails)}
+                                        className="mt-6 flex items-center gap-2 text-jdc-blue font-bold uppercase tracking-widest text-[10px] hover:text-jdc-orange transition-colors group/btn"
+                                    >
+                                        {showFullDetails ? 'Show Less' : 'More Details'}
+                                        <ChevronRight size={14} className={`transform transition-transform duration-300 ${showFullDetails ? 'rotate-90' : 'group-hover/btn:translate-x-1'}`} />
+                                    </button>
+                                )}
+
+                                {!showFullDetails && product.description.length > 200 && (
+                                    <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-slate-50 to-transparent pointer-events-none rounded-b-2xl"></div>
+                                )}
                             </div>
 
                             {/* Extra Details from Admin */}

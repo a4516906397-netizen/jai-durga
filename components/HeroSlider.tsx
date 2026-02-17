@@ -6,7 +6,7 @@ import { ArrowRight, ChevronLeft, ChevronRight, Minus } from 'lucide-react';
 const SLIDES = [
   {
     image: "/images/production.png",
-    title: "Industrial Excellence",
+    title: "Decorative Excellence",
     subtitle: "Precision-engineered paints & coatings for industrial projects.",
     cta: "Explore Products",
     link: PageRoute.PRODUCTS,
@@ -117,9 +117,7 @@ const HeroSlider: React.FC = () => {
               />
             </div>
 
-            {/* Cinematic Gradient Mesh - Crucial for readability & mood */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent mix-blend-multiply"></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 opacity-80"></div>
+            {/* Cinematic Gradient Mesh - Crucial for readability & mood - REMOVED per user request */}
           </div>
         );
       })}

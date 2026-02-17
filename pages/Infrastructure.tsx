@@ -7,11 +7,9 @@ const Infrastructure: React.FC = () => {
 
          {/* 1. PREMIUM HERO SECTION */}
          <div className="relative h-[60vh] md:h-[70vh] min-h-[500px] overflow-hidden bg-jdc-dark">
-            <img src="/images/factory.png" alt="Factory" className="w-full h-full object-cover grayscale opacity-40 scale-105" />
+            <img src="/images/factory.png" alt="Factory" className="w-full h-full object-cover scale-105" />
 
-            {/* Cinematic Overlays */}
-            <div className="absolute inset-0 bg-gradient-to-t from-jdc-dark via-jdc-dark/40 to-transparent"></div>
-            <div className="absolute inset-0 bg-jdc-blue/60 mix-blend-multiply"></div>
+            {/* Cinematic Overlays REMOVED per user request */}
             <div className="absolute inset-0 opacity-[0.05] bg-noise pointer-events-none"></div>
 
             <div className="absolute inset-0 flex items-center justify-center text-center">

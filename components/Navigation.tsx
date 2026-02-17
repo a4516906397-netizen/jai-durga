@@ -19,6 +19,13 @@ const NavItemComponent: React.FC<{ item: any }> = ({ item }) => {
   const location = useLocation();
   const isActive = location.pathname === item.path;
 
+  // For Products, allow both hover and click
+  const toggleMenu = () => {
+    if (item.label === 'Products') {
+      setIsHovered(!isHovered);
+    }
+  };
+
   return (
     <div
       className="h-full flex items-center relative"
@@ -27,8 +34,14 @@ const NavItemComponent: React.FC<{ item: any }> = ({ item }) => {
     >
       <NavLink
         to={item.path}
+        onClick={(e) => {
+          if (item.label === 'Products') {
+            e.preventDefault();
+            toggleMenu();
+          }
+        }}
         className={({ isActive }) =>
-          `text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 relative group py-2 flex items-center gap-1.5
+          `text-[10px] font-black uppercase tracking-[0.25em] transition-all duration-500 relative group py-5 flex items-center gap-1.5
           ${isActive ? 'text-white' : 'text-slate-400 hover:text-white'}`
         }
       >
@@ -47,14 +60,14 @@ const NavItemComponent: React.FC<{ item: any }> = ({ item }) => {
             {isActive && (
               <motion.div
                 layoutId="activeNav"
-                className="absolute -bottom-1.5 left-0 right-0 h-[2px] bg-gradient-to-r from-jdc-orange to-amber-400 rounded-full"
+                className="absolute bottom-3 left-0 right-0 h-[2px] bg-gradient-to-r from-jdc-orange to-amber-400 rounded-full"
                 transition={{ type: "spring", stiffness: 380, damping: 30 }}
               />
             )}
 
             {/* Hover Indicator */}
             {!isActive && (
-              <span className="absolute -bottom-1.5 left-0 w-0 h-[2px] bg-white/20 transition-all duration-500 group-hover:w-full rounded-full"></span>
+              <span className="absolute bottom-3 left-0 w-0 h-[2px] bg-white/20 transition-all duration-500 group-hover:w-full rounded-full"></span>
             )}
           </>
         )}
@@ -69,10 +82,11 @@ const NavItemComponent: React.FC<{ item: any }> = ({ item }) => {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.98 }}
               transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-              className="fixed top-[64px] md:top-[90px] left-0 w-full bg-[#030712]/95 backdrop-blur-2xl border-b border-white/5 z-[100] overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.6)]"
+              className="fixed top-[70px] md:top-[90px] left-0 w-full bg-jdc-blue backdrop-blur-3xl border-b border-jdc-orange/20 z-[100] overflow-hidden shadow-[0_40px_100px_rgba(11,28,62,0.95)]"
             >
               {/* Premium Glass Effect Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent pointer-events-none"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-jdc-orange/5 via-transparent to-jdc-orange/5 pointer-events-none"></div>
 
               <MegaMenuContent onItemClick={() => setIsHovered(false)} />
 
@@ -94,7 +108,7 @@ export const DesktopNav: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 20);
 
       // Calculate scroll progress
       const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -103,51 +117,39 @@ export const DesktopNav: React.FC = () => {
       setScrollProgress(scrolled);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 border-b ${isScrolled || !isHome
-        ? 'bg-jdc-blue/80 backdrop-blur-2xl py-2 md:py-3 border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.2)]'
-        : 'bg-transparent py-6 md:py-8 border-transparent'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled || !isHome
+        ? 'bg-jdc-blue backdrop-blur-2xl py-3 border-b-2 border-jdc-orange/30 shadow-[0_10px_60px_rgba(11,28,62,0.8),0_0_40px_rgba(242,118,34,0.1)]'
+        : 'bg-jdc-blue/60 md:bg-jdc-blue/40 backdrop-blur-md py-6 md:py-8 border-b border-white/10'
         }`}
     >
       {/* Scroll Progress Bar */}
-      <div className="absolute top-0 left-0 h-[2px] bg-jdc-orange/80 z-[60] transition-all duration-300 ease-out" style={{ width: `${scrollProgress}%` }}></div>
+      <div className="absolute top-0 left-0 h-[3px] bg-gradient-to-r from-jdc-orange via-amber-500 to-jdc-orange z-[60] transition-all duration-300 ease-out shadow-[0_0_15px_rgba(242,118,34,0.6)]" style={{ width: `${scrollProgress}%` }}></div>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center h-full relative">
-
-        {/* Subtle Background Glow for Scrolled Header */}
-        <AnimatePresence>
-          {isScrolled && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute inset-x-0 -bottom-20 h-20 bg-gradient-to-b from-jdc-blue/20 to-transparent pointer-events-none"
-            />
-          )}
-        </AnimatePresence>
+      <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center h-full relative gap-8">
 
         {/* Brand Identity */}
-        <Link to={PageRoute.HOME} className="flex items-center gap-5 group relative z-10">
-          <div className="flex items-center gap-4 bg-white/5 py-1.5 px-3 rounded-2xl border border-white/10 backdrop-blur-md group-hover:bg-white/10 transition-all duration-500">
+        <Link to={PageRoute.HOME} className="flex items-center gap-4 group relative z-10 shrink-0">
+          <div className="flex items-center gap-4 bg-white/5 py-2.5 px-4 rounded-2xl border border-white/10 backdrop-blur-md group-hover:bg-white/10 group-hover:border-jdc-orange/30 transition-all duration-500 shadow-lg">
             <img
               src="/product/logo.png"
               alt="Sakarni Logo"
-              className="h-8 md:h-12 w-auto object-contain drop-shadow-lg"
+              className="h-10 md:h-14 w-auto object-contain drop-shadow-lg"
             />
-            <div className="h-6 md:h-10 w-[1px] bg-white/20"></div>
+            <div className="h-8 md:h-12 w-[1px] bg-white/10"></div>
             <img
               src="/images/PYD.jpeg"
               alt="PYD Logo"
-              className="h-8 md:h-12 w-auto object-contain rounded-lg shadow-2xl group-hover:scale-105 transition-transform duration-500"
+              className="h-10 md:h-14 w-auto object-contain rounded-lg shadow-2xl group-hover:scale-105 transition-transform duration-500"
             />
           </div>
           <div className="flex flex-col">
-            <span className="text-white font-serif font-black text-sm md:text-base tracking-[0.1em] uppercase leading-none mb-1 group-hover:text-jdc-orange transition-colors duration-500">
+            <span className="text-white font-serif font-black text-sm md:text-base tracking-[0.1em] uppercase leading-none group-hover:text-jdc-orange transition-colors duration-500">
               {COMPANY_NAME}
             </span>
           </div>
@@ -159,22 +161,6 @@ export const DesktopNav: React.FC = () => {
             <NavItemComponent key={item.path} item={item} />
           ))}
         </nav>
-
-        {/* Call to Action */}
-        <div className="hidden md:block">
-          <NavLink
-            to={PageRoute.CONTACT}
-            className={`px-8 py-3 text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 relative overflow-hidden group rounded-full
-               ${isScrolled || !isHome
-                ? 'bg-jdc-orange text-white shadow-[0_10px_30px_rgba(255,102,0,0.3)]'
-                : 'bg-white text-jdc-blue shadow-2xl'
-              }
-             `}
-          >
-            <span className="relative z-10">Get Quote</span>
-            <div className="absolute inset-0 bg-jdc-blue scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-          </NavLink>
-        </div>
       </div>
     </header>
   );
@@ -312,8 +298,8 @@ const MegaMenuContent: React.FC<{ onItemClick?: () => void }> = ({ onItemClick }
             </h4>
             <div className="flex items-center justify-between gap-4">
               <p className="text-slate-400 text-[11px] leading-relaxed font-medium opacity-80 flex-1">
-                {activeName === "PYD META RUBY"
-                  ? "UPCOMING PRODUCT - Stay tuned for our latest metallic masterpiece."
+                {["PYD META RUBY", "PYD ROOF COVER"].includes(activeName || "")
+                  ? "UPCOMING PRODUCT - Currently in development to meet our rigorous standards of excellence."
                   : "Discover industry-leading formulations engineered for durability and aesthetic perfection."}
               </p>
               {activeSlug && (
@@ -401,26 +387,25 @@ export const MobileNav: React.FC = () => {
   return (
     <>
       <div className={`fixed bottom-6 left-4 right-4 z-50 transition-all duration-500 cubic-bezier(0.4, 0, 0.2, 1) transform md:hidden ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-24 opacity-0'}`}>
-        <nav className="bg-jdc-blue/90 backdrop-blur-xl rounded-full flex justify-between items-center py-3 px-6 shadow-2xl border border-white/10 ring-1 ring-black/20 mx-auto max-w-sm">
+        <nav className="bg-jdc-blue/95 backdrop-blur-2xl rounded-3xl flex justify-between items-center py-4 px-4 shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 mx-auto max-w-sm">
           {navItems.map((item) => {
             const Icon = item.icon!;
             const isProducts = item.label === 'Products';
+            const isActive = location.pathname === item.path;
 
             if (isProducts) {
               return (
                 <button
                   key={item.label}
                   onClick={() => setIsDrawerOpen(true)}
-                  className={`flex flex-col items-center justify-center w-10 h-10 rounded-full transition-all duration-300 relative group
-                  ${isDrawerOpen ? 'text-white' : 'text-slate-400'}`}
+                  className={`flex flex-col items-center justify-center gap-1.5 px-3 py-1 rounded-2xl transition-all duration-300 relative group
+                  ${isDrawerOpen ? 'text-jdc-orange' : 'text-slate-400'}`}
                 >
-                  <div className="absolute inset-0 bg-jdc-orange/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity"></div>
                   <Icon
-                    size={20}
-                    strokeWidth={isDrawerOpen ? 2.5 : 2}
-                    className={`relative z-10 transition-transform duration-300 ${isDrawerOpen ? 'text-jdc-orange scale-110' : 'group-hover:text-slate-200'}`}
+                    size={18}
+                    strokeWidth={isDrawerOpen ? 3 : 2}
                   />
-                  {isDrawerOpen && <div className="absolute -bottom-1 w-1 h-1 bg-jdc-orange rounded-full"></div>}
+                  <span className="text-[8px] font-black uppercase tracking-widest">{item.label}</span>
                 </button>
               );
             }
@@ -430,23 +415,15 @@ export const MobileNav: React.FC = () => {
                 key={item.path}
                 to={item.path}
                 className={({ isActive }) =>
-                  `flex flex-col items-center justify-center w-10 h-10 rounded-full transition-all duration-300 relative group
-                  ${isActive ? 'text-white' : 'text-slate-400'}`
+                  `flex flex-col items-center justify-center gap-1.5 px-3 py-1 rounded-2xl transition-all duration-300 relative group
+                  ${isActive ? 'text-jdc-orange' : 'text-slate-400'}`
                 }
               >
-                {({ isActive }) => (
-                  <>
-                    {isActive && (
-                      <div className="absolute inset-0 bg-jdc-orange/20 rounded-full blur-md"></div>
-                    )}
-                    <Icon
-                      size={20}
-                      strokeWidth={isActive ? 2.5 : 2}
-                      className={`relative z-10 transition-transform duration-300 ${isActive ? '-translate-y-0 text-jdc-orange' : 'group-hover:text-slate-200'}`}
-                    />
-                    {isActive && <div className="absolute -bottom-1 w-1 h-1 bg-jdc-orange rounded-full"></div>}
-                  </>
-                )}
+                <Icon
+                  size={18}
+                  strokeWidth={location.pathname === item.path ? 3 : 2}
+                />
+                <span className="text-[8px] font-black uppercase tracking-widest">{item.label}</span>
               </NavLink>
             );
           })}

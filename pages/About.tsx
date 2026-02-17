@@ -8,7 +8,7 @@ const About: React.FC = () => {
       {/* Editorial Hero Section */}
       <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-6 overflow-hidden bg-jdc-blue">
         {/* Abstract background elements */}
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-black/20 to-transparent pointer-events-none"></div>
+        {/* Overlays REMOVED per user request */}
         <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-jdc-orange/10 rounded-full blur-3xl"></div>
 
         <div className="max-w-7xl mx-auto relative z-10">

@@ -2,6 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { PRODUCT_LIST } from '../constants';
 import { Search, ArrowRight, Check, Tag, ShieldCheck, Zap, Droplets, Palette, Info } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { Product } from '../types';
 import { database } from '../firebase';
 import { ref, onValue } from 'firebase/database';
@@ -124,6 +125,18 @@ const Products: React.FC = () => {
                     </div>
                   )}
 
+                  {product.subTitle === 'Upcoming Product' && (
+                    <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none p-4">
+                      <motion.span
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        className="px-8 py-4 bg-jdc-orange/95 backdrop-blur-md text-white text-[10px] md:text-sm font-black uppercase tracking-[0.4em] rounded-full shadow-[0_20px_60px_rgba(242,118,34,0.5)] border border-white/30 text-center"
+                      >
+                        Coming Soon
+                      </motion.span>
+                    </div>
+                  )}
+
                   {/* Kicker / Category Floating */}
                   <div className="absolute top-6 left-6 flex gap-2">
                     <span className="px-3 py-1.5 bg-white/90 backdrop-blur-md text-jdc-blue text-[10px] font-bold uppercase tracking-widest rounded-full shadow-sm border border-slate-100">
@@ -144,9 +157,11 @@ const Products: React.FC = () => {
                   <h3 className="text-2xl md:text-3xl font-serif font-bold text-jdc-blue mb-3 group-hover/details:text-jdc-orange transition-colors duration-300">
                     {product.name}
                   </h3>
-                  <p className="text-slate-500 text-sm md:text-base leading-relaxed mb-6 font-light">
-                    {product.description}
-                  </p>
+                  <div className="bg-slate-50 rounded-xl p-4 mb-6 border border-slate-100/50">
+                    <p className="text-slate-500 text-xs md:text-sm leading-relaxed font-light line-clamp-3">
+                      {product.description}
+                    </p>
+                  </div>
 
                   <div className="flex flex-wrap gap-4 mb-8">
                     <div className="flex items-center gap-2 text-slate-400">
@@ -163,7 +178,8 @@ const Products: React.FC = () => {
                 {/* Footer Link */}
                 <div className="px-2 pt-6 border-t border-slate-100 mt-auto flex items-center justify-between">
                   <Link to={`/product/${product.slug}`} className="group/link inline-flex items-center gap-2 text-jdc-blue font-bold uppercase tracking-widest text-[10px] md:text-xs">
-                    View Details <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
+                    {product.subTitle === 'Upcoming Product' ? 'Coming Soon' : 'More Details'}
+                    <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
                   </Link>
                   <span className="text-[10px] font-mono text-slate-300 uppercase">
                     Ref: {product.slug.substring(0, 10).toUpperCase()}
@@ -186,11 +202,12 @@ const Products: React.FC = () => {
               View Full Collection
             </button>
           </div>
-        )}
-      </div>
+        )
+        }
+      </div >
 
       {/* 4. BOTTOM ADVISORY SECTION */}
-      <div className="max-w-7xl mx-auto px-6 mt-32 md:mt-48">
+      < div className="max-w-7xl mx-auto px-6 mt-32 md:mt-48" >
         <div className="bg-jdc-blue rounded-[2.5rem] p-8 md:p-20 relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -mr-32 -mt-32 transition-transform duration-700 group-hover:scale-110"></div>
 
@@ -220,9 +237,9 @@ const Products: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div >
 
-    </div>
+    </div >
   );
 };
 

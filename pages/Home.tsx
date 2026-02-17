@@ -327,8 +327,8 @@ const Home: React.FC = () => {
 
          {/* PRODUCT PORTFOLIO OVERVIEW - Parallax */}
          <section className="relative py-20 md:py-32 bg-fixed bg-cover bg-center" style={{ backgroundImage: "url('/images/production.png')" }}>
-            <div className="absolute inset-0 bg-jdc-blue/90 mix-blend-multiply"></div>
-            <div className="absolute inset-0 bg-black/20"></div>
+            {/* Overlays REMOVED per user request */}
+
 
             <div className="max-w-5xl mx-auto px-6 relative z-10 text-center text-white reveal-on-scroll">
                <div className="w-16 md:w-20 h-1 bg-jdc-orange mx-auto mb-6 md:mb-8"></div>
