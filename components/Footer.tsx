@@ -23,9 +23,6 @@ const Footer: React.FC = () => {
                 <span className="w-2 h-8 bg-jdc-orange rounded-sm"></span>
                 {COMPANY_NAME}
               </h2>
-              <p className="text-[11px] text-slate-500 uppercase tracking-[0.2em] font-bold pl-5">
-                A Unit of {PARENT_COMPANY}
-              </p>
             </div>
             <p className="text-sm leading-relaxed text-slate-400 font-light pr-4">
               Engineered for chemical perfection. We deliver industrial-grade coatings that define durability and aesthetic excellence across the globe.

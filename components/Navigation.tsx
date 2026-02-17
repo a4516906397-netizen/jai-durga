@@ -150,7 +150,6 @@ export const DesktopNav: React.FC = () => {
             <span className="text-white font-serif font-black text-sm md:text-base tracking-[0.1em] uppercase leading-none mb-1 group-hover:text-jdc-orange transition-colors duration-500">
               {COMPANY_NAME}
             </span>
-            <span className="text-[9px] font-black text-slate-400 tracking-[0.3em] uppercase opacity-70">Industrial Excellence</span>
           </div>
         </Link>
 
