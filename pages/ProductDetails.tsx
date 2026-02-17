@@ -190,17 +190,6 @@ const ProductDetails: React.FC = () => {
                                 </p>
                             </div>
 
-                            {/* More Details Button (Only for Non-Stainer) */}
-                            {!isStainer && (
-                                <button
-                                    onClick={() => setShowFullDetails(!showFullDetails)}
-                                    className="group flex items-center gap-3 px-6 py-3 bg-slate-900 text-white rounded-full font-bold uppercase tracking-widest text-xs hover:bg-jdc-orange transition-all mt-4 w-fit"
-                                >
-                                    {showFullDetails ? 'Hide Details' : 'More Details'}
-                                    <ChevronRight size={14} className={`transition-transform duration-300 ${showFullDetails ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
-                                </button>
-                            )}
-
                             {/* Extra Details from Admin */}
                             {showFullDetails && !isStainer && product.extraDetails && (
                                 <motion.div
@@ -212,6 +201,17 @@ const ProductDetails: React.FC = () => {
                                         {product.extraDetails}
                                     </div>
                                 </motion.div>
+                            )}
+
+                            {/* More Details Button (Only for Non-Stainer) */}
+                            {!isStainer && (
+                                <button
+                                    onClick={() => setShowFullDetails(!showFullDetails)}
+                                    className="group flex items-center gap-3 px-6 py-3 bg-slate-900 text-white rounded-full font-bold uppercase tracking-widest text-xs hover:bg-jdc-orange transition-all mt-4 w-fit"
+                                >
+                                    {showFullDetails ? 'Hide Details' : 'More Details'}
+                                    <ChevronRight size={14} className={`transition-transform duration-300 ${showFullDetails ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
+                                </button>
                             )}
                         </div>
 
@@ -309,15 +309,7 @@ const ProductDetails: React.FC = () => {
                                 className="flex-1 px-8 py-6 bg-slate-900 text-white text-[11px] font-black uppercase tracking-[0.3em] rounded-full hover:bg-jdc-orange transition-all duration-500 shadow-2xl flex items-center justify-center gap-3 group"
                             >
                                 <ShoppingBag size={20} className="group-hover:-translate-y-1 transition-transform" />
-                                Get Bulk Pricing
-                            </Link>
-
-                            <Link
-                                to={PageRoute.CONTACT}
-                                className="flex-1 px-8 py-6 border-2 border-slate-200 text-slate-900 text-[11px] font-black uppercase tracking-[0.3em] rounded-full hover:border-jdc-orange hover:text-jdc-orange transition-all duration-500 flex items-center justify-center gap-3"
-                            >
-                                <Phone size={20} />
-                                Expert Consultation
+                                Get Quote
                             </Link>
                         </div>
                     </motion.div>
