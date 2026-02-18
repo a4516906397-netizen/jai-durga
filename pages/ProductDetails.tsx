@@ -41,10 +41,11 @@ const ProductDetails: React.FC = () => {
                     ...prev,
                     description: data?.description || prev.description,
                     extraDetails: data?.extraDetails || prev.extraDetails,
+                    packing: data?.packing || prev.packing,
                     seo: data?.seo
                 }) : undefined);
 
-                if (data?.description || data?.extraDetails || data?.seo) {
+                if (data?.description || data?.extraDetails || data?.packing || data?.seo) {
                     setDataSource('Cloud');
                 }
             }
@@ -194,34 +195,14 @@ const ProductDetails: React.FC = () => {
                                 </p>
                             )}
 
-                            {/* Size / Packing - Visible for everyone */}
-                            {product.packing && (
-                                <div className="inline-flex items-center gap-3 bg-slate-50 rounded-lg px-4 py-2 border border-slate-100 self-start">
-                                    <Box size={16} className="text-jdc-blue" />
-                                    <span className="text-xs font-bold text-slate-700 uppercase tracking-wider">{product.packing}</span>
-                                </div>
-                            )}
+
 
                             <div className="bg-slate-50 rounded-2xl p-6 md:p-8 border border-slate-100 relative group/desc">
-                                <div className={`prose prose-slate prose-lg max-w-none transition-all duration-500 overflow-hidden ${!showFullDetails && product.description.length > 200 ? 'max-h-[150px] mask-fade' : 'max-h-[1000px]'}`}>
+                                <div className="prose prose-slate prose-lg max-w-none transition-all duration-500 overflow-hidden">
                                     <p className="text-slate-600 leading-relaxed font-medium whitespace-pre-line">
                                         {product.description}
                                     </p>
                                 </div>
-
-                                {product.description.length > 200 && (
-                                    <button
-                                        onClick={() => setShowFullDetails(!showFullDetails)}
-                                        className="mt-6 flex items-center gap-2 text-jdc-blue font-bold uppercase tracking-widest text-[10px] hover:text-jdc-orange transition-colors group/btn"
-                                    >
-                                        {showFullDetails ? 'Show Less' : 'More Details'}
-                                        <ChevronRight size={14} className={`transform transition-transform duration-300 ${showFullDetails ? 'rotate-90' : 'group-hover/btn:translate-x-1'}`} />
-                                    </button>
-                                )}
-
-                                {!showFullDetails && product.description.length > 200 && (
-                                    <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-slate-50 to-transparent pointer-events-none rounded-b-2xl"></div>
-                                )}
                             </div>
 
                             {/* Extra Details from Admin */}
@@ -331,6 +312,33 @@ const ProductDetails: React.FC = () => {
                                                 </p>
                                             </div>
                                         </motion.div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Available Sizes */}
+                        {product.packing && (
+                            <div className="pt-12 space-y-8 border-t border-slate-100">
+                                <div className="flex items-end gap-3 px-2">
+                                    <div className="h-10 w-2 bg-jdc-blue rounded-full"></div>
+                                    <div className="flex flex-col gap-1">
+                                        <span className="text-[9px] font-black uppercase tracking-[0.5em] text-jdc-blue">Packaging</span>
+                                        <h3 className="text-2xl font-serif font-black text-slate-900">Available Sizes</h3>
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-wrap gap-4">
+                                    {product.packing.split(',').map((size, idx) => (
+                                        <div
+                                            key={idx}
+                                            className="px-6 py-4 bg-white border border-slate-100 rounded-2xl shadow-sm flex items-center gap-4 hover:border-jdc-orange hover:shadow-md transition-all duration-300"
+                                        >
+                                            <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-jdc-blue">
+                                                <Box size={20} />
+                                            </div>
+                                            <span className="text-sm font-black text-slate-800 uppercase tracking-wide">{size.trim()}</span>
+                                        </div>
                                     ))}
                                 </div>
                             </div>

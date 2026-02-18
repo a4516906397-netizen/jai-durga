@@ -220,7 +220,7 @@ const MegaMenuContent: React.FC<{ onItemClick?: () => void }> = ({ onItemClick }
                       <ImageIcon size={64} strokeWidth={1} className="opacity-40" />
                     </div>
                     <div className="flex flex-col items-center">
-                      {["PYD META RUBY", "PYD ROOF COVER"].includes(activeName || "") ? (
+                      {["PYD META RUBY (COMING SOON)", "PYD ROOF COVER (COMING SOON)"].includes((activeName || "").toUpperCase()) ? (
                         <span className="text-3xl md:text-4xl uppercase tracking-[0.2em] font-black text-jdc-orange animate-pulse">
                           Upcoming
                         </span>
@@ -298,7 +298,7 @@ const MegaMenuContent: React.FC<{ onItemClick?: () => void }> = ({ onItemClick }
             </h4>
             <div className="flex items-center justify-between gap-4">
               <p className="text-slate-400 text-[11px] leading-relaxed font-medium opacity-80 flex-1">
-                {["PYD META RUBY", "PYD ROOF COVER"].includes(activeName || "")
+                {["PYD META RUBY (COMING SOON)", "PYD ROOF COVER (COMING SOON)"].includes((activeName || "").toUpperCase())
                   ? "UPCOMING PRODUCT - Currently in development to meet our rigorous standards of excellence."
                   : "Discover industry-leading formulations engineered for durability and aesthetic perfection."}
               </p>

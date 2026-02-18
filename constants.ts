@@ -40,6 +40,7 @@ export const PRODUCT_LIST: Product[] = [
       'Dispose of responsibly after the Stainer dries naturally'
     ],
     recommendation: 'Test a small mixture before full application • Maximum recommended usage: 5% for tinting purposes.',
+    packing: '50 ml, 100 ml, 200 ml',
     image: '/product/pydstainer.png',
     colors: [
       { name: 'Fast Red', hex: '#A33434' },
@@ -79,7 +80,7 @@ export const PRODUCT_LIST: Product[] = [
       'User friendly',
       'Low VOC'
     ],
-    packing: '50 ml, 100 ml, 200 ml, and 500 ml.',
+    packing: '50 ml, 100 ml, 200 ml',
     image: '/product/sakarni_universal_stainer.png',
     recommendation: 'Test a small mixture before full application • Maximum recommended usage: 5% for tinting purposes.',
     colors: [
@@ -154,7 +155,7 @@ export const PRODUCT_LIST: Product[] = [
       'Resistance to bacteria, fungus, moisture etc.',
       'Outstanding adhesion and anti-corrosive properties'
     ],
-    packing: '1 ltr, 4 ltr, 10 ltr, 20 ltr',
+    packing: '500 ml, 1 ltr, 4 ltr',
     image: '/product/sakarni_high_prime_red_oxide_primer_can.png'
   },
   {
@@ -162,7 +163,6 @@ export const PRODUCT_LIST: Product[] = [
     name: 'Pro Protect - Red Oxide Primer',
     slug: 'solvent-base-red-oxide-primer',
     category: 'Primers',
-    subTitle: 'Advanced Corrosion & Rust Protection',
     description: `SAKARNI PRO PROTECT Red Oxide Primer is a premium quality polymer-based, non-flammable, and water-soluble primer. Specifically designed for metal surfaces like mild steel, casting, GI, and aluminium, it offers superior hardness and rust protection compared to conventional solvent-based primers.\n\nIt is eco-friendly, fast-drying, and can be top-coated with both water-based and solvent-based enamels, making it ideal for everything from railway wagons to household gates.`,
     features: [
       'Touch Dry: 2–3 hours',
@@ -194,7 +194,7 @@ export const PRODUCT_LIST: Product[] = [
       'Dispose of responsibly after natural drying'
     ],
     recommendation: 'ANTI-CORROSIVE TECHNOLOGY: Formulated with advanced bonding features to provide a lifecycle-extending barrier against harsh environmental factors.',
-    packing: '1 ltr, 4 ltr, 10 ltr, 20 ltr',
+    packing: '500 ml, 1 ltr, 4 ltr, 20 ltr',
     image: '/product/sakarni_primer_pro_protect_red_oxide_can.png'
   },
   {
@@ -214,7 +214,7 @@ export const PRODUCT_LIST: Product[] = [
       'Free From Harmful Chemicals',
       'Prevents Dry Skinning in Container'
     ],
-    packing: '1 ltr, 4 ltr, 10 ltr, 20 ltr',
+    packing: '500 ml, 1 ltr, 4 ltr',
     image: '/product/sakarni_primer_wood_guard_can.png'
   },
   {
@@ -223,14 +223,15 @@ export const PRODUCT_LIST: Product[] = [
     slug: 'solvent-base-wood-primer',
     category: 'Primers',
     description: 'Solvent-based primer for wood, offering deep penetration and protection against moisture and insects for long-lasting wood finishes.',
+    packing: '500 ml, 1 ltr, 4 ltr',
     image: '/product/sakarni_primer_wood_secure_can.png'
   },
+
   {
     id: 'magna',
     name: 'Magna',
     slug: 'magna',
     category: 'Interior Emulsion',
-    subTitle: 'Premium Value-for-Money Interior Finish',
     description: `Sakarni Magna Interior Emulsion is a solvent free acrylic emulsion paint which ensures to provide smooth and matt finish with a soft feel to the walls. It is formulated and specifically designed to provide higher coverage, long life and elegant finish. It can be applied on interior walls finished with cement plaster, gypsum plaster, gypsum board, wall putty, concrete, asbestos sheet and also on already painted surfaces.`,
     features: [
       'Higher coverage and excellent opacity.',
@@ -250,8 +251,9 @@ export const PRODUCT_LIST: Product[] = [
       'POT LIFE: Thinned material should be consumed the same day.',
       'STORAGE: Store in a cool and dry place having relative humidity below 70% and atmospheric temperature 5°-40° C. Keep the container tightly closed and protected from direct sunlight.',
       'SHELF LIFE: 24 months from the date of packing in unopened condition.',
-      'AVAILABLE PACK SIZE: 1 ltr, 4 ltr, 10 ltr, 20 ltr'
+      'AVAILABLE PACK SIZE: 1 Liter, 4 Liter, 10 Liter, 20 Liter'
     ],
+    packing: '1 Liter, 4 Liter, 10 Liter, 20 Liter',
     image: '/product/sakarni_magna_emulsion_paint.png'
   },
   {
@@ -260,6 +262,7 @@ export const PRODUCT_LIST: Product[] = [
     slug: 'magna-glow',
     category: 'Interior Emulsion',
     description: 'Premium interior emulsion with excellent coverage, vibrant colors, washability, and resistance to stains for a rich, long-lasting finish on interior walls.',
+    packing: '1 ltr, 4 ltr, 10 ltr, 20 ltr',
     image: '/product/sakarni_magna_glow_interior_emulsion.png'
   },
   {
@@ -268,6 +271,7 @@ export const PRODUCT_LIST: Product[] = [
     slug: 'quick-clean',
     category: 'Interior Emulsion',
     description: 'Luxury interior emulsion formulated for easy cleaning, with a washable surface that maintains shine even after removing stains, ideal for high-traffic areas.',
+    packing: '1 ltr, 4 ltr, 10 ltr, 20 ltr',
     image: '/product/sakarni_quick_clean_interior_emulsion.png'
   },
   {
@@ -276,7 +280,24 @@ export const PRODUCT_LIST: Product[] = [
     slug: 'charm-glow-sheen',
     category: 'Exterior Emulsion',
     description: 'Advanced exterior emulsion with multiple premium shades, offering weather resistance, anti-fungal protection, and durability against rain, heat, and humidity.',
-    image: '/product/sakarni_charm_glow_exterior_emulsion.png'
+    packing: '1 ltr, 4 ltr, 10 ltr, 20 ltr',
+    image: '/product/sakarni_charm_glow_exterior_emulsion.png',
+    colors: [
+      { name: 'Sporty Yellow', hex: '#E3BC2E' },
+      { name: 'Lemon Souffle', hex: '#A9C84A' },
+      { name: 'Sunrise', hex: '#F07C3A' },
+      { name: 'Jolly Holly', hex: '#1FA04E' },
+      { name: 'Terra Cotta', hex: '#7A4A3A' },
+      { name: 'Pine', hex: '#166B52' },
+      { name: 'Ming Red', hex: '#7A2B2B' },
+      { name: 'Steel Grey', hex: '#8A9198' },
+      { name: 'Signal Red', hex: '#D12F2F' },
+      { name: 'Wild Purple', hex: '#7A6BA8' },
+      { name: 'Nut Brown', hex: '#6B534C' },
+      { name: 'Royal Blue', hex: '#355A7C' },
+      { name: 'Black', hex: '#2E2A2A' },
+      { name: 'White', hex: '#F4F4F4' },
+    ]
   },
   {
     id: 'charm-gold',
@@ -284,6 +305,7 @@ export const PRODUCT_LIST: Product[] = [
     slug: 'charm-gold',
     category: 'Exterior Emulsion',
     description: 'Premium exterior emulsion with 7-year warranty, Suspension Max Technology, low VOC, anti-fungal and antibacterial protection, and extra coverage for luxurious outdoor finishes.',
+    packing: '1 ltr, 4 ltr, 10 ltr, 20 ltr',
     image: '/product/sakarni_charm_gold_exterior_emulsion.png'
   },
   {
@@ -292,7 +314,11 @@ export const PRODUCT_LIST: Product[] = [
     slug: 'charm-gold-sheen',
     category: 'Exterior Emulsion',
     description: 'Multiple premium shades of Charm Gold, providing robust protection and an elegant finish for exterior surfaces exposed to harsh weather conditions.',
-    image: '/product/sakarni_charm_gold_exterior_emulsion.png'
+    packing: '1 ltr, 4 ltr, 10 ltr, 20 ltr',
+    image: '/product/sakarni_charm_gold_exterior_emulsion.png',
+    colors: [
+      { name: 'Signal Red', hex: '#D12F2F' },
+    ]
   },
   {
     id: 'charm-glow-plus',
@@ -300,6 +326,7 @@ export const PRODUCT_LIST: Product[] = [
     slug: 'charm-glow-plus',
     category: 'Exterior Emulsion',
     description: 'Upgraded exterior emulsion with plus features like improved adhesion, crack resistance, and superior weather guard for long-term exterior wall protection.',
+    packing: '1 ltr, 4 ltr, 10 ltr, 20 ltr',
     image: '/product/charmglow+.png'
   },
   {
@@ -307,7 +334,6 @@ export const PRODUCT_LIST: Product[] = [
     name: 'Charm Glow',
     slug: 'charm-glow',
     category: 'Exterior Emulsion',
-    subTitle: 'Premium Shiny Finish Exterior Protection',
     description: `Sakarni Charm Glow Exterior Emulsion Paint is based on modified acrylic emulsion which gives smooth and shiny finish with a soft feel to the walls. It is specifically formulated to provide excellent brushability, outstanding recoatable, enhanced look, greater durability and to withstand humidity, rain and hot climate. It also contains antifungal and antibacterial additives which protect the surface and help to provide a longer life. This economical and affordable emulsion paint can be applied on exterior and interior surfaces finished with cement plaster, gypsum plaster, gypsum board, wall putty, concrete, asbestos sheet and also on already painted surfaces.
 
 SHINE MAX:
@@ -336,6 +362,7 @@ This innovative technology helps particles to reflect more light and gives enhan
       'SHELF LIFE: 24 months from the date of packing in unopened condition.',
       'AVAILABLE PACK SIZE: 1 ltr, 4 ltr, 10 ltr, 20 ltr'
     ],
+    packing: '1 ltr, 4 ltr, 10 ltr, 20 ltr',
     image: '/product/sakarni_charm_glow_exterior_emulsion.png'
   },
   {
@@ -343,7 +370,6 @@ This innovative technology helps particles to reflect more light and gives enhan
     name: 'Charm',
     slug: 'charm',
     category: 'Exterior Emulsion',
-    subTitle: 'Premium Weather-Shield Protection',
     description: `Sakarni Charm Exterior Emulsion Paint is based on modified acrylic emulsion which gives smooth and matt finish with a soft feel to the walls. It is specifically formulated to provide excellent brushability, outstanding recoatatability, enhanced look, greater durability and to withstand humidity, rain and hot climate.\n\nIt also contains antifungal and antibacterial additives which protect the surface and help to provide a longer life. This economical and affordable emulsion paint can be applied on exterior and interior surfaces finished with cement plaster, gypsum plaster, gypsum board, wall putty, concrete, asbestos sheet and also on already painted surfaces.`,
     features: [
       'Touch dry @27°C: Minimum 45 mins',
@@ -386,7 +412,24 @@ This innovative technology helps particles to reflect more light and gives enhan
     slug: 'sak-classic',
     category: 'Enamel',
     description: 'High-quality enamel paint for a classic finish, suitable for wood and metal surfaces, offering shine, durability, and protection against wear.',
-    image: '/product/sakarni_sak_classic_gloss_enamel_can.png'
+    packing: '200 ml, 500 ml, 1 ltr, 4 ltr, 20 ltr',
+    image: '/product/sakarni_sak_classic_gloss_enamel_can.png',
+    colors: [
+      { name: 'Golden Yellow', hex: '#F2A62B' },
+      { name: 'Mint Green', hex: '#17964A' },
+      { name: 'Deep Orange', hex: '#F05B2F' },
+      { name: 'Bus Green', hex: '#0E5E4A' },
+      { name: 'P.O. Red', hex: '#D62F2F' },
+      { name: 'Smoke Grey', hex: '#6F8AA3' },
+      { name: 'Crimson', hex: '#7A2F2F' },
+      { name: 'Phirozi', hex: '#1F7FA3' },
+      { name: 'Golden Brown', hex: '#9A643E' },
+      { name: 'Oxford Blue', hex: '#444A86' },
+      { name: 'Brown', hex: '#7B4A34' },
+      { name: 'Truck Brown', hex: '#6A3A30' },
+      { name: 'Black', hex: '#2B2B2B' },
+      { name: 'White', hex: '#F3F3F3' },
+    ]
   },
   {
     id: 'pyd-prime-shine',
@@ -432,11 +475,12 @@ This premium semi gloss enamel is perfect for a variety of surfaces:
   },
   {
     id: 'pyd-meta-ruby',
-    name: 'Pyd Meta Ruby',
+    name: 'Pyd Meta Ruby (Coming Soon)',
     slug: 'pyd-meta-ruby',
     category: 'Metallic Paint',
     subTitle: 'Upcoming Product',
-    description: 'COMING SOON - Our luxury metallic emulsion paint with a ruby finish is currently in development. Stay tuned for a brilliant metallic shimmer.'
+    description: 'COMING SOON - Our luxury metallic emulsion paint with a ruby finish is currently in development.',
+    packing: '1 ltr, 4 ltr, 10 ltr, 20 ltr'
   },
   {
     id: 'maha-glow',
@@ -444,6 +488,7 @@ This premium semi gloss enamel is perfect for a variety of surfaces:
     slug: 'maha-glow',
     category: 'Distemper',
     description: 'Acrylic distemper paint offering an economical wall coating with smooth matt finish, emulsion-like feel, and availability in vibrant colors for budget-friendly interiors.',
+    packing: '1 ltr, 4 ltr, 10 ltr, 20 ltr',
     image: '/product/sakarni_mahaglow_distemper_bucket.png'
   },
   {
@@ -452,14 +497,29 @@ This premium semi gloss enamel is perfect for a variety of surfaces:
     slug: 'sakarni-maha-glow-colour-distemper',
     category: 'Distemper',
     description: 'Color distemper variant providing durable, washable finish with good coverage and a soft sheen, ideal for interior walls seeking affordable yet quality painting.',
-    image: '/product/sakarni_mahaglow_distemper_bucket.png'
+    packing: '2 ltr, 5 ltr, 10 ltr, 20 ltr',
+    image: '/product/sakarni_mahaglow_distemper_bucket.png',
+    colors: [
+      { name: 'Ivory', hex: '#E8C897' },
+      { name: 'Purple', hex: '#B997B8' },
+      { name: 'Pale Cream', hex: '#D7C98B' },
+      { name: 'Electric Blue', hex: '#6A9AC5' },
+      { name: 'Daffodil', hex: '#D9C763' },
+      { name: 'Lemon Souffle', hex: '#C1CF62' },
+      { name: 'Merrie Pink', hex: '#D7A7A9' },
+      { name: 'Parrot Green', hex: '#8FBE6B' },
+      { name: 'Pink', hex: '#D97883' },
+      { name: 'Aquamarine', hex: '#149C8D' },
+      { name: 'Candy', hex: '#E39A84' },
+      { name: 'Sunrise', hex: '#E18A55' },
+    ]
   },
   {
     id: 'pyd-super-booster',
     name: 'Pyd Super Booster',
     slug: 'pyd-super-booster',
     category: 'Waterproofing',
-    subTitle: 'Advanced Polymer-Based Liquid Additive',
+    subTitle: 'Liquid polymer additive to enhance bonding property. ',
     description: `PYD Super Booster is an advanced polymer based liquid additive specially formulated to enhance workability, adhesion, strength and overall performance for white cement-based Wall Putty, Waterproof Putty, Acrylic Primer, Acrylic Distemper, Acrylic Emulsion, Tile Adhesive, Repair Mortar and Bonding Agent for repair mortar/waterproofing chemical.`,
     features: [
       'Effortless mixing and application',
@@ -483,11 +543,12 @@ This premium semi gloss enamel is perfect for a variety of surfaces:
       'SUPER BOOSTER ADDITION: Always mix Super Booster with 50% of total water first. Settle for 5 minutes before application.',
       'SHELF LIFE: 12 months from manufacturing date in tightly sealed containers. Store away from direct sunlight and excess heat.'
     ],
+    packing: '1 ltr, 5 ltr, 10 ltr, 20 ltr',
     image: '/product/pyd_super_booster.png'
   },
   {
     id: 'pyd-roof-cover',
-    name: 'Pyd Roof Cover',
+    name: 'Pyd Roof Cover (Coming Soon)',
     slug: 'pyd-roof-cover',
     category: 'Waterproofing',
     subTitle: 'Upcoming Product',
@@ -513,6 +574,7 @@ export const MEGA_MENU_DATA: MegaMenuCategory[] = [
       { name: "Wood Guard Primer", slug: "water-base-wood-primer", image: "/product/sakarni_primer_wood_guard_can.png" },
       { name: "High Prime - Red Oxide Primer", slug: "water-base-red-oxide-primer", image: "/product/sakarni_high_prime_red_oxide_primer_can.png" },
       { name: "Wood Secure Primer", slug: "solvent-base-wood-primer", image: "/product/sakarni_primer_wood_secure_can.png" }
+
     ]
   },
   {
@@ -544,7 +606,7 @@ export const MEGA_MENU_DATA: MegaMenuCategory[] = [
   {
     title: "METALLIC PAINT",
     items: [
-      { name: "Pyd Meta Ruby", slug: "pyd-meta-ruby" }
+      { name: "Pyd Meta Ruby (Coming Soon)", slug: "pyd-meta-ruby" }
     ]
   },
   {
@@ -558,7 +620,7 @@ export const MEGA_MENU_DATA: MegaMenuCategory[] = [
     title: "WATER PROOFING",
     items: [
       { name: "Pyd Super Booster", slug: "pyd-super-booster", image: "/product/pyd_super_booster.png" },
-      { name: "Pyd Roof Cover", slug: "pyd-roof-cover" }
+      { name: "Pyd Roof Cover (Coming Soon)", slug: "pyd-roof-cover" }
     ]
   }
 ];
