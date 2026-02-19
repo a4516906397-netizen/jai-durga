@@ -331,7 +331,11 @@ const ProductDetails: React.FC = () => {
                                 <div className="flex flex-wrap gap-4">
                                     {product.packing.split(',')
                                         .map(s => s.trim())
-                                        .filter(s => !(isStainer && s.toLowerCase() === '500 ml'))
+                                        .filter(s => {
+                                            const lowerSize = s.toLowerCase();
+                                            const isTargetSize = lowerSize.includes('500') && (lowerSize.includes('ml') || lowerSize.includes('ml.'));
+                                            return !(isStainer && isTargetSize);
+                                        })
                                         .map((size, idx) => {
                                             const displaySize = size
                                                 .replace(/Liter/gi, 'LTR')
