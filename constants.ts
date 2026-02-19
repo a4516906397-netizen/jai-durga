@@ -488,7 +488,7 @@ This premium semi gloss enamel is perfect for a variety of surfaces:
     slug: 'maha-glow',
     category: 'Distemper',
     description: 'Acrylic distemper paint offering an economical wall coating with smooth matt finish, emulsion-like feel, and availability in vibrant colors for budget-friendly interiors.',
-    packing: '1 LTR, 4 LTR, 10 LTR, 20 LTR',
+    packing: '2 KG, 5 KG, 10 KG, 20 KG',
     image: '/product/sakarni_mahaglow_distemper_bucket.png'
   },
   {
@@ -497,7 +497,7 @@ This premium semi gloss enamel is perfect for a variety of surfaces:
     slug: 'sakarni-maha-glow-colour-distemper',
     category: 'Distemper',
     description: 'Color distemper variant providing durable, washable finish with good coverage and a soft sheen, ideal for interior walls seeking affordable yet quality painting.',
-    packing: '2 LTR, 5 LTR, 10 LTR, 20 LTR',
+    packing: '2 KG, 5 KG, 10 KG, 20 KG',
     image: '/product/sakarni_mahaglow_distemper_bucket.png',
     colors: [
       { name: 'Ivory', hex: '#E8C897' },
