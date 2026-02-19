@@ -117,7 +117,7 @@ export const PRODUCT_LIST: Product[] = [
       'Interlocking particles',
       'Strong surface bonding'
     ],
-    packing: '1 ltr, 4 ltr, 10 ltr, 20 ltr',
+    packing: '1 LTR, 4 LTR, 10 LTR, 20 LTR',
     image: '/product/sakarni_magic_coat_interior_primer.png'
   },
   {
@@ -135,7 +135,7 @@ export const PRODUCT_LIST: Product[] = [
       'Interlocking particles',
       'Strong surface bonding'
     ],
-    packing: '1 ltr, 4 ltr, 10 ltr, 20 ltr',
+    packing: '1 LTR, 4 LTR, 10 LTR, 20 LTR',
     image: '/product/sakarni_magic_grip_primer_bucket.png'
   },
   {
@@ -155,7 +155,7 @@ export const PRODUCT_LIST: Product[] = [
       'Resistance to bacteria, fungus, moisture etc.',
       'Outstanding adhesion and anti-corrosive properties'
     ],
-    packing: '500 ml, 1 ltr, 4 ltr',
+    packing: '500 ml, 1 LTR, 4 LTR',
     image: '/product/sakarni_high_prime_red_oxide_primer_can.png'
   },
   {
@@ -194,7 +194,7 @@ export const PRODUCT_LIST: Product[] = [
       'Dispose of responsibly after natural drying'
     ],
     recommendation: 'ANTI-CORROSIVE TECHNOLOGY: Formulated with advanced bonding features to provide a lifecycle-extending barrier against harsh environmental factors.',
-    packing: '500 ml, 1 ltr, 4 ltr, 20 ltr',
+    packing: '500 ml, 1 LTR, 4 LTR, 20 LTR',
     image: '/product/sakarni_primer_pro_protect_red_oxide_can.png'
   },
   {
@@ -214,7 +214,7 @@ export const PRODUCT_LIST: Product[] = [
       'Free From Harmful Chemicals',
       'Prevents Dry Skinning in Container'
     ],
-    packing: '500 ml, 1 ltr, 4 ltr',
+    packing: '500 ml, 1 LTR, 4 LTR',
     image: '/product/sakarni_primer_wood_guard_can.png'
   },
   {
@@ -223,7 +223,7 @@ export const PRODUCT_LIST: Product[] = [
     slug: 'solvent-base-wood-primer',
     category: 'Primers',
     description: 'Solvent-based primer for wood, offering deep penetration and protection against moisture and insects for long-lasting wood finishes.',
-    packing: '500 ml, 1 ltr, 4 ltr',
+    packing: '500 ml, 1 LTR, 4 LTR',
     image: '/product/sakarni_primer_wood_secure_can.png'
   },
 
@@ -251,9 +251,9 @@ export const PRODUCT_LIST: Product[] = [
       'POT LIFE: Thinned material should be consumed the same day.',
       'STORAGE: Store in a cool and dry place having relative humidity below 70% and atmospheric temperature 5°-40° C. Keep the container tightly closed and protected from direct sunlight.',
       'SHELF LIFE: 24 months from the date of packing in unopened condition.',
-      'AVAILABLE PACK SIZE: 1 Liter, 4 Liter, 10 Liter, 20 Liter'
+      'AVAILABLE PACK SIZE: 1 LTR, 4 LTR, 10 LTR, 20 LTR'
     ],
-    packing: '1 Liter, 4 Liter, 10 Liter, 20 Liter',
+    packing: '1 LTR, 4 LTR, 10 LTR, 20 LTR',
     image: '/product/sakarni_magna_emulsion_paint.png'
   },
   {
@@ -262,7 +262,7 @@ export const PRODUCT_LIST: Product[] = [
     slug: 'magna-glow',
     category: 'Interior Emulsion',
     description: 'Premium interior emulsion with excellent coverage, vibrant colors, washability, and resistance to stains for a rich, long-lasting finish on interior walls.',
-    packing: '1 ltr, 4 ltr, 10 ltr, 20 ltr',
+    packing: '1 LTR, 4 LTR, 10 LTR, 20 LTR',
     image: '/product/sakarni_magna_glow_interior_emulsion.png'
   },
   {
@@ -271,7 +271,7 @@ export const PRODUCT_LIST: Product[] = [
     slug: 'quick-clean',
     category: 'Interior Emulsion',
     description: 'Luxury interior emulsion formulated for easy cleaning, with a washable surface that maintains shine even after removing stains, ideal for high-traffic areas.',
-    packing: '1 ltr, 4 ltr, 10 ltr, 20 ltr',
+    packing: '1 LTR, 4 LTR, 10 LTR, 20 LTR',
     image: '/product/sakarni_quick_clean_interior_emulsion.png'
   },
   {
@@ -280,7 +280,7 @@ export const PRODUCT_LIST: Product[] = [
     slug: 'charm-glow-sheen',
     category: 'Exterior Emulsion',
     description: 'Advanced exterior emulsion with multiple premium shades, offering weather resistance, anti-fungal protection, and durability against rain, heat, and humidity.',
-    packing: '1 ltr, 4 ltr, 10 ltr, 20 ltr',
+    packing: '1 LTR, 4 LTR, 10 LTR, 20 LTR',
     image: '/product/sakarni_charm_glow_exterior_emulsion.png',
     colors: [
       { name: 'Sporty Yellow', hex: '#E3BC2E' },
@@ -305,7 +305,7 @@ export const PRODUCT_LIST: Product[] = [
     slug: 'charm-gold',
     category: 'Exterior Emulsion',
     description: 'Premium exterior emulsion with 7-year warranty, Suspension Max Technology, low VOC, anti-fungal and antibacterial protection, and extra coverage for luxurious outdoor finishes.',
-    packing: '1 ltr, 4 ltr, 10 ltr, 20 ltr',
+    packing: '1 LTR, 4 LTR, 10 LTR, 20 LTR',
     image: '/product/sakarni_charm_gold_exterior_emulsion.png'
   },
   {
@@ -314,7 +314,7 @@ export const PRODUCT_LIST: Product[] = [
     slug: 'charm-gold-sheen',
     category: 'Exterior Emulsion',
     description: 'Multiple premium shades of Charm Gold, providing robust protection and an elegant finish for exterior surfaces exposed to harsh weather conditions.',
-    packing: '1 ltr, 4 ltr, 10 ltr, 20 ltr',
+    packing: '1 LTR, 4 LTR, 10 LTR, 20 LTR',
     image: '/product/sakarni_charm_gold_exterior_emulsion.png',
     colors: [
       { name: 'Signal Red', hex: '#D12F2F' },
@@ -326,7 +326,7 @@ export const PRODUCT_LIST: Product[] = [
     slug: 'charm-glow-plus',
     category: 'Exterior Emulsion',
     description: 'Upgraded exterior emulsion with plus features like improved adhesion, crack resistance, and superior weather guard for long-term exterior wall protection.',
-    packing: '1 ltr, 4 ltr, 10 ltr, 20 ltr',
+    packing: '1 LTR, 4 LTR, 10 LTR, 20 LTR',
     image: '/product/charmglow+.png'
   },
   {
@@ -360,9 +360,9 @@ This innovative technology helps particles to reflect more light and gives enhan
       'POT LIFE: Thinned material should be consumed the same day.',
       'STORAGE: Store in a cool and dry place having relative humidity below 70% and atmospheric temperature 5°–40° C. Keep the container tightly closed and protected from direct sunlight.',
       'SHELF LIFE: 24 months from the date of packing in unopened condition.',
-      'AVAILABLE PACK SIZE: 1 ltr, 4 ltr, 10 ltr, 20 ltr'
+      'AVAILABLE PACK SIZE: 1 LTR, 4 LTR, 10 LTR, 20 LTR'
     ],
-    packing: '1 ltr, 4 ltr, 10 ltr, 20 ltr',
+    packing: '1 LTR, 4 LTR, 10 LTR, 20 LTR',
     image: '/product/sakarni_charm_glow_exterior_emulsion.png'
   },
   {
@@ -402,7 +402,7 @@ This innovative technology helps particles to reflect more light and gives enhan
       'In case of eye contact, wash with clean water and seek medical attention',
       'Do not pour leftovers in drain; dispose after natural drying'
     ],
-    packing: '1 ltr, 4 ltr, 10 ltr, 20 ltr',
+    packing: '1 LTR, 4 LTR, 10 LTR, 20 LTR',
     recommendation: 'SUSPENSION MAX: This innovative technology helps particles to be suspended for a longer period of time and imparts saturated uniform distribution for enhanced and consistent finish.',
     image: '/product/sakarni_charm_exterior_emulsion.png',
   },
@@ -412,7 +412,7 @@ This innovative technology helps particles to reflect more light and gives enhan
     slug: 'sak-classic',
     category: 'Enamel',
     description: 'High-quality enamel paint for a classic finish, suitable for wood and metal surfaces, offering shine, durability, and protection against wear.',
-    packing: '200 ml, 500 ml, 1 ltr, 4 ltr, 20 ltr',
+    packing: '200 ml, 500 ml, 1 LTR, 4 LTR, 20 LTR',
     image: '/product/sakarni_sak_classic_gloss_enamel_can.png',
     colors: [
       { name: 'Golden Yellow', hex: '#F2A62B' },
@@ -470,7 +470,7 @@ This premium semi gloss enamel is perfect for a variety of surfaces:
       'STORAGE: Store in a cool, dry place having relative humidity below 70% and atmospheric temperature below 35°C.',
       'SHELF LIFE: 24 months from the date of packing in unopened condition.'
     ],
-    packing: '1 ltr, 4 ltr, 10 ltr, 20 ltr',
+    packing: '1 LTR, 4 LTR, 10 LTR, 20 LTR',
     image: '/product/pyd_prime_shine.png'
   },
   {
@@ -480,7 +480,7 @@ This premium semi gloss enamel is perfect for a variety of surfaces:
     category: 'Metallic Paint',
     subTitle: 'Upcoming Product',
     description: 'COMING SOON - Our luxury metallic emulsion paint with a ruby finish is currently in development.',
-    packing: '1 ltr, 4 ltr, 10 ltr, 20 ltr'
+    packing: '1 LTR, 4 LTR, 10 LTR, 20 LTR'
   },
   {
     id: 'maha-glow',
@@ -488,7 +488,7 @@ This premium semi gloss enamel is perfect for a variety of surfaces:
     slug: 'maha-glow',
     category: 'Distemper',
     description: 'Acrylic distemper paint offering an economical wall coating with smooth matt finish, emulsion-like feel, and availability in vibrant colors for budget-friendly interiors.',
-    packing: '1 ltr, 4 ltr, 10 ltr, 20 ltr',
+    packing: '1 LTR, 4 LTR, 10 LTR, 20 LTR',
     image: '/product/sakarni_mahaglow_distemper_bucket.png'
   },
   {
@@ -497,7 +497,7 @@ This premium semi gloss enamel is perfect for a variety of surfaces:
     slug: 'sakarni-maha-glow-colour-distemper',
     category: 'Distemper',
     description: 'Color distemper variant providing durable, washable finish with good coverage and a soft sheen, ideal for interior walls seeking affordable yet quality painting.',
-    packing: '2 ltr, 5 ltr, 10 ltr, 20 ltr',
+    packing: '2 LTR, 5 LTR, 10 LTR, 20 LTR',
     image: '/product/sakarni_mahaglow_distemper_bucket.png',
     colors: [
       { name: 'Ivory', hex: '#E8C897' },
@@ -543,7 +543,7 @@ This premium semi gloss enamel is perfect for a variety of surfaces:
       'SUPER BOOSTER ADDITION: Always mix Super Booster with 50% of total water first. Settle for 5 minutes before application.',
       'SHELF LIFE: 12 months from manufacturing date in tightly sealed containers. Store away from direct sunlight and excess heat.'
     ],
-    packing: '1 ltr, 5 ltr, 10 ltr, 20 ltr',
+    packing: '1 LTR, 5 LTR, 10 LTR, 20 LTR',
     image: '/product/pyd_super_booster.png'
   },
   {
@@ -644,6 +644,6 @@ export const HERO_IMAGES = [
 export const FAQS = [
   { q: "What makes your paints different from competitors?", a: "We focus on consistency and reliability. Every batch undergoes rigorous quality control, and our formulations are designed for industrial-grade performance, not just decorative appeal. Our automated dosing systems ensure that Batch #1 and Batch #1000 are identical." },
   { q: "Do you provide custom formulations for bulk partners?", a: "Absolutely. Our R&D team specializes in developing custom formulations based on your specific requirements—whether it's viscosity, drying time, chemical resistance, or finish specifications. We work directly with your technical team to match exact standards." },
-  { q: "What is your minimum order quantity for bulk orders?", a: "For industrial products, our typical MOQ is 500 liters. For decorative paints, we supply pallet-sized loads. However, we're flexible for long-term partnerships and can discuss specific requirements based on your project needs." },
+  { q: "What is your minimum order quantity for bulk orders?", a: "For industrial products, our typical MOQ is 500 LTR. For decorative paints, we supply pallet-sized loads. However, we're flexible for long-term partnerships and can discuss specific requirements based on your project needs." },
   { q: "How do you ensure quality consistency across batches?", a: "We use computer-controlled automated blending systems, batch-level testing, and maintain strict protocols. Every batch is certified and documented before dispatch, ensuring 100% repeatability and traceability." }
 ];

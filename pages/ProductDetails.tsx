@@ -329,17 +329,27 @@ const ProductDetails: React.FC = () => {
                                 </div>
 
                                 <div className="flex flex-wrap gap-4">
-                                    {product.packing.split(',').map((size, idx) => (
-                                        <div
-                                            key={idx}
-                                            className="px-6 py-4 bg-white border border-slate-100 rounded-2xl shadow-sm flex items-center gap-4 hover:border-jdc-orange hover:shadow-md transition-all duration-300"
-                                        >
-                                            <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-jdc-blue">
-                                                <Box size={20} />
-                                            </div>
-                                            <span className="text-sm font-black text-slate-800 uppercase tracking-wide">{size.trim()}</span>
-                                        </div>
-                                    ))}
+                                    {product.packing.split(',')
+                                        .map(s => s.trim())
+                                        .filter(s => !(isStainer && s.toLowerCase() === '500 ml'))
+                                        .map((size, idx) => {
+                                            const displaySize = size
+                                                .replace(/Liter/gi, 'LTR')
+                                                .replace(/ltr/gi, 'LTR')
+                                                .replace(/liters/gi, 'LTR');
+
+                                            return (
+                                                <div
+                                                    key={idx}
+                                                    className="px-6 py-4 bg-white border border-slate-100 rounded-2xl shadow-sm flex items-center gap-4 hover:border-jdc-orange hover:shadow-md transition-all duration-300"
+                                                >
+                                                    <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-jdc-blue">
+                                                        <Box size={20} />
+                                                    </div>
+                                                    <span className="text-sm font-black text-slate-800 uppercase tracking-wide">{displaySize}</span>
+                                                </div>
+                                            );
+                                        })}
                                 </div>
                             </div>
                         )}
