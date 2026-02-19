@@ -36,11 +36,45 @@ const MegaMenuContent: React.FC<{ onItemClick?: () => void }> = ({ onItemClick }
       className="max-w-7xl mx-auto px-10 py-8 flex gap-10 items-start h-[480px] relative overflow-hidden"
       onMouseMove={handleMouseMove}
     >
-      {/* ── Background Subtle Glow ── */}
-      <motion.div
-        className="absolute w-64 h-64 bg-jdc-orange/10 blur-[120px] rounded-full pointer-events-none"
-        style={{ x: mouseX, y: mouseY, left: -100, top: -100 }}
-      />
+      {/* ── Background Enhancements ── */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Deep Atmospheric Base */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0B1C3E] via-[#0D2653] to-[#040D1D]" />
+
+        {/* Interactive Mouse Glow */}
+        <motion.div
+          className="absolute w-[500px] h-[500px] bg-jdc-orange/10 blur-[120px] rounded-full"
+          style={{
+            x: mouseX,
+            y: mouseY,
+            left: -250,
+            top: -250,
+            opacity: 0.6
+          }}
+        />
+
+        {/* Static Ambient Orbs */}
+        <div className="absolute -top-32 -right-32 w-[600px] h-[600px] bg-blue-500/10 blur-[150px] rounded-full" />
+        <div className="absolute -bottom-32 -left-32 w-[500px] h-[500px] bg-jdc-orange/5 blur-[120px] rounded-full" />
+
+        {/* Ambient Branding Overlay */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-[0.05] select-none pointer-events-none overflow-hidden">
+          <motion.img
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5 }}
+            src="/images/PYD.jpeg"
+            alt="PYD Watermark"
+            className="w-[500px] h-auto grayscale invert brightness-200"
+          />
+        </div>
+
+        {/* Grain / Noise Texture Overlay */}
+        <div className="absolute inset-0 opacity-[0.05] bg-[url('https://www.transparenttextures.com/patterns/p6-dark.png')]" />
+
+        {/* Edge Reflection */}
+        <div className="absolute inset-0 border-[1px] border-white/5 rounded-[48px] pointer-events-none shadow-[inset_0_0_80px_rgba(255,255,255,0.02)]" />
+      </div>
 
       {/* ── Products List (Left) ── */}
       <div className="flex-1 overflow-y-auto pr-6 custom-scrollbar h-full z-10">
@@ -216,7 +250,7 @@ const NavItem: React.FC<{ item: any; currentPath: string }> = ({ item, currentPa
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="fixed left-0 right-0 top-[70px] mx-auto max-w-7xl z-[110] px-6 pointer-events-auto"
             >
-              <div className="bg-[#0B1C3E]/95 backdrop-blur-[40px] border border-white/10 rounded-[48px] shadow-[0_40px_120px_rgba(0,0,0,0.8)] overflow-hidden">
+              <div className="bg-gradient-to-b from-[#0B1C3E]/95 to-[#08152e]/98 backdrop-blur-[60px] border border-white/10 rounded-[48px] shadow-[0_60px_150px_-20px_rgba(0,0,0,0.9)] overflow-hidden">
                 {/* Animated Edge Light */}
                 <motion.div
                   animate={{ x: [-500, 500] }}
