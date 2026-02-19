@@ -45,7 +45,7 @@ const LeadershipCarousel: React.FC<LeadershipCarouselProps> = ({ leaders }) => {
   const activeLead = leaders[activeIndex];
 
   return (
-    <div className="w-full bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 min-h-screen flex flex-col justify-between py-8 px-4 sm:px-6">
+    <div className="w-full max-w-[1366px] h-[768px] mx-auto bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 flex flex-col justify-between py-8 px-4 sm:px-6 shadow-2xl">
       {/* Header */}
       <div className="text-center mb-8 sm:mb-12">
         <h2 className="text-4xl sm:text-5xl font-serif font-bold text-white mb-2">
@@ -151,11 +151,10 @@ const LeadershipCarousel: React.FC<LeadershipCarouselProps> = ({ leaders }) => {
                 setActiveIndex(index);
                 setIsAutoPlay(false);
               }}
-              className={`group relative overflow-hidden rounded-lg transition-all duration-300 flex-shrink-0 ${
-                index === activeIndex
+              className={`group relative overflow-hidden rounded-lg transition-all duration-300 flex-shrink-0 ${index === activeIndex
                   ? 'ring-2 ring-orange-500 scale-110'
                   : 'hover:scale-105 opacity-70 hover:opacity-100'
-              }`}
+                }`}
             >
               {/* Thumbnail image */}
               <div className="w-16 h-20 sm:w-20 sm:h-24 overflow-hidden rounded-lg">
@@ -167,9 +166,8 @@ const LeadershipCarousel: React.FC<LeadershipCarouselProps> = ({ leaders }) => {
               </div>
 
               {/* Label below thumbnail */}
-              <div className={`absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-900/95 to-transparent pt-6 pb-2 px-1 text-center transition-all ${
-                index === activeIndex ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-              }`}>
+              <div className={`absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-900/95 to-transparent pt-6 pb-2 px-1 text-center transition-all ${index === activeIndex ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                }`}>
                 <p className="text-xs font-bold text-white truncate">
                   {leader.name.split(' ')[0]}
                 </p>
@@ -192,11 +190,10 @@ const LeadershipCarousel: React.FC<LeadershipCarouselProps> = ({ leaders }) => {
                 setActiveIndex(index);
                 setIsAutoPlay(false);
               }}
-              className={`transition-all duration-300 rounded-full ${
-                index === activeIndex
+              className={`transition-all duration-300 rounded-full ${index === activeIndex
                   ? 'bg-orange-500 w-3 h-3'
                   : 'bg-slate-700 w-2 h-2 hover:bg-slate-600'
-              }`}
+                }`}
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}

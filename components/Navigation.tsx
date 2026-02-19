@@ -1,97 +1,230 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { PageRoute } from '../types';
-import { Home, Info, Box, Phone, HelpCircle, ChevronDown, ImageIcon, ArrowRight } from 'lucide-react';
+import { Home, Info, Box, Phone, HelpCircle, ChevronDown, ImageIcon, ArrowRight, X, LayoutGrid, Sparkles } from 'lucide-react';
 import { COMPANY_NAME, MEGA_MENU_DATA } from '../constants';
-import { MegaMenuItem } from '../types';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useSpring, useTransform, useMotionValue } from 'framer-motion';
 
 const navItems = [
   { label: 'Home', path: PageRoute.HOME, icon: Home },
   { label: 'About', path: PageRoute.ABOUT, icon: Info },
   { label: 'Products', path: PageRoute.PRODUCTS, icon: Box },
-  { label: 'FAQ', path: PageRoute.FAQ, icon: HelpCircle },
-  { label: 'Contact', path: PageRoute.CONTACT, icon: Phone },
 ];
 
-const NavItemComponent: React.FC<{ item: any }> = ({ item }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const location = useLocation();
-  const isActive = location.pathname === item.path;
+/* ─────────────────────────────────────────────
+   ULTRA MEGA MENU CONTENT
+───────────────────────────────────────────── */
+const MegaMenuContent: React.FC<{ onItemClick?: () => void }> = ({ onItemClick }) => {
+  const [activeProduct, setActiveProduct] = useState<any>(null);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
 
-  // For Products, allow both hover and click
-  const toggleMenu = () => {
-    if (item.label === 'Products') {
-      setIsHovered(!isHovered);
-    }
+  // Correctly define transforms at top level to avoid hook violations
+  const rotateY = useTransform(mouseX, [0, 800], [-7, 7]);
+  const rotateX = useTransform(mouseY, [0, 600], [7, -7]);
+  const springX = useSpring(rotateX, { stiffness: 100, damping: 20 });
+  const springY = useSpring(rotateY, { stiffness: 100, damping: 20 });
+
+  const handleMouseMove = ({ clientX, clientY, currentTarget }: React.MouseEvent) => {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
   };
 
   return (
     <div
-      className="h-full flex items-center relative"
-      onMouseEnter={() => item.label === 'Products' && setIsHovered(true)}
-      onMouseLeave={() => item.label === 'Products' && setIsHovered(false)}
+      className="max-w-7xl mx-auto px-10 py-8 flex gap-10 items-start h-[480px] relative overflow-hidden"
+      onMouseMove={handleMouseMove}
+    >
+      {/* ── Background Subtle Glow ── */}
+      <motion.div
+        className="absolute w-64 h-64 bg-jdc-orange/10 blur-[120px] rounded-full pointer-events-none"
+        style={{ x: mouseX, y: mouseY, left: -100, top: -100 }}
+      />
+
+      {/* ── Products List (Left) ── */}
+      <div className="flex-1 overflow-y-auto pr-6 custom-scrollbar h-full z-10">
+        <div className="grid grid-cols-4 gap-x-8 gap-y-10">
+          {MEGA_MENU_DATA.map((category, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.05 }}
+              className="space-y-4"
+            >
+              <div className="flex items-baseline gap-3">
+                <span className="text-[10px] font-mono text-jdc-orange/40 font-bold">0{idx + 1}</span>
+                <h3 className="text-[11px] font-black uppercase tracking-[0.4em] text-white/50 border-b border-white/5 pb-2 w-full">
+                  {category.title}
+                </h3>
+              </div>
+              <ul className="space-y-2 pl-1">
+                {category.items.map((product, pIdx) => (
+                  <li key={pIdx}>
+                    <Link
+                      to={`/product/${product.slug}`}
+                      onMouseEnter={() => setActiveProduct(product)}
+                      onClick={onItemClick}
+                      className="group/link flex items-center justify-between text-[12px] font-semibold text-white/70 hover:text-white transition-all duration-300"
+                    >
+                      <span className="relative line-clamp-1">
+                        {product.name}
+                        <span className="absolute bottom-0 left-0 w-0 h-px bg-jdc-orange transition-all duration-500 group-hover/link:w-full" />
+                      </span>
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0 }}
+                        whileHover={{ opacity: 1, scale: 1 }}
+                        className="w-1.5 h-1.5 rounded-full bg-jdc-orange shadow-[0_0_10px_#F97316]"
+                      />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Highlight Preview (Right) ── */}
+      <div className="w-[340px] shrink-0 h-full relative z-10">
+        <AnimatePresence mode="wait">
+          {activeProduct ? (
+            <motion.div
+              key={activeProduct.slug}
+              initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
+              animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+              exit={{ opacity: 0, scale: 1.05, filter: 'blur(10px)' }}
+              transition={{ duration: 0.4, ease: "circOut" }}
+              className="h-full flex flex-col"
+            >
+              <div className="relative group/preview aspect-square rounded-[32px] overflow-hidden bg-gradient-to-br from-[#12254e]/50 to-[#0B1C3E]/50 backdrop-blur-xl border border-white/10 p-12 flex items-center justify-center shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)] group-hover/preview:border-jdc-orange/40 group-hover/preview:bg-[#12254e]/80 transition-all duration-700">
+                {/* Subtle Inner Glow */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(249,115,22,0.1),transparent_70%)] opacity-0 group-hover/preview:opacity-100 transition-opacity duration-700" />
+                {/* Parallax Image Effect — Hooks moved to top level */}
+                <motion.img
+                  src={activeProduct.image || '/product/logo.png'}
+                  alt={activeProduct.name}
+                  style={{
+                    rotateY: springY,
+                    rotateX: springX,
+                    perspective: 1000
+                  }}
+                  className="w-full h-full object-contain drop-shadow-[0_32px_64px_rgba(0,0,0,0.6)] z-10"
+                />
+                <div className="absolute inset-0 bg-gradient-to-tr from-jdc-orange/10 via-transparent to-transparent opacity-0 group-hover/preview:opacity-100 transition-opacity duration-700" />
+              </div>
+
+              <div className="mt-6 space-y-3">
+                <div className="flex items-center gap-2">
+                  <div className="h-px flex-1 bg-white/10" />
+                  <Sparkles size={12} className="text-jdc-orange animate-pulse" />
+                  <div className="h-px flex-1 bg-white/10" />
+                </div>
+                <h4 className="text-2xl font-serif font-bold text-white tracking-tight">
+                  {activeProduct.name}
+                </h4>
+                <p className="text-white/40 text-[12px] leading-relaxed font-medium line-clamp-2">
+                  Experience superior protection and aesthetics with our specialized {activeProduct.name.toLowerCase()} formulation.
+                </p>
+                <Link
+                  to={`/product/${activeProduct.slug}`}
+                  onClick={onItemClick}
+                  className="group inline-flex items-center gap-4 text-[11px] font-black uppercase tracking-[0.3em] text-jdc-orange hover:text-white transition-colors"
+                >
+                  Explore Collection <div className="w-10 h-px bg-jdc-orange group-hover:w-14 group-hover:bg-white transition-all duration-500" />
+                </Link>
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="h-full flex flex-col items-center justify-center text-center p-12 border border-white/5 rounded-[32px] bg-gradient-to-b from-[#12254e]/30 to-transparent shadow-inner"
+            >
+              <div className="relative mb-8">
+                <img src="/product/logo.png" alt="Logo" className="w-40 opacity-10 grayscale brightness-200" />
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  className="absolute -inset-8 border border-white/5 rounded-full border-dashed"
+                />
+              </div>
+              <p className="text-white/20 text-[10px] font-black uppercase tracking-[0.5em] animate-pulse">
+                Selective Product Exploration
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────
+   REFINED NAV ITEM
+───────────────────────────────────────────── */
+const NavItem: React.FC<{ item: any; currentPath: string }> = ({ item, currentPath }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const isProducts = item.label === 'Products';
+  const isActive = currentPath === item.path;
+
+  return (
+    <div
+      className="relative h-full flex items-center"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <NavLink
         to={item.path}
-        onClick={(e) => {
-          if (item.label === 'Products') {
-            e.preventDefault();
-            toggleMenu();
-          }
-        }}
-        className={({ isActive }) =>
-          `text-[10px] font-black uppercase tracking-[0.25em] transition-all duration-500 relative group py-5 flex items-center gap-1.5
-          ${isActive ? 'text-white' : 'text-slate-400 hover:text-white'}`
-        }
+        onClick={(e) => isProducts && e.preventDefault()}
+        className={({ isActive }) => `
+          relative z-10 px-6 py-2.5 rounded-full text-[11px] font-black uppercase tracking-[0.25em] transition-all duration-500
+          ${isActive ? 'text-white' : 'text-white/40 hover:text-white'}
+        `}
       >
-        {({ isActive }) => (
-          <>
-            {item.label}
-            {item.label === 'Products' && (
-              <ChevronDown
-                size={12}
-                strokeWidth={3}
-                className={`transition-all duration-500 ${isHovered ? 'rotate-180 text-jdc-orange translate-y-0.5' : 'text-slate-500'}`}
-              />
-            )}
-
-            {/* Elegant Active Indicator */}
-            {isActive && (
-              <motion.div
-                layoutId="activeNav"
-                className="absolute bottom-3 left-0 right-0 h-[2px] bg-gradient-to-r from-jdc-orange to-amber-400 rounded-full"
-                transition={{ type: "spring", stiffness: 380, damping: 30 }}
-              />
-            )}
-
-            {/* Hover Indicator */}
-            {!isActive && (
-              <span className="absolute bottom-3 left-0 w-0 h-[2px] bg-white/20 transition-all duration-500 group-hover:w-full rounded-full"></span>
-            )}
-          </>
-        )}
+        <span className="relative z-10 flex items-center gap-1">
+          {item.label}
+          {isProducts && (
+            <ChevronDown size={12} className={`transition-transform duration-500 ${isHovered ? 'rotate-180 text-jdc-orange scale-110' : ''}`} />
+          )}
+        </span>
       </NavLink>
 
-      {/* Mega Menu with AnimatePresence */}
-      {item.label === 'Products' && (
+      {/* Advanced Indicator Pill */}
+      <AnimatePresence>
+        {(isHovered || isActive) && (
+          <motion.div
+            layoutId="navIndicator"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            className={`absolute inset-0 z-0 rounded-full ${isActive ? 'bg-white/10 shadow-[inset_0_0_20px_rgba(255,255,255,0.05)]' : 'bg-white/5'}`}
+            transition={{ type: "spring", stiffness: 350, damping: 25 }}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Mega Menu Dropdown */}
+      {isProducts && (
         <AnimatePresence>
           {isHovered && (
             <motion.div
-              initial={{ opacity: 0, y: 15, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 10, scale: 0.98 }}
-              transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-              className="fixed top-[70px] md:top-[90px] left-0 w-full bg-jdc-blue backdrop-blur-3xl border-b border-jdc-orange/20 z-[100] overflow-hidden shadow-[0_40px_100px_rgba(11,28,62,0.95)]"
+              initial={{ opacity: 0, y: 12, scale: 0.99, filter: 'blur(15px)' }}
+              animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+              exit={{ opacity: 0, y: 8, scale: 0.99, filter: 'blur(15px)' }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="fixed left-0 right-0 top-[70px] mx-auto max-w-7xl z-[110] px-6 pointer-events-auto"
             >
-              {/* Premium Glass Effect Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent pointer-events-none"></div>
-              <div className="absolute inset-0 bg-gradient-to-r from-jdc-orange/5 via-transparent to-jdc-orange/5 pointer-events-none"></div>
-
-              <MegaMenuContent onItemClick={() => setIsHovered(false)} />
-
-              {/* Finishing decorative line */}
-              <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-jdc-orange/30 to-transparent"></div>
+              <div className="bg-[#0B1C3E]/95 backdrop-blur-[40px] border border-white/10 rounded-[48px] shadow-[0_40px_120px_rgba(0,0,0,0.8)] overflow-hidden">
+                {/* Animated Edge Light */}
+                <motion.div
+                  animate={{ x: [-500, 500] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                  className="absolute top-0 left-0 w-1/2 h-px bg-gradient-to-r from-transparent via-jdc-orange/50 to-transparent"
+                />
+                <MegaMenuContent onItemClick={() => setIsHovered(false)} />
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -100,443 +233,170 @@ const NavItemComponent: React.FC<{ item: any }> = ({ item }) => {
   );
 };
 
+/* ─────────────────────────────────────────────
+   MAIN DESKTOP NAV
+───────────────────────────────────────────── */
 export const DesktopNav: React.FC = () => {
+  const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
   const location = useLocation();
-  const isHome = location.pathname === PageRoute.HOME;
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-
-      // Calculate scroll progress
-      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      setScrollProgress(scrolled);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    return scrollY.onChange((v) => setIsScrolled(v > 50));
+  }, [scrollY]);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled || !isHome
-        ? 'bg-jdc-blue backdrop-blur-2xl py-3 border-b-2 border-jdc-orange/30 shadow-[0_10px_60px_rgba(11,28,62,0.8),0_0_40px_rgba(242,118,34,0.1)]'
-        : 'bg-jdc-blue/60 md:bg-jdc-blue/40 backdrop-blur-md py-6 md:py-8 border-b border-white/10'
-        }`}
-    >
-      {/* Scroll Progress Bar */}
-      <div className="absolute top-0 left-0 h-[3px] bg-gradient-to-r from-jdc-orange via-amber-500 to-jdc-orange z-[60] transition-all duration-300 ease-out shadow-[0_0_15px_rgba(242,118,34,0.6)]" style={{ width: `${scrollProgress}%` }}></div>
+    <header className="fixed top-0 left-0 right-0 z-[100] transition-all duration-700 pointer-events-none">
+      <div className={`
+        max-w-7xl mx-auto px-6 transition-all duration-1000 ease-[cubic-bezier(0.16, 1, 0.3, 1)]
+        ${isScrolled ? 'pt-3 max-w-[95%]' : 'pt-4 md:pt-6 max-w-[95%] md:max-w-7xl'}
+      `}>
+        <div className={`
+          relative flex items-center justify-between gap-4 px-6 md:px-10 py-3 rounded-[50px] border transition-all duration-700 pointer-events-auto
+          bg-[#0B1C3E] border-white/10 shadow-[0_32px_80px_-16px_rgba(0,0,0,0.6)]
+          ${isScrolled ? 'scale-[0.98] py-2' : 'scale-100'}
+        `}>
+          {/* Logo Identity (Always Original Content) */}
+          <Link to={PageRoute.HOME} className="flex items-center gap-4 group shrink-0">
+            <div className="flex items-center gap-3 bg-white/5 px-3 py-1.5 rounded-2xl border border-white/10 transition-all group-hover:bg-white/10 group-hover:border-jdc-orange/40 group-hover:shadow-[0_0_20px_rgba(249,115,22,0.15)]">
+              <img src="/product/logo.png" alt="Jai Durga Chemical" className="h-7 md:h-9 w-auto object-contain transition-transform group-hover:scale-105" />
+              <div className="w-px h-6 md:h-7 bg-white/10" />
+              <img src="/images/PYD.jpeg" alt="PYD" className="h-7 md:h-9 w-auto object-contain rounded-lg shadow-xl" />
+            </div>
+            <div className="hidden xl:flex flex-col">
+              <span className="text-white font-serif font-black text-xs tracking-[0.12em] uppercase leading-none group-hover:text-jdc-orange transition-colors duration-500">
+                {COMPANY_NAME}
+              </span>
+              <span className="text-[7px] text-white/30 font-black tracking-[0.3em] uppercase mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Industrial Excellence</span>
+            </div>
+          </Link>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center h-full relative gap-8">
+          {/* Luxury Navigation Dock */}
+          <nav className="hidden lg:flex items-center gap-1.5 bg-black/40 p-1.5 rounded-full border border-white/10 shadow-inner">
+            {navItems.map((item) => (
+              <NavItem key={item.path} item={item} currentPath={location.pathname} />
+            ))}
+          </nav>
 
-        {/* Brand Identity */}
-        <Link to={PageRoute.HOME} className="flex items-center gap-4 group relative z-10 shrink-0">
-          <div className="flex items-center gap-4 bg-white/5 py-2.5 px-4 rounded-2xl border border-white/10 backdrop-blur-md group-hover:bg-white/10 group-hover:border-jdc-orange/30 transition-all duration-500 shadow-lg">
-            <img
-              src="/product/logo.png"
-              alt="Sakarni Logo"
-              className="h-10 md:h-14 w-auto object-contain drop-shadow-lg"
-            />
-            <div className="h-8 md:h-12 w-[1px] bg-white/10"></div>
-            <img
-              src="/images/PYD.jpeg"
-              alt="PYD Logo"
-              className="h-10 md:h-14 w-auto object-contain rounded-lg shadow-2xl group-hover:scale-105 transition-transform duration-500"
-            />
+          {/* Premium CTAs */}
+          <div className="hidden lg:flex items-center gap-2 shrink-0">
+            <Link
+              to={PageRoute.FAQ}
+              className="relative px-5 py-2.5 text-white/40 hover:text-jdc-orange text-[10px] font-black uppercase tracking-[0.25em] transition-all duration-500"
+            >
+              Dealer Enquiry
+            </Link>
+            <Link
+              to={PageRoute.CONTACT}
+              className="relative group px-6 py-2.5 overflow-hidden bg-jdc-orange text-white rounded-full text-[10px] font-black uppercase tracking-[0.2em] shadow-2xl shadow-jdc-orange/30 transition-all hover:scale-105 active:scale-95"
+            >
+              <span className="relative z-10">Contact Us</span>
+              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+            </Link>
           </div>
-          <div className="flex flex-col">
-            <span className="text-white font-serif font-black text-sm md:text-base tracking-[0.1em] uppercase leading-none group-hover:text-jdc-orange transition-colors duration-500">
-              {COMPANY_NAME}
-            </span>
-          </div>
-        </Link>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-10 h-full">
-          {navItems.map((item) => (
-            <NavItemComponent key={item.path} item={item} />
-          ))}
-        </nav>
+        </div>
       </div>
     </header>
   );
 };
 
-const MegaMenuContent: React.FC<{ onItemClick?: () => void }> = ({ onItemClick }) => {
-  const [activeImage, setActiveImage] = useState<string | null>(null);
-  const [activeName, setActiveName] = useState<string | null>(null);
-  const [activeSlug, setActiveSlug] = useState<string | null>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setMousePos({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-  };
-
-  return (
-    <div
-      className="max-w-7xl mx-auto px-6 md:px-12 py-10 flex gap-12 relative items-start"
-      onMouseMove={handleMouseMove}
-    >
-      {/* Interactive Pattern Overlay */}
-      <motion.div
-        animate={{
-          x: (mousePos.x - 500) / 50,
-          y: (mousePos.y - 300) / 50,
-        }}
-        transition={{ type: "tween", ease: "linear", duration: 0.1 }}
-        className="absolute inset-[-100px] pointer-events-none opacity-[0.05]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }}
-      />
-
-      {/* Preview Area (Left Down) - Enlarged for Impact */}
-      <div className="w-[420px] flex flex-col shrink-0 relative z-10">
-        <div className="sticky top-0">
-          <div className="relative group/preview overflow-hidden rounded-xl bg-gradient-to-br from-white/10 to-white/5 aspect-square flex items-center justify-center border border-white/20 shadow-xl backdrop-blur-sm">
-            <AnimatePresence mode="wait">
-              {activeImage === 'missing' ? (
-                <Link
-                  to={activeSlug ? `/product/${activeSlug}` : '#'}
-                  onClick={onItemClick}
-                  className={`flex flex-col items-center gap-4 text-slate-500 ${activeSlug ? 'cursor-pointer' : 'cursor-default'}`}
-                >
-                  <motion.div
-                    key="missing"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 1.1 }}
-                    className="flex flex-col items-center gap-4"
-                  >
-                    <div className="p-6 rounded-full bg-white/5 border border-white/10">
-                      <ImageIcon size={64} strokeWidth={1} className="opacity-40" />
-                    </div>
-                    <div className="flex flex-col items-center">
-                      {["PYD META RUBY (COMING SOON)", "PYD ROOF COVER (COMING SOON)"].includes((activeName || "").toUpperCase()) ? (
-                        <span className="text-3xl md:text-4xl uppercase tracking-[0.2em] font-black text-jdc-orange animate-pulse">
-                          Upcoming
-                        </span>
-                      ) : (
-                        <span className="text-xs uppercase tracking-[0.3em] font-black text-jdc-orange/50">
-                          Image Missing
-                        </span>
-                      )}
-                      <span className="text-[10px] text-slate-600 mt-1 uppercase font-bold">{activeName}</span>
-                    </div>
-                  </motion.div>
-                </Link>
-              ) : activeImage ? (
-                <Link
-                  to={activeSlug ? `/product/${activeSlug}` : '#'}
-                  onClick={onItemClick}
-                  className="w-full h-full flex items-center justify-center p-6 relative cursor-pointer group/img"
-                >
-                  <motion.div
-                    key={activeImage}
-                    initial={{ opacity: 0, scale: 0.8, filter: 'blur(10px)' }}
-                    animate={{ opacity: 1, scale: 1.05, filter: 'blur(0px)' }}
-                    exit={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 260,
-                      damping: 20
-                    }}
-                    className="w-full h-full flex items-center justify-center relative z-10"
-                  >
-                    <img
-                      src={activeImage}
-                      alt={activeName || "Product Preview"}
-                      className="w-full h-full object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.6)] group-hover/img:scale-110 transition-transform duration-500"
-                    />
-                  </motion.div>
-                  {/* Dynamic Glow Effect */}
-                  <div className="absolute inset-0 bg-jdc-orange/10 blur-[60px] rounded-full transform scale-75 animate-pulse pointer-events-none"></div>
-                </Link>
-              ) : (
-                <motion.div
-                  key="empty"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="flex flex-col items-center gap-6"
-                >
-                  <div className="relative">
-                    <img
-                      src="/product/logo.png"
-                      alt="Sakarni Logo"
-                      className="w-48 h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.3)]"
-                    />
-                    <div className="absolute -inset-4 bg-jdc-orange/5 blur-2xl rounded-full -z-10 animate-pulse"></div>
-                  </div>
-                  <span className="text-[10px] uppercase tracking-[0.4em] font-black text-white/20">Select a Product</span>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Subtle Overlay Glow */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-jdc-blue/20 to-transparent pointer-events-none"></div>
-          </div>
-
-          <Link
-            to={activeSlug ? `/product/${activeSlug}` : '#'}
-            onClick={onItemClick}
-            className={`block mt-6 p-5 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-md transition-all duration-300 hover:bg-white/[0.05] hover:border-white/10 ${activeSlug ? 'cursor-pointer' : 'cursor-default'}`}
-          >
-            <div className="flex items-center gap-2 mb-2">
-              <span className="w-2 h-2 rounded-full bg-jdc-orange animate-pulse"></span>
-              <span className="text-[9px] text-jdc-orange font-black uppercase tracking-[0.4em]">Product Spotlight</span>
-            </div>
-            <h4 className="text-white text-xl font-serif font-bold tracking-tight mb-2 group-hover/preview:text-jdc-orange transition-colors">
-              {activeName || "Our Collection"}
-            </h4>
-            <div className="flex items-center justify-between gap-4">
-              <p className="text-slate-400 text-[11px] leading-relaxed font-medium opacity-80 flex-1">
-                {["PYD META RUBY (COMING SOON)", "PYD ROOF COVER (COMING SOON)"].includes((activeName || "").toUpperCase())
-                  ? "UPCOMING PRODUCT - Currently in development to meet our rigorous standards of excellence."
-                  : "Discover industry-leading formulations engineered for durability and aesthetic perfection."}
-              </p>
-              {activeSlug && (
-                <div className="w-8 h-8 rounded-full bg-jdc-orange/10 flex items-center justify-center text-jdc-orange group-hover/preview:bg-jdc-orange group-hover/preview:text-white transition-all">
-                  <ArrowRight size={14} />
-                </div>
-              )}
-            </div>
-          </Link>
-        </div>
-      </div>
-
-      <div className="flex-1 grid grid-cols-4 gap-x-10 gap-y-12 relative z-10">
-        {MEGA_MENU_DATA.map((category, idx) => (
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: idx * 0.04 + 0.1, duration: 0.5 }}
-            className="flex flex-col gap-4"
-          >
-            <div className="relative">
-              <h3 className="text-white/80 text-[10px] font-black uppercase tracking-[0.25em] flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-jdc-orange/80"></span>
-                {category.title}
-              </h3>
-              <div className="absolute -bottom-2 left-0 w-8 h-[1px] bg-white/10"></div>
-            </div>
-            <ul className="flex flex-col gap-2.5 mt-2">
-              {category.items.map((product, pIdx) => (
-                <li key={pIdx}>
-                  <Link
-                    to={`/product/${product.slug}`}
-                    onMouseEnter={() => {
-                      setActiveImage(product.image || 'missing');
-                      setActiveName(product.name);
-                      setActiveSlug(product.slug);
-                    }}
-                    onClick={onItemClick}
-                    className="text-white/50 hover:text-jdc-orange text-[13px] font-semibold transition-all duration-300 flex items-start group/link relative"
-                  >
-                    <span className="group-hover:translate-x-1 transition-transform duration-300 leading-tight py-0.5">{product.name}</span>
-                    <ArrowRight
-                      size={10}
-                      className="ml-2 mt-1.5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 shrink-0"
-                    />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
+/* ─────────────────────────────────────────────
+   MOBILE LUXURY NAV
+───────────────────────────────────────────── */
 export const MobileNav: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
-      setLastScrollY(currentScrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
-
-  // Close drawer on route change
-  useEffect(() => {
-    setIsDrawerOpen(false);
-  }, [location.pathname]);
 
   return (
     <>
-      <div className={`fixed bottom-6 left-4 right-4 z-50 transition-all duration-500 cubic-bezier(0.4, 0, 0.2, 1) transform md:hidden ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-24 opacity-0'}`}>
-        <nav className="bg-jdc-blue/95 backdrop-blur-2xl rounded-3xl flex justify-between items-center py-4 px-4 shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 mx-auto max-w-sm">
+      <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-[150] lg:hidden">
+        <div className="bg-[#0B1C3E]/95 backdrop-blur-[40px] border border-white/20 rounded-full p-2.5 flex items-center gap-2 shadow-[0_24px_64px_rgba(0,0,0,0.6)]">
           {navItems.map((item) => {
             const Icon = item.icon!;
-            const isProducts = item.label === 'Products';
             const isActive = location.pathname === item.path;
-
-            if (isProducts) {
-              return (
-                <button
-                  key={item.label}
-                  onClick={() => setIsDrawerOpen(true)}
-                  className={`flex flex-col items-center justify-center gap-1.5 px-3 py-1 rounded-2xl transition-all duration-300 relative group
-                  ${isDrawerOpen ? 'text-jdc-orange' : 'text-slate-400'}`}
-                >
-                  <Icon
-                    size={18}
-                    strokeWidth={isDrawerOpen ? 3 : 2}
-                  />
-                  <span className="text-[8px] font-black uppercase tracking-widest">{item.label}</span>
-                </button>
-              );
-            }
-
             return (
               <NavLink
                 key={item.path}
                 to={item.path}
-                className={({ isActive }) =>
-                  `flex flex-col items-center justify-center gap-1.5 px-3 py-1 rounded-2xl transition-all duration-300 relative group
-                  ${isActive ? 'text-jdc-orange' : 'text-slate-400'}`
-                }
+                className={`w-14 h-14 rounded-full flex items-center justify-center transition-all duration-500 relative ${isActive ? 'bg-jdc-orange text-white scale-110 shadow-lg shadow-jdc-orange/30' : 'text-white/40 hover:text-white'}`}
               >
-                <Icon
-                  size={18}
-                  strokeWidth={location.pathname === item.path ? 3 : 2}
-                />
-                <span className="text-[8px] font-black uppercase tracking-widest">{item.label}</span>
+                <Icon size={22} strokeWidth={isActive ? 2.5 : 2} />
+                {isActive && (
+                  <motion.div layoutId="mobileActive" className="absolute -bottom-1 w-1 h-1 bg-white rounded-full" />
+                )}
               </NavLink>
             );
           })}
-        </nav>
+          <button
+            onClick={() => setIsOpen(true)}
+            className="w-14 h-14 rounded-full bg-white/5 border border-white/5 flex items-center justify-center text-white"
+          >
+            <LayoutGrid size={22} />
+          </button>
+        </div>
       </div>
 
-      {/* Next Level Product Drawer */}
       <AnimatePresence>
-        {isDrawerOpen && (
+        {isOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] md:hidden"
+            initial={{ opacity: 0, clipPath: 'circle(0% at 90% 90%)' }}
+            animate={{ opacity: 1, clipPath: 'circle(150% at 90% 90%)' }}
+            exit={{ opacity: 0, clipPath: 'circle(0% at 90% 90%)' }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 z-[200] lg:hidden bg-[#0B1C3E]/98 backdrop-blur-3xl"
           >
-            {/* Backdrop */}
-            <div
-              className="absolute inset-0 bg-black/60 backdrop-blur-md"
-              onClick={() => setIsDrawerOpen(false)}
-            ></div>
+            <div className="relative h-full flex flex-col p-10 pt-20">
+              <button
+                onClick={() => setIsOpen(false)}
+                className="absolute top-8 right-8 w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white"
+              >
+                <X size={28} />
+              </button>
 
-            {/* Menu Container */}
-            <motion.div
-              initial={{ y: '100%' }}
-              animate={{ y: 0 }}
-              exit={{ y: '100%' }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="absolute bottom-0 left-0 right-0 h-[85vh] bg-jdc-blue/95 border-t border-white/10 rounded-t-[2.5rem] shadow-2xl flex flex-col overflow-hidden"
-            >
-              {/* Header */}
-              <div className="p-6 flex items-center justify-between border-b border-white/5 bg-white/5">
-                <div className="flex flex-col">
-                  <h2 className="text-white font-serif font-bold text-xl uppercase tracking-wider">Product Categories</h2>
-                  <p className="text-slate-400 text-[10px] font-bold tracking-widest uppercase">Select to explore</p>
-                </div>
-                <button
-                  onClick={() => setIsDrawerOpen(false)}
-                  className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:text-white border border-white/10"
-                >
-                  <ChevronDown size={24} />
-                </button>
-              </div>
-
-              {/* Scrollable Content */}
-              <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
-                <div className="space-y-3 pb-24">
-                  {MEGA_MENU_DATA.map((category) => (
-                    <div
-                      key={category.title}
-                      className={`rounded-2xl border transition-all duration-300 overflow-hidden
-                      ${expandedCategory === category.title ? 'bg-white/10 border-jdc-orange/30' : 'bg-white/5 border-white/5'}`}
+              <div className="space-y-8">
+                <p className="text-jdc-orange text-[10px] uppercase font-black tracking-[0.5em]">Navigation</p>
+                <div className="flex flex-col gap-6">
+                  {navItems.map((item, i) => (
+                    <motion.div
+                      key={item.label}
+                      initial={{ opacity: 0, x: -30 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.1 + i * 0.1 }}
                     >
-                      <button
-                        onClick={() => setExpandedCategory(expandedCategory === category.title ? null : category.title)}
-                        className="w-full flex items-center justify-between p-4 px-5"
+                      <Link
+                        to={item.path}
+                        onClick={() => setIsOpen(false)}
+                        className="text-5xl font-serif font-bold text-white flex items-end gap-4 group"
                       >
-                        <div className="flex items-center gap-4">
-                          <div className={`w-8 h-8 rounded-lg flex items-center justify-center
-                          ${expandedCategory === category.title ? 'bg-jdc-orange text-white' : 'bg-white/5 text-slate-400'}`}>
-                            <Box size={18} />
-                          </div>
-                          <span className="text-white font-bold text-sm tracking-widest uppercase">{category.title}</span>
-                        </div>
-                        <ChevronDown
-                          size={18}
-                          className={`text-slate-500 transition-transform duration-300 ${expandedCategory === category.title ? 'rotate-180 text-jdc-orange' : ''}`}
-                        />
-                      </button>
-
-                      <AnimatePresence>
-                        {expandedCategory === category.title && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            className="bg-black/20 border-t border-white/5"
-                          >
-                            <div className="p-2 grid grid-cols-2 gap-2">
-                              {category.items.map((prod) => (
-                                <Link
-                                  key={prod.slug}
-                                  to={`/product/${prod.slug}`}
-                                  className="flex flex-col bg-white/5 p-3 rounded-xl border border-white/5 hover:bg-white/10 hover:border-jdc-orange/20 group transition-all"
-                                >
-                                  <div className="aspect-square rounded-lg bg-white/5 flex items-center justify-center mb-2 overflow-hidden overflow-hidden p-2">
-                                    <img
-                                      src={prod.image || '/product/logo.png'}
-                                      alt={prod.name}
-                                      className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
-                                    />
-                                  </div>
-                                  <span className="text-[10px] text-white font-bold text-center leading-tight">{prod.name}</span>
-                                </Link>
-                              ))}
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
+                        {item.label}
+                        <span className="text-[14px] font-mono text-white/20 mb-2 font-bold group-hover:text-jdc-orange">0{i + 1}</span>
+                      </Link>
+                    </motion.div>
                   ))}
                 </div>
               </div>
 
-              {/* Quick Action Footer */}
-              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-jdc-blue to-transparent pt-12">
+              <div className="mt-auto flex flex-col gap-4">
                 <Link
-                  to={PageRoute.PRODUCTS}
-                  className="w-full py-4 bg-jdc-orange text-white font-black text-xs uppercase tracking-[0.3em] rounded-xl shadow-lg flex items-center justify-center gap-2 hover:bg-white hover:text-jdc-orange transition-all"
+                  to={PageRoute.FAQ}
+                  onClick={() => setIsOpen(false)}
+                  className="w-full py-4 bg-white/5 border border-white/10 text-white rounded-2xl font-black uppercase tracking-[0.2em] flex items-center justify-center gap-3"
                 >
-                  View All Products <ArrowRight size={14} />
+                  Dealer Enquiry <ArrowRight size={18} />
                 </Link>
+                <Link
+                  to={PageRoute.CONTACT}
+                  onClick={() => setIsOpen(false)}
+                  className="w-full py-5 bg-jdc-orange text-white rounded-2xl font-black uppercase tracking-[0.3em] flex items-center justify-center gap-3"
+                >
+                  Contact Us <ArrowRight size={20} />
+                </Link>
+                <div className="flex justify-between items-center text-[10px] text-white/20 font-black uppercase tracking-[0.3em]">
+                  <span>© 2026 JDC PVT LTD</span>
+                  <div className="h-px w-20 bg-white/10" />
+                </div>
               </div>
-            </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

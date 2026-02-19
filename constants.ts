@@ -559,33 +559,6 @@ This premium semi gloss enamel is perfect for a variety of surfaces:
 
 export const MEGA_MENU_DATA: MegaMenuCategory[] = [
   {
-    title: "UNIVERSAL STAINER",
-    items: [
-      { name: "Universal Stainer", slug: "sakarni-universal-stainer", image: "/product/sakarni_universal_stainer.png" },
-      { name: "Pyd Universal Stainer", slug: "pyd-universal-stainer", image: "/product/pydstainer.png" }
-    ]
-  },
-  {
-    title: "PRIMERS",
-    items: [
-      { name: "Magic Coat Primer", slug: "magic-coat", image: "/product/sakarni_magic_coat_interior_primer.png" },
-      { name: "Magic Grip Primer", slug: "magic-grip", image: "/product/sakarni_magic_grip_primer_bucket.png" },
-      { name: "Pro Protect - Red Oxide Primer", slug: "solvent-base-red-oxide-primer", image: "/product/sakarni_primer_pro_protect_red_oxide_can.png" },
-      { name: "Wood Guard Primer", slug: "water-base-wood-primer", image: "/product/sakarni_primer_wood_guard_can.png" },
-      { name: "High Prime - Red Oxide Primer", slug: "water-base-red-oxide-primer", image: "/product/sakarni_high_prime_red_oxide_primer_can.png" },
-      { name: "Wood Secure Primer", slug: "solvent-base-wood-primer", image: "/product/sakarni_primer_wood_secure_can.png" }
-
-    ]
-  },
-  {
-    title: "INTERIOR EMULSION",
-    items: [
-      { name: "Magna Interior Emulsion", slug: "magna", image: "/product/sakarni_magna_emulsion_paint.png" },
-      { name: "Magna Glow", slug: "magna-glow", image: "/product/sakarni_magna_glow_interior_emulsion.png" },
-      { name: "Quick Clean", slug: "quick-clean", image: "/product/sakarni_quick_clean_interior_emulsion.png" }
-    ]
-  },
-  {
     title: "EXTERIOR EMULSION",
     items: [
       { name: "Charm Gold", slug: "charm-gold", image: "/product/sakarni_charm_gold_exterior_emulsion.png" },
@@ -597,16 +570,42 @@ export const MEGA_MENU_DATA: MegaMenuCategory[] = [
     ]
   },
   {
+    title: "PRIMER",
+    items: [
+      { name: "Magic Coat Primer", slug: "magic-coat", image: "/product/sakarni_magic_coat_interior_primer.png" },
+      { name: "Magic Grip Primer", slug: "magic-grip", image: "/product/sakarni_magic_grip_primer_bucket.png" },
+      { name: "Pro Protect - Red Oxide Primer", slug: "solvent-base-red-oxide-primer", image: "/product/sakarni_primer_pro_protect_red_oxide_can.png" },
+      { name: "Wood Guard Primer", slug: "water-base-wood-primer", image: "/product/sakarni_primer_wood_guard_can.png" },
+      { name: "High Prime - Red Oxide Primer", slug: "water-base-red-oxide-primer", image: "/product/sakarni_high_prime_red_oxide_primer_can.png" },
+      { name: "Wood Secure Primer", slug: "solvent-base-wood-primer", image: "/product/sakarni_primer_wood_secure_can.png" }
+    ]
+  },
+  {
+    title: "INTERIOR",
+    items: [
+      { name: "Magna Interior Emulsion", slug: "magna", image: "/product/sakarni_magna_emulsion_paint.png" },
+      { name: "Magna Glow", slug: "magna-glow", image: "/product/sakarni_magna_glow_interior_emulsion.png" },
+      { name: "Quick Clean", slug: "quick-clean", image: "/product/sakarni_quick_clean_interior_emulsion.png" }
+    ]
+  },
+  {
     title: "ENAMEL",
     items: [
       { name: "Sak Classic", slug: "sak-classic", image: "/product/sakarni_sak_classic_gloss_enamel_can.png" },
-      { name: "Pyd Prime Shine", slug: "pyd-prime-shine", image: "/product/pyd_prime_shine.png" }
+      { name: "PYD Prime Shine", slug: "pyd-prime-shine", image: "/product/pyd_prime_shine.png" }
+    ]
+  },
+  {
+    title: "STAINER",
+    items: [
+      { name: "Universal Stainer", slug: "sakarni-universal-stainer", image: "/product/sakarni_universal_stainer.png" },
+      { name: "PYD Universal Stainer", slug: "pyd-universal-stainer", image: "/product/pydstainer.png" }
     ]
   },
   {
     title: "METALLIC PAINT",
     items: [
-      { name: "Pyd Meta Ruby (Coming Soon)", slug: "pyd-meta-ruby" }
+      { name: "PYD Meta Ruby (Coming Soon)", slug: "pyd-meta-ruby" }
     ]
   },
   {
@@ -619,8 +618,8 @@ export const MEGA_MENU_DATA: MegaMenuCategory[] = [
   {
     title: "WATER PROOFING",
     items: [
-      { name: "Pyd Super Booster", slug: "pyd-super-booster", image: "/product/pyd_super_booster.png" },
-      { name: "Pyd Roof Cover (Coming Soon)", slug: "pyd-roof-cover" }
+      { name: "PYD Super Booster", slug: "pyd-super-booster", image: "/product/pyd_super_booster.png" },
+      { name: "PYD Roof Cover (Coming Soon)", slug: "pyd-roof-cover" }
     ]
   }
 ];

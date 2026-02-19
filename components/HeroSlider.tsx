@@ -5,44 +5,12 @@ import { ArrowRight, ChevronLeft, ChevronRight, Minus } from 'lucide-react';
 
 const SLIDES = [
   {
-    image: "/images/production.png",
-    title: "Decorative Excellence",
-    subtitle: "Precision-engineered paints & coatings for industrial projects.",
-    cta: "Explore Products",
-    link: PageRoute.PRODUCTS,
-    tag: "Expert Solutions"
-  },
-  {
     image: "/images/factory.png",
     title: "Advanced Manufacturing",
     subtitle: "State-of-the-art facilities ensuring consistency in every drop.",
     cta: "View Our Story",
     link: PageRoute.ABOUT,
     tag: "Advanced Tech"
-  },
-  {
-    image: "/images/colour.png",
-    title: "Enduring Protection",
-    subtitle: "Surface solutions designed to withstand the toughest environments.",
-    cta: "Contact Us",
-    link: PageRoute.CONTACT,
-    tag: "Global Standards"
-  },
-  {
-    image: "/images/slide1.png",
-    title: "Trusted by Thousands",
-    subtitle: "Building lasting partnerships with global infrastructure developers.",
-    cta: "Learn More",
-    link: PageRoute.ABOUT,
-    tag: "2500+ Clients"
-  },
-  {
-    image: "/images/slide2.png",
-    title: "Quality You Can Depend On",
-    subtitle: "Certified excellence in every batch, every time.",
-    cta: "View Our Story",
-    link: PageRoute.ABOUT,
-    tag: "Quality Assured"
   }
 ];
 
@@ -53,13 +21,13 @@ const HeroSlider: React.FC = () => {
   const progressRef = useRef<HTMLDivElement>(null);
 
   const nextSlide = useCallback(() => {
-    if (isAnimating) return;
+    if (isAnimating || SLIDES.length <= 1) return;
     setIsAnimating(true);
     setCurrentIndex((prev) => (prev + 1) % SLIDES.length);
   }, [isAnimating]);
 
   const prevSlide = useCallback(() => {
-    if (isAnimating) return;
+    if (isAnimating || SLIDES.length <= 1) return;
     setIsAnimating(true);
     setCurrentIndex((prev) => (prev === 0 ? SLIDES.length - 1 : prev - 1));
   }, [isAnimating]);
@@ -72,6 +40,7 @@ const HeroSlider: React.FC = () => {
 
   // Auto-play
   useEffect(() => {
+    if (SLIDES.length <= 1) return;
     timerRef.current = setInterval(() => {
       nextSlide();
     }, 6000);
@@ -82,7 +51,7 @@ const HeroSlider: React.FC = () => {
 
   // Progress Bar Animation Reset
   useEffect(() => {
-    if (progressRef.current) {
+    if (progressRef.current && SLIDES.length > 1) {
       progressRef.current.style.transition = 'none';
       progressRef.current.style.width = '0%';
       setTimeout(() => {
@@ -97,7 +66,7 @@ const HeroSlider: React.FC = () => {
   const currentSlide = SLIDES[currentIndex];
 
   return (
-    <div className="relative w-full h-[90vh] min-h-[420px] md:h-screen overflow-hidden bg-jdc-dark group select-none">
+    <div className="relative w-full h-[70vh] sm:h-[80vh] lg:h-[768px] overflow-hidden bg-jdc-dark group select-none shadow-2xl mt-0">
 
       {/* 1. Background Layers */}
       {SLIDES.map((slide, index) => {
@@ -109,11 +78,11 @@ const HeroSlider: React.FC = () => {
               }`}
           >
             {/* Image with Parallax/Zoom Effect */}
-            <div className={`absolute inset-0 transform transition-transform duration-[8000ms] ease-out ${isActive ? 'scale-110' : 'scale-100'}`}>
+            <div className={`absolute inset-0 transform transition-transform duration-[8000ms] ease-out ${isActive ? 'scale-110 sm:scale-125' : 'scale-100'}`}>
               <img
                 src={slide.image}
                 alt={slide.title}
-                className="w-full h-full object-cover object-center"
+                className="w-full h-full object-cover object-center sm:object-[center_30%]"
               />
             </div>
 
@@ -128,91 +97,50 @@ const HeroSlider: React.FC = () => {
       {/* 3. Main Content Layer */}
       <div className="absolute inset-0 z-20 flex flex-col justify-center">
         <div className="max-w-7xl w-full mx-auto px-3 sm:px-4 md:px-12 pt-10 sm:pt-16 md:pt-20">
-          {/* Animated Text Container */}
-          <div key={currentIndex} className="max-w-[98vw] sm:max-w-2xl md:max-w-4xl">
-            {/* Tag / Kicker */}
-            <div className="overflow-hidden mb-2 sm:mb-3 md:mb-4">
-              <div className="flex items-center gap-1 sm:gap-2 md:gap-3 text-jdc-orange font-bold uppercase tracking-[0.25em] text-[10px] sm:text-[9px] md:text-xs animate-[slideUp_0.8s_ease-out_forwards]">
-                <span className="w-5 sm:w-6 md:w-8 h-[2px] bg-jdc-orange"></span>
-                {currentSlide.tag}
-              </div>
-            </div>
-
-            {/* Headline - Editorial Typography */}
-            <div className="overflow-hidden mb-2 sm:mb-3 md:mb-6">
-              <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-7xl lg:text-8xl xl:text-9xl font-serif font-medium text-white leading-tight md:leading-[0.95] tracking-tight opacity-0 animate-[slideUp_0.8s_ease-out_forwards_0.2s]">
-                {currentSlide.title.split(" ").map((word, i) => (
-                  <span key={i} className={i === 1 ? "italic font-light ml-1 md:ml-2 block md:inline" : "block md:inline"}>{word} </span>
-                ))}
-              </h1>
-            </div>
-
-            {/* Subtitle - Technical Look */}
-            <div className="overflow-hidden mb-4 sm:mb-6 md:mb-12">
-              <p className="text-[11px] xs:text-xs sm:text-sm md:text-lg lg:text-2xl text-slate-300 font-light max-w-xs sm:max-w-xl leading-relaxed md:leading-relaxed opacity-0 animate-[slideUp_0.8s_ease-out_forwards_0.4s] border-l-2 border-white/20 pl-2 sm:pl-3 md:pl-6">
-                {currentSlide.subtitle}
-              </p>
-            </div>
-
-            {/* CTAs - Mobile Optimized */}
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-5 opacity-0 animate-[fadeIn_0.8s_ease-out_forwards_0.6s] w-full max-w-md sm:max-w-none">
-              <Link
-                to={currentSlide.link}
-                className="group relative w-full sm:w-auto px-6 md:px-8 py-4 md:py-4 bg-white text-jdc-blue font-bold tracking-wider uppercase text-xs md:text-xs overflow-hidden flex items-center justify-center gap-3 transition-all hover:bg-jdc-orange hover:text-white hover:scale-105 duration-300 shadow-xl rounded-lg"
-              >
-                <span className="relative z-10">{currentSlide.cta}</span>
-                <ArrowRight size={18} className="relative z-10 group-hover:translate-x-1 transition-transform" />
-              </Link>
-
-              <Link
-                to={PageRoute.CONTACT}
-                className="w-full sm:w-auto px-6 md:px-8 py-4 md:py-4 border-2 border-white/40 text-white font-bold tracking-wider uppercase text-xs md:text-xs hover:bg-white/10 hover:border-white transition-all backdrop-blur-sm flex items-center justify-center rounded-lg"
-              >
-                Start Project
-              </Link>
-            </div>
-          </div>
+          {/* Content hidden for visual focus - Single slide mode */}
         </div>
       </div>
 
-      {/* 4. Professional Navigation Hub (Bottom Right) */}
-      <div className="absolute bottom-0 right-0 w-full md:w-auto p-3 sm:p-4 md:p-12 z-30 flex flex-col md:items-end gap-3 md:gap-6">
-        {/* Slide Counter & Progress */}
-        <div className="flex items-center gap-2 sm:gap-3 md:gap-6">
-          <span className="text-white font-mono text-lg xs:text-xl sm:text-2xl md:text-4xl font-light">
-            0{currentIndex + 1}
-          </span>
-          {/* Dynamic Progress Bar */}
-          <div className="w-12 xs:w-16 sm:w-20 md:w-32 h-[2px] bg-white/20 relative overflow-hidden rounded-full">
-            <div ref={progressRef} className="absolute inset-0 bg-jdc-orange w-0 rounded-full"></div>
+      {/* 4. Professional Navigation Hub - Hidden for single slide */}
+      {SLIDES.length > 1 && (
+        <div className="absolute bottom-0 right-0 w-full md:w-auto p-3 sm:p-4 md:p-12 z-30 flex flex-col md:items-end gap-3 md:gap-6">
+          {/* Slide Counter & Progress */}
+          <div className="flex items-center gap-2 sm:gap-3 md:gap-6">
+            <span className="text-white font-mono text-lg xs:text-xl sm:text-2xl md:text-4xl font-light">
+              0{currentIndex + 1}
+            </span>
+            {/* Dynamic Progress Bar */}
+            <div className="w-12 xs:w-16 sm:w-20 md:w-32 h-[2px] bg-white/20 relative overflow-hidden rounded-full">
+              <div ref={progressRef} className="absolute inset-0 bg-jdc-orange w-0 rounded-full"></div>
+            </div>
+            <span className="text-white/40 font-mono text-xs xs:text-sm sm:text-base md:text-lg">
+              0{SLIDES.length}
+            </span>
           </div>
-          <span className="text-white/40 font-mono text-xs xs:text-sm sm:text-base md:text-lg">
-            0{SLIDES.length}
-          </span>
+          {/* Navigation Buttons - Glassmorphism */}
+          <div className="flex gap-2 mt-1">
+            <button
+              onClick={prevSlide}
+              className="w-11 h-11 xs:w-12 xs:h-12 sm:w-10 sm:h-10 md:w-14 md:h-14 border border-white/10 bg-white/10 backdrop-blur-md text-white flex items-center justify-center hover:bg-jdc-orange hover:border-jdc-orange transition-all duration-300 group rounded-full"
+              aria-label="Previous Slide"
+            >
+              <ChevronLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
+            </button>
+            <button
+              onClick={nextSlide}
+              className="w-11 h-11 xs:w-12 xs:h-12 sm:w-10 sm:h-10 md:w-14 md:h-14 border border-white/10 bg-white/10 backdrop-blur-md text-white flex items-center justify-center hover:bg-jdc-orange hover:border-jdc-orange transition-all duration-300 group rounded-full"
+              aria-label="Next Slide"
+            >
+              <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
         </div>
-        {/* Navigation Buttons - Glassmorphism */}
-        <div className="flex gap-2 mt-1">
-          <button
-            onClick={prevSlide}
-            className="w-11 h-11 xs:w-12 xs:h-12 sm:w-10 sm:h-10 md:w-14 md:h-14 border border-white/10 bg-white/10 backdrop-blur-md text-white flex items-center justify-center hover:bg-jdc-orange hover:border-jdc-orange transition-all duration-300 group rounded-full"
-            aria-label="Previous Slide"
-          >
-            <ChevronLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
-          </button>
-          <button
-            onClick={nextSlide}
-            className="w-11 h-11 xs:w-12 xs:h-12 sm:w-10 sm:h-10 md:w-14 md:h-14 border border-white/10 bg-white/10 backdrop-blur-md text-white flex items-center justify-center hover:bg-jdc-orange hover:border-jdc-orange transition-all duration-300 group rounded-full"
-            aria-label="Next Slide"
-          >
-            <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
-          </button>
-        </div>
-      </div>
+      )}
 
       {/* Scroll Indicator - Subtle functional UI */}
-      <div className="absolute bottom-10 left-6 md:left-12 hidden md:flex items-center gap-4 z-20 animate-bounce">
+      <div className="absolute bottom-10 right-6 md:right-12 hidden md:flex flex-row-reverse items-center gap-4 z-20 animate-bounce">
         <div className="w-[1px] h-12 bg-gradient-to-b from-white to-transparent"></div>
-        <span className="text-[10px] text-white/50 uppercase tracking-widest -rotate-90 origin-left translate-y-8">Scroll</span>
+        <span className="text-[10px] text-white/50 uppercase tracking-widest rotate-90 origin-right translate-y-8">Scroll</span>
       </div>
 
     </div>

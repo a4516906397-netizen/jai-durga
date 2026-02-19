@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Clock, ChevronDown, Send, Sparkles, Building2, ExternalLink } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, ChevronDown, Send, Sparkles, Building2, ExternalLink, CheckCircle, MessageCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { database } from '../firebase';
+import { ref, push, serverTimestamp } from 'firebase/database';
+
 
 const FAQS = [
    { q: "Do you offer custom formulations?", a: "Yes, our R&D team specializes in developing custom formulations based on specific viscosity, drying time, and finish requirements for industrial partners." },
@@ -11,6 +14,42 @@ const FAQS = [
 
 const Contact: React.FC = () => {
    const [activeFAQ, setActiveFAQ] = useState<number | null>(0);
+   const [formData, setFormData] = useState({
+      name: '',
+      email: '',
+      subject: 'General Inquiry',
+      message: ''
+   });
+   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+
+   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+      const { name, value } = e.target;
+      setFormData(prev => ({ ...prev, [name]: value }));
+   };
+
+   const handleSubmit = async (e: React.FormEvent) => {
+      e.preventDefault();
+      if (!formData.name || !formData.email || !formData.message) return;
+
+      setStatus('submitting');
+      try {
+         // 1. Save to Firebase
+         const submissionsRef = ref(database, 'submissions/contacts');
+         const submissionData = {
+            ...formData,
+            timestamp: serverTimestamp(),
+            type: 'Contact Inquiry'
+         };
+         await push(submissionsRef, submissionData);
+
+         setStatus('success');
+         setFormData({ name: '', email: '', subject: 'General Inquiry', message: '' });
+         setTimeout(() => setStatus('idle'), 5000);
+      } catch (error) {
+         console.error("Submission error:", error);
+         setStatus('error');
+      }
+   };
 
    return (
       <div className="bg-slate-50 min-h-screen pt-20">
@@ -25,21 +64,19 @@ const Contact: React.FC = () => {
                   <h1 className="text-4xl md:text-5xl font-serif font-bold text-slate-900 mb-6">
                      Contact <span className="text-jdc-blue">Us</span>
                   </h1>
-                  <p className="text-slate-600 text-lg max-w-2xl mx-auto leading-relaxed">
-                     Get in touch for bulk orders, technical support, or partnership inquiries. <br className="hidden md:block" />
-                     Our team is available 6 days a week to assist you.
-                  </p>
+
                </motion.div>
             </div>
          </div>
 
          {/* Contact Info Cards */}
          <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                {[
                   { icon: Phone, title: "Call Us", desc: "Mon-Sat, 9am - 6pm", action: "+91 99716 61234", link: "tel:+919971661234", color: "text-blue-600", bg: "bg-blue-50" },
-                  { icon: Mail, title: "Email Us", desc: "For quotes & support", action: "info@jaidurgachemical.com", link: "mailto:info@jaidurgachemical.com", color: "text-orange-500", bg: "bg-orange-50" },
-                  { icon: MapPin, title: "Visit Factory", desc: "Greater Noida, UP", action: "Get Directions", link: "https://maps.app.goo.gl/XfQFFabfzoz9Zz7s7", color: "text-green-600", bg: "bg-green-50" },
+                  { icon: Mail, title: "Email Us", desc: "Official Inquiry", action: "info@jaidurgachemicals.com", link: "mailto:info@jaidurgachemicals.com", color: "text-orange-500", bg: "bg-orange-50" },
+                  { icon: MessageCircle, title: "WhatsApp", desc: "Instant Support", action: "Chat Now", link: "https://wa.me/919971661234", color: "text-green-600", bg: "bg-green-50" },
+                  { icon: MapPin, title: "Plant Visit", desc: "Greater Noida, UP", action: "Get Directions", link: "https://maps.app.goo.gl/XfQFFabfzoz9Zz7s7", color: "text-red-600", bg: "bg-red-50" },
                ].map((item, idx) => (
                   <motion.a
                      href={item.link}
@@ -70,57 +107,97 @@ const Contact: React.FC = () => {
 
                {/* Left: Contact Form */}
                <div className="lg:col-span-7 bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-slate-200">
-                  <div className="mb-8">
-                     <h2 className="text-2xl font-serif font-bold text-slate-900 mb-2">Send Message</h2>
-                     <p className="text-slate-500 text-sm">We usually respond within 24 hours.</p>
-                  </div>
-
-                  <form className="space-y-5">
-                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                        <div className="space-y-1.5">
-                           <label className="text-xs font-bold text-slate-700 uppercase">Name</label>
-                           <input
-                              type="text"
-                              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 focus:outline-none focus:border-jdc-orange focus:ring-1 focus:ring-jdc-orange transition-all placeholder:text-slate-400 text-sm"
-                              placeholder="Your Name"
-                           />
+                  {status === 'success' ? (
+                     <div className="h-full flex flex-col items-center justify-center py-20 text-center space-y-4">
+                        <div className="w-20 h-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center mb-4">
+                           <CheckCircle size={40} />
                         </div>
-                        <div className="space-y-1.5">
-                           <label className="text-xs font-bold text-slate-700 uppercase">Email</label>
-                           <input
-                              type="email"
-                              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 focus:outline-none focus:border-jdc-orange focus:ring-1 focus:ring-jdc-orange transition-all placeholder:text-slate-400 text-sm"
-                              placeholder="email@example.com"
-                           />
+                        <h2 className="text-3xl font-serif font-bold text-slate-900">Message Received!</h2>
+                        <p className="text-slate-500 max-w-sm">Thank you for reaching out. Our team will get back to you within 24 hours.</p>
+                        <button
+                           onClick={() => setStatus('idle')}
+                           className="text-jdc-blue font-bold uppercase tracking-widest text-xs hover:underline pt-4"
+                        >
+                           Send another message
+                        </button>
+                     </div>
+                  ) : (
+                     <>
+                        <div className="mb-8">
+                           <h2 className="text-2xl font-serif font-bold text-slate-900 mb-2">Send Message</h2>
+                           <p className="text-slate-500 text-sm">We usually respond within 24 hours.</p>
                         </div>
-                     </div>
 
-                     <div className="space-y-1.5">
-                        <label className="text-xs font-bold text-slate-700 uppercase">Subject</label>
-                        <select className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-700 focus:outline-none focus:border-jdc-orange focus:ring-1 focus:ring-jdc-orange transition-all cursor-pointer text-sm">
-                           <option>General Inquiry</option>
-                           <option>Bulk/Wholesale Order</option>
-                           <option>Job Application</option>
-                           <option>Other</option>
-                        </select>
-                     </div>
+                        <form onSubmit={handleSubmit} className="space-y-5">
+                           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                              <div className="space-y-1.5">
+                                 <label className="text-xs font-bold text-slate-700 uppercase">Name</label>
+                                 <input
+                                    required
+                                    type="text"
+                                    name="name"
+                                    value={formData.name}
+                                    onChange={handleInputChange}
+                                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 focus:outline-none focus:border-jdc-orange focus:ring-1 focus:ring-jdc-orange transition-all placeholder:text-slate-400 text-sm"
+                                    placeholder="Your Name"
+                                 />
+                              </div>
+                              <div className="space-y-1.5">
+                                 <label className="text-xs font-bold text-slate-700 uppercase">Email</label>
+                                 <input
+                                    required
+                                    type="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleInputChange}
+                                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 focus:outline-none focus:border-jdc-orange focus:ring-1 focus:ring-jdc-orange transition-all placeholder:text-slate-400 text-sm"
+                                    placeholder="email@example.com"
+                                 />
+                              </div>
+                           </div>
 
-                     <div className="space-y-1.5">
-                        <label className="text-xs font-bold text-slate-700 uppercase">Message</label>
-                        <textarea
-                           rows={5}
-                           className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 focus:outline-none focus:border-jdc-orange focus:ring-1 focus:ring-jdc-orange transition-all placeholder:text-slate-400 text-sm resize-none"
-                           placeholder="How can we help you?"
-                        ></textarea>
-                     </div>
+                           <div className="space-y-1.5">
+                              <label className="text-xs font-bold text-slate-700 uppercase">Subject</label>
+                              <select
+                                 name="subject"
+                                 value={formData.subject}
+                                 onChange={handleInputChange}
+                                 className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-700 focus:outline-none focus:border-jdc-orange focus:ring-1 focus:ring-jdc-orange transition-all cursor-pointer text-sm"
+                              >
+                                 <option>General Inquiry</option>
+                                 <option>Bulk/Wholesale Order</option>
+                                 <option>Job Application</option>
+                                 <option>Other</option>
+                              </select>
+                           </div>
 
-                     <button
-                        type="button"
-                        className="bg-jdc-blue text-white px-8 py-4 rounded-lg font-bold uppercase tracking-widest text-xs hover:bg-jdc-orange transition-colors duration-300 w-full flex items-center justify-center gap-2 mt-2"
-                     >
-                        Submit Inquiry <Send size={14} />
-                     </button>
-                  </form>
+                           <div className="space-y-1.5">
+                              <label className="text-xs font-bold text-slate-700 uppercase">Message</label>
+                              <textarea
+                                 required
+                                 name="message"
+                                 value={formData.message}
+                                 onChange={handleInputChange}
+                                 rows={5}
+                                 className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-slate-900 focus:outline-none focus:border-jdc-orange focus:ring-1 focus:ring-jdc-orange transition-all placeholder:text-slate-400 text-sm resize-none"
+                                 placeholder="How can we help you?"
+                              ></textarea>
+                           </div>
+
+                           <button
+                              type="submit"
+                              disabled={status === 'submitting'}
+                              className="bg-jdc-blue text-white px-8 py-4 rounded-lg font-bold uppercase tracking-widest text-xs hover:bg-jdc-orange transition-colors duration-300 w-full flex items-center justify-center gap-2 mt-2 disabled:opacity-50 shadow-lg shadow-jdc-blue/10"
+                           >
+                              {status === 'submitting' ? 'Sending...' : 'Submit Inquiry'} <Send size={14} />
+                           </button>
+
+                           {status === 'error' && (
+                              <p className="text-red-500 text-xs text-center mt-2 font-bold animate-pulse">Failed to send. Please try again or call us.</p>
+                           )}
+                        </form>
+                     </>
+                  )}
                </div>
 
                {/* Right: Map & Details */}
@@ -157,9 +234,8 @@ const Contact: React.FC = () => {
                         <p className="leading-relaxed pl-8 relative">
                            <span className="absolute left-0 top-1 w-1.5 h-1.5 rounded-full bg-jdc-orange"></span>
                            <strong className="text-slate-900 block mb-1">Jai Durga Chemical</strong>
-                           Site-5, J-10, Kasna Road, Industrial Area,<br />
-                           Surajpur Site V, Greater Noida,<br />
-                           Uttar Pradesh - 201312
+                           J-10, Site-V, Industrial Area, Greater Noida,<br />
+                           District - Gautam Buddha Nagar, UP - 201310
                         </p>
                         <div className="border-t border-slate-100 my-4"></div>
                         <p className="leading-relaxed pl-8 relative">

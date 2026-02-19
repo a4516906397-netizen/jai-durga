@@ -12,6 +12,7 @@ import ProductDetails from './pages/ProductDetails';
 import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
 import Admin from './pages/Admin';
+import FloatingContact from './components/FloatingContact';
 
 // Scroll to top on route change
 const ScrollToTop = () => {
@@ -27,6 +28,7 @@ const App: React.FC = () => {
     <HashRouter>
       <ScrollToTop />
       <div className="font-sans antialiased text-slate-800 bg-gray-50 flex flex-col min-h-screen">
+        <FloatingContact />
 
         {/* Navigation - Header (Brand Bar) is now visible on mobile via DesktopNav */}
         <DesktopNav />

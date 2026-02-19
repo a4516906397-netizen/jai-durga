@@ -1,0 +1,8 @@
+# Query: We didn't just build a factory. We built a culture where
+# ContextLines: 1
+
+2 results - 1 file
+
+pages\Home.tsx:
+  350:                            "We didn't just build a factory. We built a culture where <span className="italic text-slate-400 border-b border-jdc-orange/30">excellence is the only metric.</span>"
+  423:                         quote: "We didn't just build a factory. We built a culture where excellence is the only metric."

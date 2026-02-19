@@ -1,107 +1,268 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ChevronDown, Sparkles, ArrowRight, HelpCircle, MessageSquare, PhoneCall } from 'lucide-react';
-import { PageRoute } from '../types';
-import { FAQS } from '../constants';
+import { motion } from 'framer-motion';
+import { Sparkles, Send, User, Building2, Phone, MessageSquare, MapPin, CheckCircle } from 'lucide-react';
+import { database } from '../firebase';
+import { ref, push, serverTimestamp } from 'firebase/database';
 
-const FAQ: React.FC = () => {
-    const [activeFAQ, setActiveFAQ] = useState<number | null>(null);
+
+const DealerEnquiry: React.FC = () => {
+    const [formData, setFormData] = useState({
+        dealerName: '',
+        companyName: '',
+        mobileNumber: '',
+        address: '',
+        remark: ''
+    });
+
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [submitError, setSubmitError] = useState(false);
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setSubmitError(false);
+
+        try {
+            // 1. Save to Firebase Realtime Database
+            const submissionsRef = ref(database, 'submissions/dealers');
+            await push(submissionsRef, {
+                ...formData,
+                timestamp: serverTimestamp(),
+                type: 'Dealer Enquiry'
+            });
+
+            // 2. Clear status and set submitted
+            setIsSubmitting(false);
+            setIsSubmitted(true);
+
+            // 3. Construct WhatsApp Message (Optional Redirect)
+            const message = `*DEALER ENQUIRY - JDC*\n\n` +
+                `*Name:* ${formData.dealerName}\n` +
+                `*Firm:* ${formData.companyName}\n` +
+                `*Mobile:* ${formData.mobileNumber}\n` +
+                `*Address:* ${formData.address}\n` +
+                `*Remark:* ${formData.remark || 'N/A'}`;
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/919971661234?text=${encodedMessage}`;
+
+            // Redirect to WhatsApp after success
+            window.open(whatsappUrl, '_blank');
+
+            // 4. Reset form
+            setFormData({
+                dealerName: '',
+                companyName: '',
+                mobileNumber: '',
+                address: '',
+                remark: ''
+            });
+
+        } catch (error) {
+            console.error("Firebase submission error:", error);
+            setIsSubmitting(false);
+            setSubmitError(true);
+        }
+    };
 
     return (
-        <div className="bg-[#FAF9F6] min-h-screen pt-32 pb-24">
-            {/* Editorial Header */}
-            <section className="px-6 mb-16 md:mb-24">
-                <div className="max-w-4xl mx-auto text-center">
-                    <div className="inline-flex items-center gap-2 bg-jdc-orange/10 px-4 py-2 rounded-full mb-6">
-                        <Sparkles size={16} className="text-jdc-orange" />
-                        <span className="text-jdc-orange font-bold uppercase tracking-widest text-xs">Knowledge Base</span>
-                    </div>
-                    <h1 className="text-4xl md:text-7xl font-serif text-jdc-blue mb-8 leading-tight">
-                        Common Inquiries & <span className="italic text-slate-400">Technical Support.</span>
-                    </h1>
-                    <p className="text-lg md:text-xl text-slate-600 font-light leading-relaxed">
-                        Detailed answers to common questions regarding our manufacturing processes,
-                        product specifications, and partnership terms.
-                    </p>
-                </div>
-            </section>
+        <div className="bg-[#FAF9F6] min-h-screen pt-32 pb-24 overflow-hidden relative">
+            {/* Background Accents */}
+            <div className="absolute top-0 right-0 w-1/2 h-full bg-jdc-blue/[0.02] -skew-x-12 translate-x-1/4 pointer-events-none" />
 
-            {/* Accordion Section */}
-            <section className="px-6 max-w-4xl mx-auto">
-                <div className="space-y-4">
-                    {FAQS.map((faq, idx) => (
-                        <div
-                            key={idx}
-                            className="bg-white border border-slate-100 rounded-2xl overflow-hidden hover:border-jdc-orange/20 hover:shadow-xl transition-all duration-500"
-                        >
-                            <button
-                                onClick={() => setActiveFAQ(activeFAQ === idx ? null : idx)}
-                                className="w-full flex justify-between items-center p-6 md:p-8 text-left hover:bg-slate-50/50 transition-colors group"
-                            >
-                                <div className="flex items-start gap-4">
-                                    <div className={`mt-1 shrink-0 w-6 h-6 rounded-full border-2 flex items-center justify-center text-[10px] font-bold transition-colors ${activeFAQ === idx ? 'bg-jdc-orange border-jdc-orange text-white' : 'border-slate-200 text-slate-400'
-                                        }`}>
-                                        {idx + 1}
-                                    </div>
-                                    <span className={`font-bold text-base md:text-lg pr-6 transition-colors leading-relaxed ${activeFAQ === idx ? 'text-jdc-blue' : 'text-slate-700 group-hover:text-jdc-blue'
-                                        }`}>
-                                        {faq.q}
-                                    </span>
-                                </div>
-                                <div className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-500 ${activeFAQ === idx ? 'bg-jdc-blue text-white rotate-180' : 'bg-slate-100 text-slate-400'
-                                    }`}>
-                                    <ChevronDown size={20} />
-                                </div>
-                            </button>
+            <div className="max-w-7xl mx-auto px-6 relative z-10">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24 items-center">
 
-                            <div className={`overflow-hidden transition-all duration-500 ease-in-out ${activeFAQ === idx ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
-                                }`}>
-                                <div className="px-6 md:px-8 pb-8 pt-2">
-                                    <div className="pl-10 border-l border-slate-100">
-                                        <p className="text-base md:text-lg text-slate-500 font-light leading-relaxed">
-                                            {faq.a}
-                                        </p>
-                                    </div>
+                    {/* LEFT CONTENT: Minimal & Professional */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        className="space-y-8"
+                    >
+                        <div className="inline-flex items-center gap-2 bg-jdc-orange/10 px-4 py-2 rounded-full">
+                            <Sparkles size={16} className="text-jdc-orange" />
+                            <span className="text-jdc-orange font-black uppercase tracking-widest text-[10px]">Partnership Portal</span>
+                        </div>
+
+                        <h1 className="text-5xl md:text-7xl font-serif text-jdc-blue leading-tight">
+                            Expand Your <br />
+                            <span className="italic text-slate-400 font-light">Business with Us.</span>
+                        </h1>
+
+                        <p className="text-lg md:text-xl text-slate-600 font-light leading-relaxed max-w-lg">
+                            Join the Jai Durga Chemical network. We provide premium decorative coatings
+                            and comprehensive support to our nationwide dealer partners.
+                        </p>
+
+                        <div className="space-y-6 pt-4">
+                            <div className="flex items-center gap-4 group">
+                                <div className="w-12 h-12 rounded-2xl bg-white shadow-sm border border-slate-100 flex items-center justify-center text-jdc-blue group-hover:bg-jdc-orange group-hover:text-white transition-all duration-300">
+                                    <Building2 size={20} />
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-jdc-blue text-sm uppercase tracking-wider">Premium Quality</h4>
+                                    <p className="text-xs text-slate-400">Consistent formulations for high-stakes projects.</p>
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-4 group">
+                                <div className="w-12 h-12 rounded-2xl bg-white shadow-sm border border-slate-100 flex items-center justify-center text-jdc-blue group-hover:bg-jdc-orange group-hover:text-white transition-all duration-300">
+                                    <MapPin size={20} />
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-jdc-blue text-sm uppercase tracking-wider">Wide Network</h4>
+                                    <p className="text-xs text-slate-400">Serving infrastructure and retail sectors nationwide.</p>
                                 </div>
                             </div>
                         </div>
-                    ))}
+                    </motion.div>
+
+                    {/* RIGHT CONTENT: Next-Level Form UI */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                        className="relative"
+                    >
+                        {/* Glow effect */}
+                        <div className="absolute -inset-4 bg-jdc-orange/10 blur-3xl opacity-50 rounded-[40px] pointer-events-none" />
+
+                        <div className="bg-white p-8 md:p-12 rounded-[40px] shadow-[0_40px_100px_-20px_rgba(11,28,62,0.1)] border border-white relative overflow-hidden">
+
+                            {isSubmitted ? (
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    className="text-center py-12 space-y-6"
+                                >
+                                    <div className="w-20 h-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                                        <CheckCircle size={32} />
+                                    </div>
+                                    <h3 className="text-3xl font-serif font-bold text-jdc-blue">Application Sent.</h3>
+                                    <p className="text-slate-500 max-w-xs mx-auto">Our dealership department will review your profile and contact you within 2-3 business days.</p>
+                                    <button
+                                        onClick={() => setIsSubmitted(false)}
+                                        className="text-jdc-orange font-bold uppercase tracking-widest text-xs hover:underline pt-4"
+                                    >
+                                        Send another enquiry
+                                    </button>
+                                </motion.div>
+                            ) : (
+                                <form onSubmit={handleSubmit} className="space-y-6">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        {/* Dealer Name */}
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">Dealer Name</label>
+                                            <div className="relative group">
+                                                <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-jdc-orange transition-colors" size={18} />
+                                                <input
+                                                    required
+                                                    type="text"
+                                                    name="dealerName"
+                                                    value={formData.dealerName}
+                                                    onChange={handleInputChange}
+                                                    placeholder="Full Name"
+                                                    className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:bg-white focus:border-jdc-orange focus:ring-4 focus:ring-jdc-orange/5 transition-all outline-none placeholder:text-slate-300 text-jdc-blue font-medium"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        {/* Company Name */}
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">Firm Name</label>
+                                            <div className="relative group">
+                                                <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-jdc-orange transition-colors" size={18} />
+                                                <input
+                                                    required
+                                                    type="text"
+                                                    name="companyName"
+                                                    value={formData.companyName}
+                                                    onChange={handleInputChange}
+                                                    placeholder="Firm / Shop Name"
+                                                    className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:bg-white focus:border-jdc-orange focus:ring-4 focus:ring-jdc-orange/5 transition-all outline-none placeholder:text-slate-300 text-jdc-blue font-medium"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Mobile Number */}
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">Mobile Number</label>
+                                        <div className="relative group">
+                                            <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-jdc-orange transition-colors" size={18} />
+                                            <input
+                                                required
+                                                type="tel"
+                                                name="mobileNumber"
+                                                value={formData.mobileNumber}
+                                                onChange={handleInputChange}
+                                                placeholder="+91 XXXXX XXXXX"
+                                                className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:bg-white focus:border-jdc-orange focus:ring-4 focus:ring-jdc-orange/5 transition-all outline-none placeholder:text-slate-300 text-jdc-blue font-medium"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    {/* Address */}
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">Business Address</label>
+                                        <div className="relative group">
+                                            <MapPin className="absolute left-4 top-4 text-slate-300 group-focus-within:text-jdc-orange transition-colors" size={18} />
+                                            <textarea
+                                                required
+                                                name="address"
+                                                value={formData.address}
+                                                onChange={handleInputChange}
+                                                placeholder="Complete Business Address"
+                                                rows={2}
+                                                className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:bg-white focus:border-jdc-orange focus:ring-4 focus:ring-jdc-orange/5 transition-all outline-none placeholder:text-slate-300 text-jdc-blue font-medium resize-none"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    {/* Remark */}
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">Your Requirements (Remark)</label>
+                                        <div className="relative group">
+                                            <MessageSquare className="absolute left-4 top-4 text-slate-300 group-focus-within:text-jdc-orange transition-colors" size={18} />
+                                            <textarea
+                                                name="remark"
+                                                value={formData.remark}
+                                                onChange={handleInputChange}
+                                                placeholder="Experience, Current Brands, Any Message..."
+                                                rows={3}
+                                                className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:bg-white focus:border-jdc-orange focus:ring-4 focus:ring-jdc-orange/5 transition-all outline-none placeholder:text-slate-300 text-jdc-blue font-medium resize-none"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <button
+                                        type="submit"
+                                        disabled={isSubmitting}
+                                        className="w-full py-5 bg-jdc-blue text-white rounded-2xl font-black uppercase tracking-[0.3em] text-xs shadow-xl shadow-jdc-blue/20 hover:bg-jdc-orange hover:shadow-jdc-orange/20 transition-all duration-500 mt-4 flex items-center justify-center gap-3 active:scale-95 disabled:opacity-50"
+                                    >
+                                        {isSubmitting ? 'Processing...' : (
+                                            <>Submit Application <Send size={16} /></>
+                                        )}
+                                    </button>
+
+                                    {submitError && (
+                                        <p className="text-red-500 text-[10px] text-center font-bold mt-2 animate-pulse">
+                                            Submission failed. Please check your connection or try again.
+                                        </p>
+                                    )}
+                                </form>
+                            )}
+                        </div>
+                    </motion.div>
                 </div>
-            </section>
-
-            {/* Support Cards */}
-            <section className="px-6 max-w-7xl mx-auto mt-24 md:mt-32">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div className="bg-white p-10 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300">
-                        <HelpCircle className="text-jdc-orange mb-6" size={32} />
-                        <h3 className="text-2xl font-serif font-bold text-jdc-blue mb-4">Technical Help</h3>
-                        <p className="text-slate-500 mb-8 leading-relaxed">Need specific data sheets or application guidance? Our chemists are ready.</p>
-                        <Link to={PageRoute.CONTACT} className="text-jdc-blue font-bold flex items-center gap-2 hover:gap-4 transition-all uppercase text-xs tracking-widest">
-                            Contact Technical <ArrowRight size={16} />
-                        </Link>
-                    </div>
-
-                    <div className="bg-jdc-blue p-10 rounded-3xl shadow-xl transform md:-translate-y-8">
-                        <MessageSquare className="text-jdc-orange mb-6" size={32} />
-                        <h3 className="text-2xl font-serif font-bold text-white mb-4">Live Inquiry</h3>
-                        <p className="text-slate-300 mb-8 leading-relaxed">Looking for bulk pricing or dealership terms? Start a conversation now.</p>
-                        <Link to={PageRoute.CONTACT} className="inline-flex items-center gap-2 px-6 py-3 bg-jdc-orange text-white font-bold rounded-lg hover:bg-white hover:text-jdc-blue transition-all duration-300 uppercase text-[10px] tracking-widest">
-                            Inquire Now <ArrowRight size={16} />
-                        </Link>
-                    </div>
-
-                    <div className="bg-white p-10 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300">
-                        <PhoneCall className="text-jdc-orange mb-6" size={32} />
-                        <h3 className="text-2xl font-serif font-bold text-jdc-blue mb-4">Direct Support</h3>
-                        <p className="text-slate-500 mb-8 leading-relaxed">Prefer talking to a human? Our support lines are open Monday to Saturday.</p>
-                        <a href="tel:+919971661234" className="text-jdc-blue font-bold flex items-center gap-2 hover:gap-4 transition-all uppercase text-xs tracking-widest">
-                            Call Support <ArrowRight size={16} />
-                        </a>
-                    </div>
-                </div>
-            </section>
+            </div>
         </div>
     );
 };
 
-export default FAQ;
+export default DealerEnquiry;
