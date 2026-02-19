@@ -286,7 +286,7 @@ export const DesktopNav: React.FC = () => {
         ${isScrolled ? 'pt-3 max-w-[95%]' : 'pt-4 md:pt-6 max-w-[95%] md:max-w-7xl'}
       `}>
         <div className={`
-          relative flex items-center justify-between gap-4 px-6 md:px-10 py-3 rounded-[50px] border transition-all duration-700 pointer-events-auto
+          relative flex items-center justify-center lg:justify-between gap-4 px-6 md:px-10 py-3 rounded-[50px] border transition-all duration-700 pointer-events-auto
           bg-[#0B1C3E] border-white/10 shadow-[0_32px_80px_-16px_rgba(0,0,0,0.6)]
           ${isScrolled ? 'scale-[0.98] py-2' : 'scale-100'}
         `}>

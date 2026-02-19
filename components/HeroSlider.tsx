@@ -66,7 +66,7 @@ const HeroSlider: React.FC = () => {
   const currentSlide = SLIDES[currentIndex];
 
   return (
-    <div className="relative w-full h-[70vh] sm:h-[80vh] lg:h-[768px] overflow-hidden bg-jdc-dark group select-none shadow-2xl mt-0">
+    <div className="relative w-full h-[50vh] lg:h-[768px] overflow-hidden bg-jdc-dark group select-none shadow-2xl mt-0">
 
       {/* 1. Background Layers */}
       {SLIDES.map((slide, index) => {
