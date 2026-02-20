@@ -110,7 +110,6 @@ const Footer: React.FC = () => {
             &copy; {new Date().getFullYear()} {COMPANY_NAME}. All Rights Reserved.
           </p>
           <div className="flex gap-8 text-[9px] font-black uppercase tracking-[0.2em] text-slate-500">
-            <Link to="/admin" className="hover:text-jdc-orange transition-colors">Admin Portal</Link>
             <span className="hover:text-jdc-orange cursor-pointer transition-colors">Quality First</span>
             <span className="hover:text-jdc-orange cursor-pointer transition-colors">Legacy Driven</span>
           </div>

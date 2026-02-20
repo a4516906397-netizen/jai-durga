@@ -23,21 +23,20 @@ const Admin: React.FC = () => {
     const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'success' | 'error'>('idle');
     const [searchQuery, setSearchQuery] = useState('');
 
+    // Authentication States
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [password, setPassword] = useState('');
+    const [loginError, setLoginError] = useState(false);
+
     // Submissions State
     const [contacts, setContacts] = useState<any[]>([]);
     const [dealers, setDealers] = useState<any[]>([]);
     const [submissionType, setSubmissionType] = useState<'all' | 'contact' | 'dealer'>('all');
     const [selectedSubmission, setSelectedSubmission] = useState<any | null>(null);
 
-    // Filter products for sidebar
-    const filteredProducts = PRODUCT_LIST.filter(p =>
-        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.slug.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-
     // Fetch Submissions
     useEffect(() => {
-        if (view === 'submissions') {
+        if (isAuthenticated && view === 'submissions') {
             setIsLoading(true);
             const contactsRef = ref(database, 'submissions/contacts');
             const dealersRef = ref(database, 'submissions/dealers');
@@ -68,11 +67,11 @@ const Admin: React.FC = () => {
                 unsubDealers();
             };
         }
-    }, [view]);
+    }, [view, isAuthenticated]);
 
-    // When a product is selected, fetch its description from Firebase
+    // When a product is selected
     useEffect(() => {
-        if (selectedProduct && view === 'products') {
+        if (isAuthenticated && selectedProduct && view === 'products') {
             setIsLoading(true);
             setSaveStatus('idle');
             const productRef = ref(database, `products/${selectedProduct.slug}`);
@@ -81,12 +80,9 @@ const Admin: React.FC = () => {
                 const data = snapshot.val();
                 setDescription(data?.description || '');
                 setExtraDetails(data?.extraDetails || '');
-
-                // Load SEO data
                 setSeoTitle(data?.seo?.title || '');
                 setSeoDescription(data?.seo?.description || '');
                 setSeoKeywords(data?.seo?.keywords || '');
-
                 setIsLoading(false);
             }, (error) => {
                 console.error("Firebase read error:", error);
@@ -95,7 +91,76 @@ const Admin: React.FC = () => {
 
             return () => unsubscribe();
         }
-    }, [selectedProduct, view]);
+    }, [selectedProduct, view, isAuthenticated]);
+
+    // Filter products for sidebar
+    const filteredProducts = PRODUCT_LIST.filter(p =>
+        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.slug.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    const handleLogin = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (password === 'P@ssw0rd3146') {
+            setIsAuthenticated(true);
+            setLoginError(false);
+        } else {
+            setLoginError(true);
+        }
+    };
+
+    if (!isAuthenticated) {
+        return (
+            <div className="min-h-screen bg-slate-900 flex items-center justify-center p-6 bg-[radial-gradient(circle_at_top_right,rgba(249,115,22,0.1),transparent_50%)]">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="w-full max-w-md bg-white rounded-[2rem] p-10 shadow-2xl border border-white/10"
+                >
+                    <div className="flex flex-col items-center gap-6 mb-10">
+                        <div className="w-20 h-20 bg-jdc-orange/10 rounded-3xl flex items-center justify-center">
+                            <User size={40} className="text-jdc-orange" />
+                        </div>
+                        <div className="text-center">
+                            <h1 className="text-3xl font-serif font-black text-slate-900 mb-2">Secure Access</h1>
+                            <p className="text-slate-500 font-medium text-sm uppercase tracking-widest">Admin Authentication Required</p>
+                        </div>
+                    </div>
+
+                    <form onSubmit={handleLogin} className="space-y-6">
+                        <div className="space-y-2">
+                            <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-2">Director Password</label>
+                            <input
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className={`w-full px-6 py-4 bg-slate-50 border ${loginError ? 'border-red-500 bg-red-50' : 'border-slate-100'} rounded-2xl focus:outline-none focus:ring-2 focus:ring-jdc-orange/20 transition-all font-bold text-slate-900`}
+                                placeholder="Enter Security Key"
+                                autoFocus
+                            />
+                            {loginError && (
+                                <p className="text-red-500 text-[10px] font-black uppercase tracking-wider mt-2 ml-2 flex items-center gap-2">
+                                    <AlertCircle size={14} /> Incorrect Authorization
+                                </p>
+                            )}
+                        </div>
+
+                        <button
+                            type="submit"
+                            className="w-full py-5 bg-slate-900 text-white rounded-2xl font-black uppercase tracking-[0.3em] hover:bg-jdc-orange transition-all shadow-xl shadow-slate-900/10 active:scale-95"
+                        >
+                            Authorize Entry
+                        </button>
+                    </form>
+
+                    <p className="mt-8 text-center text-[10px] text-slate-300 font-medium uppercase tracking-[0.2em]">
+                        Jai Durga Chemical Pvt Ltd • Confidential System
+                    </p>
+                </motion.div>
+            </div>
+        );
+    }
+
 
     const handleSave = async () => {
         if (!selectedProduct) return;

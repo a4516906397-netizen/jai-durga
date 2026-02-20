@@ -76,7 +76,7 @@ const Contact: React.FC = () => {
                   { icon: Phone, title: "Call Us", desc: "Mon-Sat, 9am - 6pm", action: "+91 99716 61234", link: "tel:+919971661234", color: "text-blue-600", bg: "bg-blue-50" },
                   { icon: Mail, title: "Email Us", desc: "Official Inquiry", action: "info@jaidurgachemicals.com", link: "mailto:info@jaidurgachemicals.com", color: "text-orange-500", bg: "bg-orange-50" },
                   { icon: MessageCircle, title: "WhatsApp", desc: "Instant Support", action: "Chat Now", link: "https://wa.me/919971661234", color: "text-green-600", bg: "bg-green-50" },
-                  { icon: MapPin, title: "Plant Visit", desc: "Greater Noida, UP", action: "Get Directions", link: "https://maps.app.goo.gl/XfQFFabfzoz9Zz7s7", color: "text-red-600", bg: "bg-red-50" },
+                  { icon: MapPin, title: "Plant", desc: "Greater Noida, UP", action: "Get Directions", link: "https://maps.app.goo.gl/XfQFFabfzoz9Zz7s7", color: "text-red-600", bg: "bg-red-50" },
                ].map((item, idx) => (
                   <motion.a
                      href={item.link}
