@@ -7,7 +7,7 @@ const FloatingContact: React.FC = () => {
     const emailAddress = "info@jaidurgachemicals.com";
 
     const handleWhatsAppClick = () => {
-        const message = encodeURIComponent("Hi Jai Durga Chemical Team, I have an inquiry.");
+        const message = encodeURIComponent("Hi Jai Durga Chemical Team, I have an enquiry.");
         window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
     };
 
