@@ -33,7 +33,7 @@ const MegaMenuContent: React.FC<{ onItemClick?: () => void }> = ({ onItemClick }
 
   return (
     <div
-      className="max-w-7xl mx-auto px-10 py-8 flex gap-10 items-start h-[480px] relative overflow-hidden"
+      className="max-w-7xl mx-auto px-10 py-8 flex gap-10 items-start h-[560px] relative overflow-hidden"
       onMouseMove={handleMouseMove}
     >
       {/* ── Background Enhancements ── */}
@@ -77,17 +77,17 @@ const MegaMenuContent: React.FC<{ onItemClick?: () => void }> = ({ onItemClick }
       </div>
 
       {/* ── Products List (Left) ── */}
-      <div className="flex-1 overflow-y-auto pr-6 custom-scrollbar h-full z-10">
-        <div className="grid grid-cols-4 gap-x-8 gap-y-10">
+      <div className="flex-1 pr-4 z-10">
+        <div className="grid grid-cols-5 gap-x-6 gap-y-4">
           {MEGA_MENU_DATA.map((category, idx) => (
             <motion.div
               key={idx}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.05 }}
-              className="space-y-4"
+              className="space-y-3"
             >
-              <div className="flex items-baseline gap-3">
+              <div className="flex items-baseline gap-2">
                 <span className="text-[10px] font-mono text-jdc-orange/40 font-bold">0{idx + 1}</span>
                 <h3 className="text-[11px] font-black uppercase tracking-[0.4em] text-white/50 border-b border-white/5 pb-2 w-full">
                   {category.title}
@@ -100,9 +100,9 @@ const MegaMenuContent: React.FC<{ onItemClick?: () => void }> = ({ onItemClick }
                       to={`/product/${product.slug}`}
                       onMouseEnter={() => setActiveProduct(product)}
                       onClick={onItemClick}
-                      className="group/link flex items-center justify-between text-[12px] font-semibold text-white/70 hover:text-white transition-all duration-300"
+                      className="group/link flex items-center gap-3 text-[12px] font-semibold text-white/70 hover:text-white transition-all duration-300"
                     >
-                      <span className="relative line-clamp-1">
+                      <span className="relative">
                         {product.name}
                         <span className="absolute bottom-0 left-0 w-0 h-px bg-jdc-orange transition-all duration-500 group-hover/link:w-full" />
                       </span>
@@ -132,7 +132,7 @@ const MegaMenuContent: React.FC<{ onItemClick?: () => void }> = ({ onItemClick }
               transition={{ duration: 0.4, ease: "circOut" }}
               className="h-full flex flex-col"
             >
-              <div className="relative group/preview aspect-square rounded-[32px] overflow-hidden bg-gradient-to-br from-[#12254e]/50 to-[#0B1C3E]/50 backdrop-blur-xl border border-white/10 p-12 flex items-center justify-center shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)] group-hover/preview:border-jdc-orange/40 group-hover/preview:bg-[#12254e]/80 transition-all duration-700">
+              <div className="relative group/preview aspect-square rounded-[32px] overflow-hidden bg-gradient-to-br from-[#12254e]/50 to-[#0B1C3E]/50 backdrop-blur-xl border border-white/10 p-4 flex items-center justify-center shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)] group-hover/preview:border-jdc-orange/40 group-hover/preview:bg-[#12254e]/80 transition-all duration-700">
                 {/* Subtle Inner Glow */}
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(249,115,22,0.1),transparent_70%)] opacity-0 group-hover/preview:opacity-100 transition-opacity duration-700" />
                 {/* Parallax Image Effect — Hooks moved to top level */}

@@ -10,19 +10,11 @@ const ImageSlider3D: React.FC = () => {
     const [images, setImages] = useState([
         "/event/1.jpeg",
         "/event/2.jpeg",
-        "/event/3.jpeg",
+        "/event/3.png",
         "/event/4.png",
-        "/event/5.jpeg",
-        "/event/6.jpeg",
-        "/event/7.jpeg",
-        "/event/8.jpeg",
-        "/event/9.jpeg",
-        "/event/10.jpeg",
-        "/event/11.jpeg",
-        "/event/12.jpeg",
-        "/event/13.jpeg",
         "/event/14.jpeg",
-        "/event/15.jpeg"
+        "/event/Tileadhesivebag131.png",
+        "/event/Tileadhesivebag231.png"
     ]);
 
     useEffect(() => {

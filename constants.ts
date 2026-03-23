@@ -639,6 +639,13 @@ export const MEGA_MENU_DATA: MegaMenuCategory[] = [
     ]
   },
   {
+    title: "ADHESIVE",
+    items: [
+      { name: "TYLin Tile Adhesive 131", slug: "tile-adhesive-silver", image: "/product/Tileadhesivebag131.png" },
+      { name: "TYLin Tile Adhesive 231", slug: "tile-adhesive-gold", image: "/product/Tileadhesivebag231.png" }
+    ]
+  },
+  {
     title: "STAINER",
     items: [
       { name: "Universal Stainer", slug: "sakarni-universal-stainer", image: "/product/sakarni_universal_stainer.png" },
@@ -663,13 +670,6 @@ export const MEGA_MENU_DATA: MegaMenuCategory[] = [
     items: [
       { name: "PYD Super Booster", slug: "pyd-super-booster", image: "/product/pyd_super_booster.png" },
       { name: "PYD Roof Cover (Coming Soon)", slug: "pyd-roof-cover" }
-    ]
-  },
-  {
-    title: "ADHESIVE",
-    items: [
-      { name: "PYD Tile Adhesive 131", slug: "tile-adhesive-silver", image: "/product/Tileadhesivebag131.png" },
-      { name: "PYD Tile Adhesive 231", slug: "tile-adhesive-gold", image: "/product/Tileadhesivebag231.png" }
     ]
   }
 ];
