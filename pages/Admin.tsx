@@ -298,7 +298,7 @@ const Admin: React.FC = () => {
                 {view === 'google-ads' && (
                     <div className="flex-1 p-8 md:p-12 bg-slate-900 border-l border-white/5 overflow-y-auto custom-scrollbar">
                         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="max-w-6xl mx-auto pb-20">
-                            
+
                             {/* Header Section */}
                             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
                                 <div>
@@ -321,7 +321,7 @@ const Admin: React.FC = () => {
                             {/* Metrics Grid */}
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
                                 <div className="bg-white/5 border border-white/10 p-8 rounded-[2.5rem] backdrop-blur-sm group hover:border-jdc-orange/30 transition-all relative overflow-hidden">
-                                     <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 rounded-full -mr-10 -mt-10 blur-2xl"></div>
+                                    <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 rounded-full -mr-10 -mt-10 blur-2xl"></div>
                                     <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-4">Total Impressions</p>
                                     <div className="flex items-baseline gap-2">
                                         <h3 className="text-5xl font-serif font-black text-white">{stats.totalImpressions || 0}</h3>
@@ -369,17 +369,17 @@ const Admin: React.FC = () => {
 
                             {/* Main Detail Section */}
                             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-                                
+
                                 {/* Technical Summary */}
                                 <div className="lg:col-span-12">
                                     <div className="bg-gradient-to-br from-jdc-blue to-slate-900 rounded-[3rem] p-10 md:p-14 border border-white/5 shadow-2xl relative overflow-hidden">
                                         <div className="absolute top-0 right-0 w-1/2 h-full bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.1),transparent_70%)]"></div>
-                                        
+
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
                                             <div>
                                                 <h3 className="text-3xl font-serif font-black text-white mb-6">Advanced Conversion Architecture</h3>
                                                 <p className="text-slate-400 leading-relaxed mb-8 font-medium">
-                                                    Our tracking engine is integrated directly into the core React architecture. 
+                                                    Our tracking engine is integrated directly into the core React architecture.
                                                     Unlike traditional implementations, our tags load asynchronously to maintain peak performance scores while ensuring 100% conversion delivery.
                                                 </p>
                                                 <div className="space-y-4 mb-2">
@@ -413,7 +413,7 @@ const Admin: React.FC = () => {
                                                     <div>
                                                         <p className="text-[10px] text-slate-400 mb-2 uppercase tracking-widest">Event Trigger Point</p>
                                                         <div className="p-4 bg-black/40 rounded-xl font-mono text-xs text-orange-300 border border-white/5">
-                                                            ContactForm.tsx → onSubmissionSuccess()
+                                                            Contact.tsx & FAQ.tsx (SPA Success Trigger)
                                                         </div>
                                                     </div>
                                                 </div>

@@ -41,6 +41,15 @@ const DealerEnquiry: React.FC = () => {
             setIsSubmitting(false);
             setIsSubmitted(true);
 
+            // Google Ads Conversion tracking for SPA (as per guide)
+            if (window.gtag) {
+                window.gtag('event', 'conversion', {
+                    'send_to': 'AW-18045154149/Flj9CLvkwJAcEOXmzJxD',
+                    'value': 1.0,
+                    'currency': 'INR'
+                });
+            }
+
             // 3. Construct WhatsApp Message (Optional Redirect)
             const message = `*DEALER ENQUIRY - JDC*\n\n` +
                 `*Name:* ${formData.dealerName}\n` +
