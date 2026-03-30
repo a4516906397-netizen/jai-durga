@@ -41,8 +41,8 @@ const DealerEnquiry: React.FC = () => {
             setIsSubmitting(false);
             setIsSubmitted(true);
 
-            // Google Ads Conversion tracking for SPA (as per guide)
-            if (window.gtag) {
+            // Google Ads Conversion tracking - Safely trigger event after successful submission
+            if (typeof window.gtag === 'function') {
                 window.gtag('event', 'conversion', {
                     'send_to': 'AW-18045154149/Flj9CLvkwJAcEOXmzJxD',
                     'value': 1.0,

@@ -44,8 +44,8 @@ const Contact: React.FC = () => {
 
          setStatus('success');
 
-         // Google Ads Conversion tracking
-         if (window.gtag) {
+         // Google Ads Conversion tracking - Safely trigger event after successful submission
+         if (typeof window.gtag === 'function') {
             window.gtag('event', 'conversion', {
                'send_to': 'AW-18045154149/Flj9CLvkwJAcEOXmzJxD',
                'value': 1.0,

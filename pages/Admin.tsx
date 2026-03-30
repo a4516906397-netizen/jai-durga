@@ -380,13 +380,13 @@ const Admin: React.FC = () => {
                                                 <h3 className="text-3xl font-serif font-black text-white mb-6">Advanced Conversion Architecture</h3>
                                                 <p className="text-slate-400 leading-relaxed mb-8 font-medium">
                                                     Our tracking engine is integrated directly into the core React architecture.
-                                                    Unlike traditional implementations, our tags load asynchronously to maintain peak performance scores while ensuring 100% conversion delivery.
+                                                    We use asynchronous, type-safe triggers (`typeof gtag === 'function'`) to ensure 100% conversion delivery without affecting site performance or causing console errors.
                                                 </p>
                                                 <div className="space-y-4 mb-2">
                                                     {[
-                                                        { label: "Real-time Event Disruption Prevention", status: "Enabled" },
-                                                        { label: "Cross-Device Conversion Pathing", status: "Active" },
-                                                        { label: "Tag Manager Synchronization", status: "Verified" }
+                                                        { label: "Type-Safe gtag Verification", status: "Enabled" },
+                                                        { label: "Asynchronous Success Callbacks", status: "Active" },
+                                                        { label: "SPA Conversion Synchronization", status: "Verified" }
                                                     ].map((item, i) => (
                                                         <div key={i} className="flex items-center gap-4 text-xs font-bold uppercase tracking-widest">
                                                             <div className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center text-green-500">
@@ -413,7 +413,7 @@ const Admin: React.FC = () => {
                                                     <div>
                                                         <p className="text-[10px] text-slate-400 mb-2 uppercase tracking-widest">Event Trigger Point</p>
                                                         <div className="p-4 bg-black/40 rounded-xl font-mono text-xs text-orange-300 border border-white/5">
-                                                            Contact.tsx & FAQ.tsx (SPA Success Trigger)
+                                                            Contact.tsx & FAQ.tsx (Safe gtag Trigger)
                                                         </div>
                                                     </div>
                                                 </div>
