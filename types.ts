@@ -50,3 +50,9 @@ export interface MegaMenuCategory {
   title: string;
   items: MegaMenuItem[];
 }
+
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}

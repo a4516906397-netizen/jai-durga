@@ -43,6 +43,16 @@ const Contact: React.FC = () => {
          await push(submissionsRef, submissionData);
 
          setStatus('success');
+
+         // Google Ads Conversion tracking
+         if (window.gtag) {
+            window.gtag('event', 'conversion', {
+               'send_to': 'AW-18045154149/Flj9CLvkwJAcEOXmzJxD',
+               'value': 1.0,
+               'currency': 'INR'
+            });
+         }
+
          setFormData({ name: '', email: '', subject: 'General Inquiry', message: '' });
          setTimeout(() => setStatus('idle'), 5000);
       } catch (error) {

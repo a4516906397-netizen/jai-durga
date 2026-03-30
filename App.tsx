@@ -14,19 +14,31 @@ import FAQ from './pages/FAQ';
 import Admin from './pages/Admin';
 import FloatingContact from './components/FloatingContact';
 
-// Scroll to top on route change
-const ScrollToTop = () => {
+import { database } from './firebase';
+import { ref, update, increment } from 'firebase/database';
+
+// Scroll to top and track impression
+const ScrollToTopAndTrack = () => {
   const { pathname } = useLocation();
+  
   useEffect(() => {
     window.scrollTo(0, 0);
+    
+    // Increment total site impressions (Page Views) in Firebase
+    const viewsRef = ref(database, 'stats');
+    update(viewsRef, {
+      totalImpressions: increment(1)
+    }).catch(err => console.error("Impression track error:", err));
+    
   }, [pathname]);
+
   return null;
 };
 
 const App: React.FC = () => {
   return (
     <HashRouter>
-      <ScrollToTop />
+      <ScrollToTopAndTrack />
       <div className="font-sans antialiased text-slate-800 bg-gray-50 flex flex-col min-h-screen">
         <FloatingContact />
 
