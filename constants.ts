@@ -538,7 +538,7 @@ This premium semi gloss enamel is perfect for a variety of surfaces:
       'Cost-effective interior painting solution'
     ],
     packing: '2 KG, 5 KG, 10 KG, 20 KG',
-    image: '/product/gen_g_distemper.jpg'
+    image: '/product/gen_g_distemper.png'
   },
   {
     id: 'pyd-super-booster',
@@ -723,7 +723,7 @@ export const MEGA_MENU_DATA: MegaMenuCategory[] = [
     items: [
       { name: "Maha Glow", slug: "maha-glow", image: "/product/sakarni_mahaglow_distemper_bucket.png" },
       { name: "Maha Glow Colour Shades", slug: "sakarni-maha-glow-colour-distemper", image: "/product/sakarni_mahaglow_distemper_bucket.png" },
-      { name: "GEN G DISTEMPER", slug: "gen-g-distemper", image: "/product/gen_g_distemper.jpg" }
+      { name: "GEN G DISTEMPER", slug: "gen-g-distemper", image: "/product/gen_g_distemper.png" }
     ]
   },
   {
