@@ -475,12 +475,21 @@ This premium semi gloss enamel is perfect for a variety of surfaces:
   },
   {
     id: 'pyd-meta-ruby',
-    name: 'Pyd Meta Ruby (Coming Soon)',
+    name: 'PYD Meta Ruby',
     slug: 'pyd-meta-ruby',
-    category: 'Metallic Paint',
-    subTitle: 'Upcoming Product',
-    description: 'COMING SOON - Our luxury metallic emulsion paint with a ruby finish is currently in development.',
-    packing: '1 LTR, 4 LTR, 10 LTR, 20 LTR'
+    category: 'Interior and Exterior',
+    subTitle: 'Luxury Metallic Emulsion Paint',
+    description: 'PYD Meta Ruby is a premium luxury metallic emulsion paint formulated to deliver an exquisite, shimmering ruby finish for both interior and exterior decorative surfaces. Engineered with superior metallic pigments and binders for exceptional durability and brilliance.',
+    features: [
+      'Dual application: suitable for both interior & exterior surfaces',
+      'Exquisite metallic luster and ruby sheen',
+      'High washability and stain resistance',
+      'Excellent opacity and rich aesthetic appeal',
+      'Low VOC and eco-friendly formulation',
+      'Smooth application with brush or roller'
+    ],
+    packing: '1 LTR, 4 LTR, 10 LTR, 20 LTR',
+    image: '/product/pyd_metaruby.png'
   },
   {
     id: 'maha-glow',
@@ -515,6 +524,23 @@ This premium semi gloss enamel is perfect for a variety of surfaces:
     ]
   },
   {
+    id: 'gen-g-distemper',
+    name: 'GEN G DISTEMPER',
+    slug: 'gen-g-distemper',
+    category: 'Distemper',
+    subTitle: 'Next-Generation Acrylic Distemper Paint',
+    description: 'GEN G DISTEMPER is an advanced, high-performance acrylic distemper engineered to provide rich color payoff, smooth matte surface texture, and excellent wall coverage for interior surfaces.',
+    features: [
+      'Smooth velvet matte finish',
+      'High opacity and coverage',
+      'Washable and durable',
+      'Low VOC and odor-free',
+      'Cost-effective interior painting solution'
+    ],
+    packing: '2 KG, 5 KG, 10 KG, 20 KG',
+    image: '/product/gen_g_distemper.png'
+  },
+  {
     id: 'pyd-super-booster',
     name: 'Pyd Super Booster',
     slug: 'pyd-super-booster',
@@ -547,22 +573,38 @@ This premium semi gloss enamel is perfect for a variety of surfaces:
     image: '/product/pyd_super_booster.png'
   },
   {
-    id: 'pyd-roof-cover',
-    name: 'Pyd Roof Cover (Coming Soon)',
-    slug: 'pyd-roof-cover',
+    id: 'pyd-neo-booster',
+    name: 'PYD NEO BOOSTER',
+    slug: 'pyd-neo-booster',
     category: 'Waterproofing',
-    subTitle: 'Upcoming Product',
-    description: 'COMING SOON - Our advanced roof waterproofing coating designed for ultimate durability and weatherproofing is currently in development.',
-    image: 'missing'
+    subTitle: 'Next-Gen Liquid Polymer Bonding & Waterproofing Agent',
+    description: 'PYD NEO BOOSTER is a cutting-edge synthetic polymer liquid additive formulated for superior bonding strength, water resistance, and crack prevention in cementitious mortars, plaster, concrete, and wall putty.',
+    features: [
+      'Exceptional bonding strength for cement mortars',
+      'Improves tensile & flexural strength',
+      'Reduces water permeability and cracking',
+      'High resistance to salt and chemical attacks',
+      'Easy to mix and apply'
+    ],
+    packing: '1 LTR, 5 LTR, 10 LTR, 20 LTR',
+    image: '/product/pyd_neo_booster.png'
   },
   {
-    id: 'adhesive',
-    name: 'Adhesive (Coming Soon)',
-    slug: 'adhesive',
-    category: 'Adhesive',
-    subTitle: 'Upcoming Product',
-    description: 'COMING SOON - High-performance bonding adhesive designed for a wide range of industrial and building applications is currently in development.',
-    packing: '1 LTR, 4 LTR, 10 LTR, 20 LTR'
+    id: 'pyd-roof-cover',
+    name: 'PYD Roof Cover',
+    slug: 'pyd-roof-cover',
+    category: 'Waterproofing',
+    subTitle: 'Advanced Elastomeric Roof Waterproofing Membrane',
+    description: 'PYD Roof Cover is an advanced heavy-duty elastomeric waterproofing coating designed for terrace and roof protection. Formulated with high-grade synthetic polymers, it creates a seamless, durable, UV-resistant and flexible waterproof barrier against water ponding and harsh weather.',
+    features: [
+      'High elastomeric flexibility to bridge hairline cracks',
+      'Outstanding resistance to water ponding and UV radiation',
+      'Reduces surface heat absorption (solar reflective finish)',
+      'Excellent adhesion to concrete, cement plaster, and brick substrates',
+      'Durable, seamless and easy to apply'
+    ],
+    packing: '1 LTR, 4 LTR, 10 LTR, 20 LTR',
+    image: '/product/pyd_roof_cover.png'
   },
   {
     id: 'tile-adhesive-silver',
@@ -597,6 +639,23 @@ This premium semi gloss enamel is perfect for a variety of surfaces:
     ],
     packing: '20 KG',
     image: '/product/Tileadhesivebag231.png'
+  },
+  {
+    id: 'pyd-tile-adhesive-331',
+    name: 'PYD Tile Adhesive 331',
+    slug: 'pyd-tile-adhesive-331',
+    category: 'Adhesive',
+    subTitle: 'Heavy-Duty Polymer Modified Tile & Stone Adhesive',
+    description: 'PYD Tile Adhesive 331 is an ultra-premium, high-strength polymer modified cement-based adhesive formulated for heavy vitrified tiles, granite, natural stone, and marble on floor and wall installations.',
+    features: [
+      'Extraordinary bonding strength for heavy tiles & stone',
+      'Thermal shock & vibration resistance',
+      'Zero vertical slip with long open time',
+      'Suitable for internal and external wall/floor cladding',
+      'Waterproof and weather-resistant bond'
+    ],
+    packing: '20 KG',
+    image: '/product/pyd_tile_adhesive_331.png'
   }
 ];
 
@@ -642,7 +701,8 @@ export const MEGA_MENU_DATA: MegaMenuCategory[] = [
     title: "ADHESIVE",
     items: [
       { name: "TYLin Tile Adhesive 131", slug: "tile-adhesive-silver", image: "/product/Tileadhesivebag131.png" },
-      { name: "TYLin Tile Adhesive 231", slug: "tile-adhesive-gold", image: "/product/Tileadhesivebag231.png" }
+      { name: "TYLin Tile Adhesive 231", slug: "tile-adhesive-gold", image: "/product/Tileadhesivebag231.png" },
+      { name: "PYD Tile Adhesive 331", slug: "pyd-tile-adhesive-331", image: "/product/pyd_tile_adhesive_331.png" }
     ]
   },
   {
@@ -653,23 +713,25 @@ export const MEGA_MENU_DATA: MegaMenuCategory[] = [
     ]
   },
   {
-    title: "METALLIC PAINT",
+    title: "INTERIOR AND EXTERIOR",
     items: [
-      { name: "PYD Meta Ruby (Coming Soon)", slug: "pyd-meta-ruby" }
+      { name: "PYD Meta Ruby", slug: "pyd-meta-ruby", image: "/product/pyd_metaruby.png" }
     ]
   },
   {
     title: "DISTEMPER",
     items: [
       { name: "Maha Glow", slug: "maha-glow", image: "/product/sakarni_mahaglow_distemper_bucket.png" },
-      { name: "Maha Glow Colour Shades", slug: "sakarni-maha-glow-colour-distemper", image: "/product/sakarni_mahaglow_distemper_bucket.png" }
+      { name: "Maha Glow Colour Shades", slug: "sakarni-maha-glow-colour-distemper", image: "/product/sakarni_mahaglow_distemper_bucket.png" },
+      { name: "GEN G DISTEMPER", slug: "gen-g-distemper", image: "/product/gen_g_distemper.png" }
     ]
   },
   {
     title: "WATER PROOFING",
     items: [
       { name: "PYD Super Booster", slug: "pyd-super-booster", image: "/product/pyd_super_booster.png" },
-      { name: "PYD Roof Cover (Coming Soon)", slug: "pyd-roof-cover" }
+      { name: "PYD NEO BOOSTER", slug: "pyd-neo-booster", image: "/product/pyd_neo_booster.png" },
+      { name: "PYD Roof Cover", slug: "pyd-roof-cover", image: "/product/pyd_roof_cover.png" }
     ]
   }
 ];
@@ -680,8 +742,8 @@ export const LEADERSHIP = {
 };
 
 export const LEADERSHIP_IMAGES = {
-  chairman: "https://sakarni.com/public/img/uploads/team/1740121605.png",
-  director_mohit: "https://sakarni.com/public/img/uploads/team/1740121691123.png",
+  chairman: "https://framerusercontent.com/images/dE9cEAnyvoJm2YchWjMEiXgTKt0.jpeg?scale-down-to=1024&width=1439&height=2560",
+  director_mohit: "https://framerusercontent.com/images/tWQky9tLsykASguCKlJbq77sJ2c.png?scale-down-to=1024&width=2560&height=1442",
   director_vikas: "/images/vikas.png",
 };
 

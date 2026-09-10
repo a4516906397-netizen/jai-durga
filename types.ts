@@ -17,6 +17,8 @@ export interface Product {
   subTitle?: string;
   packing?: string;
   extraDetails?: string;
+  isCustom?: boolean;
+  createdAt?: string;
   seo?: {
     title?: string;
     description?: string;

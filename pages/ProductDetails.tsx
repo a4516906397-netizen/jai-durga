@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { PRODUCT_LIST, COMPANY_NAME } from '../constants';
 import { motion } from 'framer-motion';
-import { ArrowLeft, ShoppingBag, Phone, ChevronRight, ImageIcon, Box, Zap } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, Phone, ChevronRight, ImageIcon, ImageOff, Box, Zap, Layers } from 'lucide-react';
 import { PageRoute, Product } from '../types';
 import { database } from '../firebase';
 import { ref, onValue } from 'firebase/database';
@@ -12,13 +12,17 @@ const ProductDetails: React.FC = () => {
     const [product, setProduct] = useState<Product | undefined>(undefined);
     const [dataSource, setDataSource] = useState<'Code' | 'Cloud'>('Code');
     const [showFullDetails, setShowFullDetails] = useState(false);
+    const [imageError, setImageError] = useState(false);
+
+    useEffect(() => {
+        setImageError(false);
+    }, [slug]);
 
     useEffect(() => {
         // 1. Initial load from local code for Name, Image, etc.
         const localProduct = PRODUCT_LIST.find((p) => p.slug === slug);
         if (localProduct) {
             setProduct(localProduct);
-            // Default to 'Code' source until we confirm Cloud has data or we override it
             setDataSource('Code');
         } else {
             setProduct(undefined);
@@ -26,28 +30,59 @@ const ProductDetails: React.FC = () => {
 
         if (!slug) return;
 
-        // 2. Fetch Description and Extra Details from Cloud
+        // 2. Fetch Description and Details from Cloud
         const productRef = ref(database, `products/${slug}`);
-        console.log(`[ProductDetails] Subscribing to Cloud Product: products/${slug}`);
-
         const unsubscribe = onValue(productRef, (snapshot) => {
             const data = snapshot.val();
 
-            if (localProduct) {
-                // Merge cloud data into local product
-                // Note: Admin panel only saves description, extraDetails and seo.
-                // It does NOT save name, image, etc. So we must merge.
-                setProduct(prev => prev ? ({
-                    ...prev,
-                    description: data?.description || prev.description,
-                    extraDetails: data?.extraDetails || prev.extraDetails,
-                    packing: data?.packing || prev.packing,
-                    seo: data?.seo
-                }) : undefined);
+            if (data?.isDeleted) {
+                setProduct(undefined);
+                return;
+            }
 
-                if (data?.description || data?.extraDetails || data?.packing || data?.seo) {
+            if (data) {
+                if (localProduct) {
+                    const cleanName = (data.name || localProduct.name).replace(/\s*\(Coming Soon\)\s*/gi, '').trim();
+                    const cleanSubTitle = data.subTitle !== undefined ? data.subTitle : localProduct.subTitle;
+                    const finalSubTitle = (cleanSubTitle === 'Upcoming Product' && localProduct.subTitle !== 'Upcoming Product') ? localProduct.subTitle : cleanSubTitle;
+                    const finalDescription = (data.description && !data.description.startsWith('COMING SOON')) ? data.description : localProduct.description;
+
+                    setProduct({
+                        ...localProduct,
+                        name: cleanName,
+                        category: data.category || localProduct.category,
+                        subTitle: finalSubTitle,
+                        image: data.image || localProduct.image,
+                        packing: data.packing || localProduct.packing,
+                        features: (data.features && data.features.length > 0) ? data.features : localProduct.features,
+                        description: finalDescription,
+                        extraDetails: data.extraDetails !== undefined ? data.extraDetails : localProduct.extraDetails,
+                        seo: data.seo || localProduct.seo
+                    });
+                    setDataSource('Cloud');
+                } else {
+                    // Completely custom product from Firebase
+                    setProduct({
+                        id: data.id || slug,
+                        name: data.name || slug,
+                        slug: data.slug || slug,
+                        category: data.category || 'General',
+                        subTitle: data.subTitle || '',
+                        image: data.image || `/product/${slug}.png`,
+                        packing: data.packing || '',
+                        description: data.description || '',
+                        extraDetails: data.extraDetails || '',
+                        features: data.features || [],
+                        seo: data.seo || {},
+                        isCustom: true
+                    });
                     setDataSource('Cloud');
                 }
+            } else if (localProduct) {
+                setProduct(localProduct);
+                setDataSource('Code');
+            } else {
+                setProduct(undefined);
             }
         }, (error) => {
             console.error(`[ProductDetails] Firebase Error for ${slug}:`, error);
@@ -89,33 +124,38 @@ const ProductDetails: React.FC = () => {
 
     if (!product) {
         return (
-            <div className="min-h-[70vh] flex flex-col items-center justify-center bg-slate-50">
+            <div className="min-h-[70vh] flex flex-col items-center justify-center bg-slate-50 p-6 text-center">
                 <h2 className="text-2xl font-serif font-bold text-slate-900 mb-4">Product Not Found</h2>
-                <Link to={PageRoute.PRODUCTS} className="text-jdc-orange hover:underline flex items-center gap-2">
-                    <ArrowLeft size={20} /> Back to Products
+                <p className="text-slate-500 mb-6 max-w-sm">The product you are looking for may have been moved or does not exist.</p>
+                <Link to={PageRoute.PRODUCTS} className="text-jdc-orange font-bold hover:underline flex items-center gap-2">
+                    <ArrowLeft size={20} /> Back to Product Portfolio
                 </Link>
             </div>
         );
     }
 
     const isStainer = product.category === 'Universal Stainer';
-    const showLocalDetails = isStainer; // Only show local tables/colors for Stainer (or others if specified)
+    const showLocalDetails = isStainer || (product.features && product.features.length > 0);
 
     return (
         <div className="bg-white min-h-screen">
             {/* Breadcrumbs */}
             <div className="max-w-7xl mx-auto px-6 py-8 md:py-12">
-                <nav className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-12">
+                <nav className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-12 flex-wrap">
                     <Link to={PageRoute.HOME} className="hover:text-jdc-orange transition-colors">Home</Link>
                     <ChevronRight size={10} strokeWidth={3} className="text-slate-300" />
                     <Link to={PageRoute.PRODUCTS} className="hover:text-jdc-orange transition-colors">Products</Link>
+                    <ChevronRight size={10} strokeWidth={3} className="text-slate-300" />
+                    <Link to={`/products?category=${encodeURIComponent(product.category)}`} className="text-slate-600 hover:text-jdc-orange transition-colors">
+                        {product.category}
+                    </Link>
                     <ChevronRight size={10} strokeWidth={3} className="text-slate-300" />
                     <span className="text-slate-900">{product.name}</span>
 
                     {/* Live Sync Status */}
                     <div className="ml-auto flex items-center gap-2 px-3 py-1 bg-slate-50 rounded-full border border-slate-100">
                         <div className={`w-1.5 h-1.5 rounded-full ${dataSource === 'Cloud' ? 'bg-green-500 animate-pulse' : 'bg-slate-300'}`}></div>
-                        <span className="text-[8px] font-bold text-slate-500 tracking-tighter uppercase">Mode: {dataSource}</span>
+                        <span className="text-[8px] font-bold text-slate-500 tracking-tighter uppercase">Sync: {dataSource}</span>
                     </div>
                 </nav>
 
@@ -126,20 +166,28 @@ const ProductDetails: React.FC = () => {
                         animate={{ opacity: 1, scale: 1 }}
                         className="relative group lg:sticky lg:top-32"
                     >
-                        <div className="aspect-square bg-white rounded-[2rem] overflow-hidden flex items-center justify-center p-8 md:p-16 border border-slate-100 shadow-[0_30px_100px_rgba(0,0,0,0.05)] relative group-hover:shadow-[0_40px_120px_rgba(0,0,0,0.08)] transition-all duration-700">
+                        <div className="aspect-square bg-slate-50/50 rounded-[2.5rem] overflow-hidden flex items-center justify-center p-8 md:p-16 border border-slate-100 shadow-[0_30px_100px_rgba(0,0,0,0.05)] relative group-hover:shadow-[0_40px_120px_rgba(0,0,0,0.08)] transition-all duration-700">
                             {/* Animated Background Decor */}
                             <div className="absolute inset-0 bg-gradient-to-br from-slate-50/50 via-white to-slate-50/50 opacity-100"></div>
 
-                            {product.image ? (
+                            {product.image && !imageError ? (
                                 <img
                                     src={product.image}
                                     alt={product.name}
-                                    className="w-full h-full object-contain relative z-10 drop-shadow-[0_40px_80px_rgba(0,0,0,0.2)] group-hover:scale-105 transition-transform duration-1000"
+                                    onError={() => setImageError(true)}
+                                    className="w-full h-full object-contain relative z-10 drop-shadow-[0_40px_80px_rgba(0,0,0,0.15)] group-hover:scale-105 transition-transform duration-1000"
                                 />
                             ) : (
-                                <div className="flex flex-col items-center gap-6 text-slate-200 relative z-10">
-                                    <ImageIcon size={140} strokeWidth={0.5} />
-                                    <span className="text-xs font-black uppercase tracking-[0.4em] text-slate-400">Image Preview</span>
+                                <div className="flex flex-col items-center gap-4 text-slate-300 relative z-10 p-6 text-center select-none">
+                                    <div className="w-24 h-24 rounded-3xl bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-300">
+                                        <ImageOff size={44} strokeWidth={1.2} />
+                                    </div>
+                                    <span className="text-sm font-black uppercase tracking-[0.3em] text-slate-400">
+                                        No Image Found
+                                    </span>
+                                    <span className="text-xs text-slate-400 font-mono">
+                                        Image sync pending in public/product folder
+                                    </span>
                                 </div>
                             )}
 
@@ -156,10 +204,13 @@ const ProductDetails: React.FC = () => {
                             )}
 
                             {/* Floating Category Badge */}
-                            <div className="absolute top-10 left-10 z-20">
-                                <div className="px-5 py-2 bg-slate-900 text-white text-[9px] font-black uppercase tracking-[0.3em] rounded-full shadow-2xl">
+                            <div className="absolute top-8 left-8 z-20">
+                                <Link
+                                    to={`/products?category=${encodeURIComponent(product.category)}`}
+                                    className="px-5 py-2 bg-slate-900 text-white text-[9px] font-black uppercase tracking-[0.3em] rounded-full shadow-2xl hover:bg-jdc-orange transition-colors"
+                                >
                                     {product.category}
-                                </div>
+                                </Link>
                             </div>
                         </div>
 

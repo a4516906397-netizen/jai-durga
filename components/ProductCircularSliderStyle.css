@@ -34,8 +34,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: transform 0.2s ease-out;
-    /* Smooth parallax */
+    transition: transform 0.25s ease-out;
+    will-change: transform;
 }
 
 .circular-slider .carousel-track {
@@ -63,7 +63,6 @@
     padding: 0 5%;
     width: 100%;
     z-index: 200;
-    /* Above everything */
     pointer-events: none;
 }
 
@@ -71,16 +70,15 @@
     width: 70px;
     height: 70px;
     border-radius: 50%;
-    border: 1px solid rgba(11, 28, 62, 0.05);
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
+    border: 1px solid rgba(11, 28, 62, 0.08);
+    background: rgba(255, 255, 255, 0.9);
     color: #0B1C3E;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
     pointer-events: auto;
 }
 
@@ -88,8 +86,8 @@
     background: #F97316;
     border-color: #F97316;
     color: white;
-    transform: scale(1.1) rotate(5deg);
-    box-shadow: 0 20px 40px rgba(249, 115, 22, 0.25);
+    transform: scale(1.08);
+    box-shadow: 0 12px 28px rgba(249, 115, 22, 0.3);
 }
 
 /* 4K PREMIUM CARD STYLING */
@@ -97,33 +95,26 @@
     position: absolute;
     inset: 0;
     border-radius: 50px;
-    /* More rounded */
     background: white;
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    box-shadow:
-        0 10px 40px -10px rgba(11, 28, 62, 0.08),
-        inset 0 0 0 1px rgba(11, 28, 62, 0.02);
-
+    border: 1px solid rgba(11, 28, 62, 0.06);
+    box-shadow: 0 10px 30px rgba(11, 28, 62, 0.06);
     transform-origin: 50% var(--radius);
-    transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.8s, scale 0.8s, box-shadow 0.8s;
-
-    filter: brightness(0.98) saturate(0.9) blur(1px);
-    scale: 0.85;
+    transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), scale 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    scale: 0.88;
     cursor: pointer;
     overflow: hidden;
-    /* 3D reflection effect */
-    -webkit-box-reflect: below 20px linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.03));
+    will-change: transform;
+    backface-visibility: hidden;
 }
 
 /* Active Card */
 .circular-slider .card.active {
-    filter: brightness(1) saturate(1.1) blur(0px);
     scale: 1.15;
     z-index: 100;
-    border-color: rgba(249, 115, 22, 0.3);
+    border-color: rgba(249, 115, 22, 0.35);
     box-shadow:
-        0 50px 100px -20px rgba(11, 28, 62, 0.12),
-        0 15px 40px -5px rgba(249, 115, 22, 0.15);
+        0 30px 60px -15px rgba(11, 28, 62, 0.15),
+        0 10px 25px -5px rgba(249, 115, 22, 0.2);
 }
 
 .circular-slider .card-content-wrapper {
@@ -142,13 +133,13 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
-    transition: transform 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: transform 0.4s ease;
     transform: scale(0.95);
-    filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.06));
+    filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.07));
 }
 
 .circular-slider .card.active .card-image {
-    transform: scale(1.1) translateY(-15px);
+    transform: scale(1.1) translateY(-10px);
 }
 
 /* Premium Shine Animation */
@@ -160,10 +151,10 @@
     height: 100%;
     background: linear-gradient(120deg,
             rgba(255, 255, 255, 0) 30%,
-            rgba(255, 255, 255, 0.8) 50%,
+            rgba(255, 255, 255, 0.6) 50%,
             rgba(255, 255, 255, 0) 70%);
     transform: skewX(-25deg);
-    animation: visual-shine 8s infinite ease-in-out;
+    animation: visual-shine 6s infinite ease-in-out;
     pointer-events: none;
     opacity: 0.3;
 }
@@ -173,7 +164,7 @@
         left: -200%;
     }
 
-    15% {
+    20% {
         left: 200%;
     }
 
@@ -203,6 +194,5 @@
 
     .circular-slider .stage {
         transform: none !important;
-        /* Disable parallax on mobile */
     }
 }

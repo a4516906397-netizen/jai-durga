@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { PageRoute } from '../types';
-import { Home, Info, Box, Phone, HelpCircle, ChevronDown, ImageIcon, ArrowRight, X, LayoutGrid, Sparkles } from 'lucide-react';
+import { Home, Info, Box, ChevronDown, ArrowRight, X, LayoutGrid, Sparkles } from 'lucide-react';
 import { COMPANY_NAME, MEGA_MENU_DATA } from '../constants';
-import { motion, AnimatePresence, useScroll, useSpring, useTransform, useMotionValue } from 'framer-motion';
+import { motion, AnimatePresence, useScroll } from 'framer-motion';
 
 const navItems = [
   { label: 'Home', path: PageRoute.HOME, icon: Home },
@@ -12,191 +12,131 @@ const navItems = [
 ];
 
 /* ─────────────────────────────────────────────
-   ULTRA MEGA MENU CONTENT
+   ULTRA MEGA MENU CONTENT (LIGHTWEIGHT & FAST)
 ───────────────────────────────────────────── */
 const MegaMenuContent: React.FC<{ onItemClick?: () => void }> = ({ onItemClick }) => {
   const [activeProduct, setActiveProduct] = useState<any>(null);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  // Correctly define transforms at top level to avoid hook violations
-  const rotateY = useTransform(mouseX, [0, 800], [-7, 7]);
-  const rotateX = useTransform(mouseY, [0, 600], [7, -7]);
-  const springX = useSpring(rotateX, { stiffness: 100, damping: 20 });
-  const springY = useSpring(rotateY, { stiffness: 100, damping: 20 });
-
-  const handleMouseMove = ({ clientX, clientY, currentTarget }: React.MouseEvent) => {
-    const { left, top } = currentTarget.getBoundingClientRect();
-    mouseX.set(clientX - left);
-    mouseY.set(clientY - top);
-  };
 
   return (
-    <div
-      className="max-w-7xl mx-auto px-10 py-8 flex gap-10 items-start h-[560px] relative overflow-hidden"
-      onMouseMove={handleMouseMove}
-    >
-      {/* ── Background Enhancements ── */}
+    <div className="max-w-7xl mx-auto px-8 py-6 flex gap-8 items-start relative select-none">
+      {/* ── Background Base ── */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Deep Atmospheric Base */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#0B1C3E] via-[#0D2653] to-[#040D1D]" />
 
-        {/* Interactive Mouse Glow */}
-        <motion.div
-          className="absolute w-[500px] h-[500px] bg-jdc-orange/10 blur-[120px] rounded-full"
-          style={{
-            x: mouseX,
-            y: mouseY,
-            left: -250,
-            top: -250,
-            opacity: 0.6
-          }}
-        />
+        {/* Static Subtle Ambient Accents */}
+        <div className="absolute -top-32 -right-32 w-[450px] h-[450px] bg-blue-500/10 rounded-full pointer-events-none" />
+        <div className="absolute -bottom-32 -left-32 w-[400px] h-[400px] bg-jdc-orange/5 rounded-full pointer-events-none" />
 
-        {/* Static Ambient Orbs */}
-        <div className="absolute -top-32 -right-32 w-[600px] h-[600px] bg-blue-500/10 blur-[150px] rounded-full" />
-        <div className="absolute -bottom-32 -left-32 w-[500px] h-[500px] bg-jdc-orange/5 blur-[120px] rounded-full" />
-
-        {/* Ambient Branding Overlay */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-[0.05] select-none pointer-events-none overflow-hidden">
-          <motion.img
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.5 }}
+        {/* Ambient Watermark */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-[0.04] select-none pointer-events-none overflow-hidden">
+          <img
             src="/images/PYD.jpeg"
             alt="PYD Watermark"
             className="w-[500px] h-auto grayscale invert brightness-200"
           />
         </div>
 
-        {/* Grain / Noise Texture Overlay */}
-        <div className="absolute inset-0 opacity-[0.05] bg-[url('https://www.transparenttextures.com/patterns/p6-dark.png')]" />
-
-        {/* Edge Reflection */}
-        <div className="absolute inset-0 border-[1px] border-white/5 rounded-[48px] pointer-events-none shadow-[inset_0_0_80px_rgba(255,255,255,0.02)]" />
+        {/* Crisp Border Edge */}
+        <div className="absolute inset-0 border border-white/5 rounded-[48px] pointer-events-none" />
       </div>
 
-      {/* ── Products List (Left) ── */}
-      <div className="flex-1 pr-4 z-10">
-        <div className="grid grid-cols-5 gap-x-6 gap-y-4">
+      {/* ── Products List (Left with Vertical Up-Down Scroller) ── */}
+      <div className="flex-1 pr-4 z-10 overflow-y-auto overflow-x-hidden max-h-[480px]">
+        <div className="grid grid-cols-5 gap-x-5 gap-y-4">
           {MEGA_MENU_DATA.map((category, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.05 }}
-              className="space-y-3"
-            >
-              <div className="flex items-baseline gap-2">
-                <span className="text-[10px] font-mono text-jdc-orange/40 font-bold">0{idx + 1}</span>
-                <h3 className="text-[11px] font-black uppercase tracking-[0.4em] text-white/50 border-b border-white/5 pb-2 w-full">
+            <div key={idx} className="space-y-2 min-w-0">
+              <div className="flex items-baseline gap-1.5 border-b border-white/5 pb-1">
+                <span className="text-[10px] font-mono text-jdc-orange/80 font-bold shrink-0">0{idx + 1}</span>
+                <Link
+                  to={`/products?category=${encodeURIComponent(category.title)}`}
+                  onClick={onItemClick}
+                  className="text-[11px] font-black uppercase tracking-[0.08em] text-white/60 hover:text-jdc-orange transition-colors leading-snug break-words block w-full"
+                >
                   {category.title}
-                </h3>
+                </Link>
               </div>
-              <ul className="space-y-2 pl-1">
-                {category.items.map((product, pIdx) => (
-                  <li key={pIdx}>
-                    <Link
-                      to={`/product/${product.slug}`}
-                      onMouseEnter={() => setActiveProduct(product)}
-                      onClick={onItemClick}
-                      className="group/link flex items-center gap-3 text-[12px] font-semibold text-white/70 hover:text-white transition-all duration-300"
-                    >
-                      <span className="relative">
-                        {product.name}
-                        <span className="absolute bottom-0 left-0 w-0 h-px bg-jdc-orange transition-all duration-500 group-hover/link:w-full" />
-                      </span>
-                      <motion.div
-                        initial={{ opacity: 0, scale: 0 }}
-                        whileHover={{ opacity: 1, scale: 1 }}
-                        className="w-1.5 h-1.5 rounded-full bg-jdc-orange shadow-[0_0_10px_#F97316]"
-                      />
-                    </Link>
-                  </li>
-                ))}
+              <ul className="space-y-1">
+                {category.items.map((product, pIdx) => {
+                  const isHovered = activeProduct?.name === product.name;
+                  return (
+                    <li key={pIdx}>
+                      <Link
+                        to={`/product/${product.slug}`}
+                        onMouseEnter={() => setActiveProduct(product)}
+                        onClick={onItemClick}
+                        className={`group/link flex items-start justify-between px-2 py-1 -mx-1.5 rounded-md text-[11.5px] font-medium transition-all duration-150 ${
+                          isHovered
+                            ? 'text-white bg-white/10 font-semibold'
+                            : 'text-white/70 hover:text-white hover:bg-white/5'
+                        }`}
+                      >
+                        <span className="leading-snug pr-1 break-words">{product.name}</span>
+                        <div
+                          className={`w-1.5 h-1.5 rounded-full bg-jdc-orange transition-opacity duration-150 shrink-0 mt-1 ${
+                            isHovered ? 'opacity-100' : 'opacity-0 group-hover/link:opacity-60'
+                          }`}
+                        />
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
 
       {/* ── Highlight Preview (Right) ── */}
-      <div className="w-[340px] shrink-0 h-full relative z-10">
-        <AnimatePresence mode="wait">
-          {activeProduct ? (
-            <motion.div
-              key={activeProduct.slug}
-              initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
-              animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-              exit={{ opacity: 0, scale: 1.05, filter: 'blur(10px)' }}
-              transition={{ duration: 0.4, ease: "circOut" }}
-              className="h-full flex flex-col"
-            >
-              <div className="relative group/preview aspect-square rounded-[32px] overflow-hidden bg-gradient-to-br from-[#12254e]/50 to-[#0B1C3E]/50 backdrop-blur-xl border border-white/10 p-4 flex items-center justify-center shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)] group-hover/preview:border-jdc-orange/40 group-hover/preview:bg-[#12254e]/80 transition-all duration-700">
-                {/* Subtle Inner Glow */}
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(249,115,22,0.1),transparent_70%)] opacity-0 group-hover/preview:opacity-100 transition-opacity duration-700" />
-                {/* Parallax Image Effect — Hooks moved to top level */}
-                <motion.img
-                  src={activeProduct.image || '/product/logo.png'}
-                  alt={activeProduct.name}
-                  style={{
-                    rotateY: springY,
-                    rotateX: springX,
-                    perspective: 1000
-                  }}
-                  className="w-full h-full object-contain drop-shadow-[0_32px_64px_rgba(0,0,0,0.6)] z-10"
-                />
-                <div className="absolute inset-0 bg-gradient-to-tr from-jdc-orange/10 via-transparent to-transparent opacity-0 group-hover/preview:opacity-100 transition-opacity duration-700" />
-              </div>
+      <div className="w-[300px] shrink-0 relative z-10 self-stretch flex flex-col justify-center">
+        {activeProduct ? (
+          <div className="flex flex-col transition-all duration-200">
+            <div className="relative group/preview w-full aspect-[4/3] rounded-[24px] overflow-hidden bg-gradient-to-br from-[#12254e]/60 to-[#0B1C3E]/80 border border-white/10 p-3 flex items-center justify-center shadow-2xl transition-all duration-200">
+              <img
+                src={activeProduct.image || '/product/logo.png'}
+                alt={activeProduct.name}
+                className="w-full h-full object-contain drop-shadow-xl z-10 transition-transform duration-300 group-hover/preview:scale-105"
+              />
+            </div>
 
-              <div className="mt-6 space-y-3">
-                <div className="flex items-center gap-2">
-                  <div className="h-px flex-1 bg-white/10" />
-                  <Sparkles size={12} className="text-jdc-orange animate-pulse" />
-                  <div className="h-px flex-1 bg-white/10" />
-                </div>
-                <h4 className="text-2xl font-serif font-bold text-white tracking-tight">
-                  {activeProduct.name}
-                </h4>
-                <p className="text-white/40 text-[12px] leading-relaxed font-medium line-clamp-2">
-                  Experience superior protection and aesthetics with our specialized {activeProduct.name.toLowerCase()} formulation.
-                </p>
-                <Link
-                  to={`/product/${activeProduct.slug}`}
-                  onClick={onItemClick}
-                  className="group inline-flex items-center gap-4 text-[11px] font-black uppercase tracking-[0.3em] text-jdc-orange hover:text-white transition-colors"
-                >
-                  Explore Collection <div className="w-10 h-px bg-jdc-orange group-hover:w-14 group-hover:bg-white transition-all duration-500" />
-                </Link>
+            <div className="mt-3.5 space-y-2">
+              <div className="flex items-center gap-2">
+                <div className="h-px flex-1 bg-white/10" />
+                <Sparkles size={12} className="text-jdc-orange" />
+                <div className="h-px flex-1 bg-white/10" />
               </div>
-            </motion.div>
-          ) : (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="h-full flex flex-col items-center justify-center text-center p-12 border border-white/5 rounded-[32px] bg-gradient-to-b from-[#12254e]/30 to-transparent shadow-inner"
-            >
-              <div className="relative mb-8">
-                <img src="/product/logo.png" alt="Logo" className="w-40 opacity-10 grayscale brightness-200" />
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  className="absolute -inset-8 border border-white/5 rounded-full border-dashed"
-                />
-              </div>
-              <p className="text-white/20 text-[10px] font-black uppercase tracking-[0.5em] animate-pulse">
-                Selective Product Exploration
+              <h4 className="text-lg font-serif font-bold text-white tracking-tight leading-snug">
+                {activeProduct.name}
+              </h4>
+              <p className="text-white/45 text-[11.5px] leading-relaxed font-medium line-clamp-2">
+                Experience superior protection and aesthetics with our specialized {activeProduct.name.toLowerCase()} formulation.
               </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
+              <Link
+                to={`/product/${activeProduct.slug}`}
+                onClick={onItemClick}
+                className="group inline-flex items-center gap-2 text-[10.5px] font-black uppercase tracking-[0.2em] text-jdc-orange hover:text-white transition-colors"
+              >
+                <span>Explore Collection</span>
+                <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform duration-200" />
+              </Link>
+            </div>
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center text-center p-8 border border-white/5 rounded-[24px] bg-gradient-to-b from-[#12254e]/30 to-transparent">
+            <div className="relative mb-4">
+              <img src="/product/logo.png" alt="Logo" className="w-28 opacity-15 grayscale brightness-200" />
+            </div>
+            <p className="text-white/30 text-[9.5px] font-black uppercase tracking-[0.3em]">
+              Hover a Product to Preview
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
 /* ─────────────────────────────────────────────
-   REFINED NAV ITEM
+   REFINED NAV ITEM (ULTRA FAST & SMOOTH)
 ───────────────────────────────────────────── */
 const NavItem: React.FC<{ item: any; currentPath: string }> = ({ item, currentPath }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -213,50 +153,44 @@ const NavItem: React.FC<{ item: any; currentPath: string }> = ({ item, currentPa
         to={item.path}
         onClick={(e) => isProducts && e.preventDefault()}
         className={({ isActive }) => `
-          relative z-10 px-6 py-2.5 rounded-full text-[11px] font-black uppercase tracking-[0.25em] transition-all duration-500
-          ${isActive ? 'text-white' : 'text-white/40 hover:text-white'}
+          relative z-10 px-6 py-2.5 rounded-full text-[11px] font-black uppercase tracking-[0.25em] transition-colors duration-200
+          ${isActive ? 'text-white' : 'text-white/50 hover:text-white'}
         `}
       >
         <span className="relative z-10 flex items-center gap-1">
           {item.label}
           {isProducts && (
-            <ChevronDown size={12} className={`transition-transform duration-500 ${isHovered ? 'rotate-180 text-jdc-orange scale-110' : ''}`} />
+            <ChevronDown size={12} className={`transition-transform duration-300 ${isHovered ? 'rotate-180 text-jdc-orange' : ''}`} />
           )}
         </span>
       </NavLink>
 
-      {/* Advanced Indicator Pill */}
+      {/* Lightweight Active / Hover Indicator */}
       <AnimatePresence>
         {(isHovered || isActive) && (
           <motion.div
             layoutId="navIndicator"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            className={`absolute inset-0 z-0 rounded-full ${isActive ? 'bg-white/10 shadow-[inset_0_0_20px_rgba(255,255,255,0.05)]' : 'bg-white/5'}`}
-            transition={{ type: "spring", stiffness: 350, damping: 25 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className={`absolute inset-0 z-0 rounded-full ${isActive ? 'bg-white/10' : 'bg-white/5'}`}
+            transition={{ duration: 0.15 }}
           />
         )}
       </AnimatePresence>
 
-      {/* Mega Menu Dropdown */}
+      {/* Mega Menu Dropdown - Instant and Smooth */}
       {isProducts && (
         <AnimatePresence>
           {isHovered && (
             <motion.div
-              initial={{ opacity: 0, y: 12, scale: 0.99, filter: 'blur(15px)' }}
-              animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
-              exit={{ opacity: 0, y: 8, scale: 0.99, filter: 'blur(15px)' }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 6 }}
+              transition={{ duration: 0.18, ease: "easeOut" }}
               className="fixed left-0 right-0 top-[70px] mx-auto max-w-7xl z-[110] px-6 pointer-events-auto"
             >
-              <div className="bg-gradient-to-b from-[#0B1C3E]/95 to-[#08152e]/98 backdrop-blur-[60px] border border-white/10 rounded-[48px] shadow-[0_60px_150px_-20px_rgba(0,0,0,0.9)] overflow-hidden">
-                {/* Animated Edge Light */}
-                <motion.div
-                  animate={{ x: [-500, 500] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-                  className="absolute top-0 left-0 w-1/2 h-px bg-gradient-to-r from-transparent via-jdc-orange/50 to-transparent"
-                />
+              <div className="bg-[#0B1C3E]/98 border border-white/10 rounded-[48px] shadow-[0_30px_80px_rgba(0,0,0,0.8)] overflow-hidden">
                 <MegaMenuContent onItemClick={() => setIsHovered(false)} />
               </div>
             </motion.div>
